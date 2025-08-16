@@ -73,8 +73,18 @@ function selectRoute(routeId, index) {
 
 // Update route visibility on map
 function updateRouteVisibility() {
-    // First, show/hide the route lines and their associated markers
-    map.eachLayer((layer) => {
+    if (!window.map) {
+        console.warn('Map not initialized yet, skipping route visibility update');
+        return;
+    }
+    
+    if (!window.optimizationResults) {
+        console.warn('No optimization results available yet');
+        return;
+    }
+    
+    // Now safe to proceed with route visibility updates
+    window.map.eachLayer((layer) => {
         if (layer instanceof L.Polyline || (layer instanceof L.Marker && layer.options.className?.includes('route-'))) {
             const routeClass = Array.from(layer.options.className?.split(' ') || [])
                 .find(cls => cls.startsWith('route-'));
@@ -117,7 +127,7 @@ function updateRouteVisibility() {
         });
 
         // Update stop markers visibility
-        map.eachLayer((layer) => {
+        window.map.eachLayer((layer) => {
             if (layer instanceof L.Marker && !layer.options.className?.includes('route-')) {
                 const popupContent = layer.getPopup()?.getContent();
                 if (popupContent) {

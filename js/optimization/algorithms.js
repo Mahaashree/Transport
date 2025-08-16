@@ -70,16 +70,30 @@ async function optimizeRoutes() {
         document.getElementById('optimizeBtn').innerHTML = '<div class="loading"></div> Optimizing...';
         document.getElementById('optimizeBtn').disabled = true;
         
+        // Initialize map first
+        initMap();
+
+        //const results = await optimizeWithGoogleAPI();
+
         // For demo purposes, using simulation. Replace with actual Google API call:
         const requestData = prepareOptimizationRequest();
         //const results = await callGoogleRouteOptimization(requestData);
         
-        optimizationResults = await optimizeWithGoogleAPI();
+        //return await optimizeWithDirectionalClusters();
+
+        const results = await optimizeWithGoogleAPI();
         
-        if (!optimizationResults || optimizationResults.length === 0) {
+        if (!results || results.length === 0) {
             throw new Error('No optimization results generated');
         }
         
+        // Set global optimizationResults
+        window.optimizationResults = results;
+        
+        // Initialize map if not already done
+        //initMap();
+        
+        // Visualize routes
         visualizeOptimizedRoutes();
         displayResults();
         initializeRouteSelectors();

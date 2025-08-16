@@ -475,6 +475,13 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/api.js"></script>
+    <script src="js/visualization/routeTracer.js"></script>
+    <script src="js/visualization/routeRenderer.js"></script>
+    <script src="js/optimization/algorithms.js"></script>
+    <script src="js/optimization/googleAPI.js"></script>
     
     <script>
         // Global variables for data storage
@@ -490,8 +497,7 @@
         // College coordinates
         const COLLEGE_COORDS = [13.008867898985972, 80.00353386796435];
         
-        // Route colors for visualization
-        const ROUTE_COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57', '#FF9FF3', '#54A0FF', '#5F27CD'];
+        // Route colors are defined in constants.js
         
         // Initialize map
         function initMap() {

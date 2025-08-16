@@ -1,11 +1,12 @@
 // Main application controller
 
 // Global variables for data storage
-let studentData = [];
-let stopsData = [];
-let depotsData = [];
-let map = null;
-let optimizationResults = [];
+window.studentData = [];
+window.stopsData = [];
+window.depotsData = [];
+window.map = null;
+window.optimizationResults = [];
+window.selectedRoute = null;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {

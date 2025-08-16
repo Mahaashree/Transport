@@ -1,13 +1,14 @@
 // Map initialization and management
+window.map = null;  // Make map globally accessible
 
 // Initialize map
 function initMap() {
-    if (map) return;
+    if (window.map) return;
     
-    map = L.map('map').setView(COLLEGE_COORDS, 10);
+    window.map = L.map('map').setView(COLLEGE_COORDS, 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    }).addTo(window.map);
     
     // Add college marker
     L.marker(COLLEGE_COORDS, {
@@ -16,5 +17,5 @@ function initMap() {
             iconSize: [30, 30],
             className: 'college-icon'
         })
-    }).addTo(map).bindPopup('<b>Rajalakshmi Engineering College</b><br>Starting Point');
+    }).addTo(window.map).bindPopup('<b>Rajalakshmi Engineering College</b><br>Starting Point');
 }

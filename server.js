@@ -1,5 +1,7 @@
 // server.js - FIXED VERSION
 const express = require('express');
+require('dotenv').config();
+const axios = require('axios');
 const { GoogleAuth } = require('google-auth-library');
 const cors = require('cors');
 
@@ -90,6 +92,95 @@ app.post('/api/optimize', async (req, res) => {
         });
     }
 });
+
+// Google Maps Directions API endpoint
+app.post('/api/directions', async (req, res) => {
+    try {
+        const { origin, destination, waypoints, optimizeWaypoints, travelMode, avoidHighways, avoidTolls, avoidFerries, units } = req.body;
+        
+        
+        // Validate API key
+        const API_KEY = process.env.GOOGLE_API_KEY;
+        if (!API_KEY) {
+            return res.status(500).json({ 
+                error: 'Google Maps API key not configured',
+                status: 'REQUEST_DENIED'
+            });
+        }
+        
+        // Build Google Maps API URL
+        const baseUrl = 'https://maps.googleapis.com/maps/api/directions/json';
+        const params = new URLSearchParams({
+            origin: origin,
+            destination: destination,
+            mode: travelMode || 'driving',
+            units: units || 'metric',
+            key: API_KEY
+        });
+        
+        // Add waypoints if provided
+        if (waypoints && waypoints.length > 0) {
+            const waypointStr = waypoints
+                .map(wp => wp.location)
+                .join('|');
+            params.append('waypoints', waypointStr);
+            
+            if (optimizeWaypoints) {
+                params.append('optimize', 'true');
+            }
+        }
+        
+        // Add avoidance options
+        const avoid = [];
+        if (avoidHighways) avoid.push('highways');
+        if (avoidTolls) avoid.push('tolls');
+        if (avoidFerries) avoid.push('ferries');
+        
+        if (avoid.length > 0) {
+            params.append('avoid', avoid.join('|'));
+        }
+        
+        console.log('🗺️ Calling Google Maps API:', baseUrl + '?' + params.toString());
+        
+        // Make request to Google Maps API
+        const response = await axios.get(baseUrl + '?' + params.toString(), {
+            timeout: 10000 // 10 second timeout
+        });
+        
+        // Log API usage for monitoring
+        console.log(`✅ Google Maps API response: ${response.data.status}`);
+        
+        // Return the response
+        res.json(response.data);
+        
+    } catch (error) {
+        console.error('Google Maps API Error:', error.message);
+        
+        if (error.response) {
+            // API responded with error
+            res.status(error.response.status).json({
+                error: 'Google Maps API error',
+                details: error.response.data,
+                status: 'API_ERROR'
+            });
+        } else if (error.code === 'ECONNABORTED') {
+            // Timeout
+            res.status(408).json({
+                error: 'Request timeout',
+                message: 'Google Maps API request timed out',
+                status: 'TIMEOUT'
+            });
+        } else {
+            // Other errors
+            res.status(500).json({
+                error: 'Internal server error',
+                message: error.message,
+                status: 'SERVER_ERROR'
+            });
+        }
+    }
+});
+
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
