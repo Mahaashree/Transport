@@ -36,79 +36,116 @@ function displayRouteWithAccessibilityInfo(route) {
 
 // Initialize route selectors
 function initializeRouteSelectors() {
-    console.log('Initializing route selectors with:', window.optimizationResults);
     const routeSelectorSection = document.getElementById('routeSelectorSection');
     const individualSelectors = document.getElementById('individualRouteSelectors');
     individualSelectors.innerHTML = '';
     selectedRoute = null;
 
-    // Check if we have valid optimization results
     if (!window.optimizationResults || !window.optimizationResults.length) {
-        console.warn('No optimization results available');
+        console.warn('No routes to display');
         return;
     }
 
-    // Show the route selector section
-    routeSelectorSection.style.display = 'block';
-
-    // Add toggle all checkbox
-    const toggleAllDiv = document.createElement('div');
-    toggleAllDiv.className = 'toggle-all-routes';
-    toggleAllDiv.innerHTML = `
-        <label>
-            <input type="checkbox" id="toggleAllRoutes" checked>
-            Show All Routes
-        </label>
+    // Create floating route selector container
+    const floatingSelector = document.createElement('div');
+    floatingSelector.className = 'floating-route-selector';
+    
+    // Add header
+    const header = document.createElement('div');
+    header.className = 'route-selector-header';
+    header.innerHTML = `
+        <h4><i class="fas fa-route"></i> Route Selection</h4>
+        <div class="route-summary">
+            ${window.optimizationResults.length} Routes | 
+            ${window.optimizationResults.reduce((sum, r) => sum + r.totalStudents, 0)} Students
+        </div>
     `;
-    individualSelectors.appendChild(toggleAllDiv);
+    floatingSelector.appendChild(header);
 
-    // Create route toggles for each valid route
+    // Add quick filters
+    const filters = document.createElement('div');
+    filters.className = 'quick-filters';
+    filters.innerHTML = `
+        <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-globe"></i> All Routes
+        </button>
+        <button class="filter-btn" data-filter="high">
+            <i class="fas fa-star"></i> High Efficiency
+        </button>
+        <button class="filter-btn" data-filter="medium">
+            <i class="fas fa-star-half-alt"></i> Medium
+        </button>
+        <button class="filter-btn" data-filter="low">
+            <i class="fas fa-exclamation"></i> Low
+        </button>
+    `;
+    floatingSelector.appendChild(filters);
+
+    // Create route list container
+    const routeList = document.createElement('div');
+    routeList.className = 'route-list';
+
+    // Add each route
     window.optimizationResults.forEach((route, index) => {
-        if (!route || !route.stops || route.stops.length === 0) {
-            console.warn(`Skipping invalid route at index ${index}`);
-            return;
-        }
-
-        const routeDiv = document.createElement('div');
-        routeDiv.className = 'route-toggle';
+        const efficiency = parseFloat(route.efficiency.replace('%', ''));
+        const efficiencyClass = efficiency > 80 ? 'high' : efficiency > 50 ? 'medium' : 'low';
         
-        // Show key route information
-        const efficiency = route.efficiency || '0%';
-        const studentCount = route.totalStudents || 0;
-        const distance = route.totalDistance || '0 km';
-        
-        routeDiv.innerHTML = `
-            <label>
-                <input type="checkbox" class="route-checkbox" data-route-index="${index}" checked>
-                <span class="route-info">
-                    <strong>${route.busId || `Bus ${index + 1}`}</strong>
-                    <span class="route-details">
-                        ${studentCount} students | ${distance} | ${efficiency} efficient
-                    </span>
+        const routeElement = document.createElement('div');
+        routeElement.className = `route-item ${efficiencyClass}`;
+        routeElement.innerHTML = `
+            <div class="route-header">
+                <label class="route-toggle">
+                    <input type="checkbox" class="route-checkbox" data-route-index="${index}" checked>
+                    <span class="route-title">${route.busId}</span>
+                </label>
+                <span class="route-efficiency ${efficiencyClass}">
+                    ${route.efficiency}
                 </span>
-            </label>
+            </div>
+            <div class="route-details">
+                <span><i class="fas fa-users"></i> ${route.totalStudents} students</span>
+                <span><i class="fas fa-road"></i> ${route.totalDistance}</span>
+                <span><i class="fas fa-map-marker-alt"></i> ${route.stops.length} stops</span>
+            </div>
         `;
         
-        // Add click handler for route selection
-        routeDiv.addEventListener('click', (e) => {
-            if (e.target.type !== 'checkbox') {
-                const checkbox = routeDiv.querySelector('.route-checkbox');
-                checkbox.checked = !checkbox.checked;
-                updateRouteVisibility();
-            }
-        });
-        
-        individualSelectors.appendChild(routeDiv);
+        routeList.appendChild(routeElement);
     });
 
+    floatingSelector.appendChild(routeList);
+    individualSelectors.appendChild(floatingSelector);
+
     // Add event listeners
-    document.getElementById('toggleAllRoutes').addEventListener('change', toggleAllRoutes);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            filterRoutes(e.target.dataset.filter);
+        });
+    });
+
     document.querySelectorAll('.route-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', updateRouteVisibility);
     });
+}
 
-    // Initial visibility update
-    updateRouteVisibility();
+function filterRoutes(filter) {
+    document.querySelectorAll('.route-item').forEach(item => {
+        const efficiency = parseFloat(item.querySelector('.route-efficiency').textContent);
+        switch(filter) {
+            case 'high':
+                item.style.display = efficiency >= 80 ? 'block' : 'none';
+                break;
+            case 'medium':
+                item.style.display = efficiency >= 50 && efficiency < 80 ? 'block' : 'none';
+                break;
+            case 'low':
+                item.style.display = efficiency < 50 ? 'block' : 'none';
+                break;
+            default:
+                item.style.display = 'block';
+        }
+    });
 }
 
 function updateRouteDisplay() {
@@ -221,68 +258,96 @@ function selectRoute(routeId, index) {
 
 // Update route visibility on map
 function updateRouteVisibility() {
-    // First, show/hide the route lines and their associated markers
+    if (!window.map) {
+        console.error('Map not initialized');
+        return;
+    }
+
+    console.log('Updating route visibility...');
+
+    // Clear ALL existing routes and markers first
     window.map.eachLayer((layer) => {
-        if (layer instanceof L.Polyline || (layer instanceof L.Marker && layer.options.className?.includes('route-'))) {
-            const routeClass = Array.from(layer.options.className?.split(' ') || [])
-                .find(cls => cls.startsWith('route-'));
-            
-            if (routeClass) {
-                const routeId = 'route-' + routeClass.split('-')[1];
-                const isVisible = selectedRoute === null || selectedRoute === routeId;
-                
-                if (isVisible) {
-                    if (layer instanceof L.Polyline) {
-                        layer.setStyle({ opacity: 0.8 });
-                    } else {
-                        layer.setOpacity(1);
-                        layer.getElement()?.style.setProperty('opacity', '1');
-                    }
-                } else {
-                    if (layer instanceof L.Polyline) {
-                        layer.setStyle({ opacity: 0 });
-                    } else {
-                        layer.setOpacity(0);
-                        layer.getElement()?.style.setProperty('opacity', '0');
-                    }
-                }
-            }
+        if (layer instanceof L.Polyline || (layer instanceof L.Marker && layer.options.title !== 'college')) {
+            window.map.removeLayer(layer);
         }
     });
 
-    // Update stop markers visibility
-    if (optimizationResults) {
-        const visibleStopIds = new Set();
-        
-        // Collect all stop IDs from selected route or all routes
-        optimizationResults.forEach((route, index) => {
-            const routeId = `route-${index}`;
-            if (selectedRoute === null || selectedRoute === routeId) {
-                route.stops.forEach(stop => {
-                    visibleStopIds.add(stop.cluster_number.toString());
-                });
-            }
-        });
+    // Get all checked routes
+    const checkedRoutes = Array.from(document.querySelectorAll('.route-checkbox'))
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => parseInt(checkbox.dataset.routeIndex));
 
-        // Update stop markers visibility
-        window.map.eachLayer((layer) => {
-            if (layer instanceof L.Marker && !layer.options.className?.includes('route-')) {
-                const popupContent = layer.getPopup()?.getContent();
-                if (popupContent) {
-                    // Extract stop number from popup content
-                    const match = popupContent.match(/Stop (\d+)/);
-                    if (match) {
-                        const stopId = match[1];
-                        if (visibleStopIds.has(stopId)) {
-                            layer.setOpacity(1);
-                            layer.getElement()?.style.setProperty('opacity', '1');
-                        } else {
-                            layer.setOpacity(0);
-                            layer.getElement()?.style.setProperty('opacity', '0');
-                        }
-                    }
-                }
-            }
+    console.log('Showing routes:', checkedRoutes);
+
+    // Show only checked routes
+    checkedRoutes.forEach(index => {
+        const route = window.optimizationResults[index];
+        if (!route) {
+            console.warn(`No route found for index ${index}`);
+            return;
+        }
+
+        console.log(`Visualizing route ${index}:`, route);
+
+        // Get route color
+        const color = ROUTE_COLORS[index % ROUTE_COLORS.length];
+
+        // Draw route line
+        const coordinates = [
+            COLLEGE_COORDS,
+            ...route.stops.map(stop => [
+                parseFloat(stop.snapped_lat),
+                parseFloat(stop.snapped_lon)
+            ])
+        ];
+
+        const routeLine = L.polyline(coordinates, {
+            color: color,
+            weight: 3,
+            opacity: 0.8,
+            routeIndex: index  // Store route index for reference
+        }).addTo(window.map);
+
+        // Add markers for stops
+        route.stops.forEach((stop, stopIndex) => {
+            const marker = L.marker([
+                parseFloat(stop.snapped_lat),
+                parseFloat(stop.snapped_lon)
+            ], {
+                icon: createStopIcon(color, stop.num_students),
+                routeIndex: index  // Store route index for reference
+            }).addTo(window.map);
+
+            // Add popup with stop info
+            marker.bindPopup(`
+                <strong>${route.busId} - Stop ${stopIndex + 1}</strong><br>
+                Students: ${stop.num_students}<br>
+                Distance: ${stop.distance?.toFixed(1) || 'N/A'} km
+            `);
+        });
+    });
+
+    // If no routes selected, show all stops as inactive
+    if (checkedRoutes.length === 0) {
+        window.optimizationResults.forEach(route => {
+            route.stops.forEach(stop => {
+                L.marker([
+                    parseFloat(stop.snapped_lat),
+                    parseFloat(stop.snapped_lon)
+                ], {
+                    icon: createStopIcon('#999', stop.num_students),
+                    opacity: 0.5
+                }).addTo(window.map);
+            });
         });
     }
+}
+
+// Helper function to create stop icon
+function createStopIcon(color, students) {
+    return L.divIcon({
+        className: 'custom-stop-icon',
+        html: `<div style="background-color: ${color};">${students}</div>`,
+        iconSize: [24, 24]
+    });
 }
