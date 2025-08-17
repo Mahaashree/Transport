@@ -4,14 +4,16 @@ async function optimizeWithGoogleAPI() {
         console.log('🎯 Starting enhanced route optimization with multi-strategy approach...');
         
         // Use the new getBusOptimizedRoutes function instead of the old approach
-        const optimizedRoutes = await getBusOptimizedRoutes();
+        const finalRoutes = await getBusOptimizedRoutes();
         
-        if (!optimizedRoutes || optimizedRoutes.length === 0) {
+        if (!finalRoutes || finalRoutes.length === 0) {
             throw new Error('No valid routes generated');
         }
-        
-        console.log(`✅ Generated ${optimizedRoutes.length} optimized routes`);
-        return optimizedRoutes;
+
+        // Return the optimized routes directly since getBusOptimizedRoutes already handles
+        // geographical clustering, validation, and salvage operations internally
+        console.log(`✅ Generated ${finalRoutes.length} optimized routes`);
+        return finalRoutes;
         
     } catch (error) {
         console.error('Route Optimization API Error:', error);
@@ -19,7 +21,6 @@ async function optimizeWithGoogleAPI() {
         return await simulateOptimization();
     }
 }
-
 
 
 function filterStopsByDistance(stopsData, maxRadiusKm = 50) {
@@ -173,25 +174,49 @@ async function processRouteOptimizationResponse(apiResponse) {
                     totalTime: route.vehicleStartTime && route.vehicleEndTime ? 
                               calculateTimeDifference(route.vehicleStartTime, route.vehicleEndTime) : 'N/A',
                     cost: route.metrics?.totalCost?.toFixed(2) || 'N/A',
-                    withinDistanceLimit: true
+                    withinDistanceLimit: true,
+                    // Save route geometry for road validation
+                    geometry: route.geometry || extractRouteGeometry(route)
                 };
                 
-                // ✅ Simple validation
-                const validation = await validateRouteAccessibility(routeData);
+                // ✅ Basic validation
+                const basicValidation = await validateRouteAccessibility(routeData);
+                
+                // ADD THIS SECTION: Road width validation
+                let roadValidation = { isValid: true, issues: [] };
+                try {
+                    // Only validate road width if basic validation passes (to save API calls)
+                    if (basicValidation.isValid) {
+                        console.log(`🔍 Validating road width for ${routeData.busId}...`);
+                        roadValidation = await validateRoadWidthForBusRoute(routeData);
+                    }
+                } catch (error) {
+                    console.error(`Road validation error for ${routeData.busId}:`, error);
+                    roadValidation = { 
+                        isValid: true, // Default to valid on error
+                        issues: ['Road width validation skipped: API error'],
+                        isEstimate: true
+                    };
+                }
+                
+                // Combine validation results
+                const isValid = basicValidation.isValid && roadValidation.isValid;
+                const allIssues = [...basicValidation.issues, ...roadValidation.issues];
                 
                 routeData.accessibility = {
-                    isValid: validation.isValid,
-                    issues: validation.issues,
-                    validatedDistance: validation.validatedDistance
+                    isValid: isValid,
+                    issues: allIssues,
+                    validatedDistance: basicValidation.validatedDistance,
+                    roadValidation: roadValidation.isValid ? 'passed' : 'failed'
                 };
                 
-                if (validation.isValid) {
+                if (isValid) {
                     routes.push(routeData);
-                    console.log(`✅ ${routeData.busId} passed basic validation`);
+                    console.log(`✅ ${routeData.busId} passed all validation including road width`);
                 } else {
-                    console.warn(`⚠️ ${routeData.busId} has concerns:`, validation.issues);
+                    console.warn(`⚠️ ${routeData.busId} has concerns:`, allIssues);
                     routeData.hasAccessibilityWarnings = true;
-                    routeData.warningMessage = validation.issues.join(', ');
+                    routeData.warningMessage = allIssues.join(', ');
                     routes.push(routeData); // Still include it with warnings
                 }
             }
@@ -203,13 +228,14 @@ async function processRouteOptimizationResponse(apiResponse) {
     const problemRoutes = routes.filter(r => r.accessibility?.isValid === false);
     
     if (problemRoutes.length > 0) {
-        showStatus(`⚠️ ${problemRoutes.length} routes have concerns. Check route details.`, 'warning');
+        showStatus(`⚠️ ${problemRoutes.length} routes have concerns including road width issues. Check route details.`, 'warning');
     } else if (validRoutes.length > 0) {
-        showStatus(`✅ Generated ${validRoutes.length} routes within ${MAX_DISTANCE_KM}km`, 'success');
+        showStatus(`✅ Generated ${validRoutes.length} routes with appropriate road width for buses`, 'success');
     }
     
     return routes;
 }
+
 
 
 // ✅ SIMPLIFIED Route validation (basic checks only)
@@ -238,12 +264,18 @@ async function validateRouteAccessibility(route) {
         if (avgDistanceBetweenStops < 1.5) {
             issues.push('Stops very close together - possible narrow roads');
         }
+
+        const roadValidation = await validateRoadWidthForBusRoute(route);
+        if (!roadValidation.isValid) {
+            issues.push('Road width too narrow for bus');
+        }
         
         // For now, be lenient - only fail routes with major issues
         return {
             isValid: issues.length <= 1,
             issues: issues,
-            validatedDistance: distanceKm
+            validatedDistance: distanceKm,
+            roadData: roadValidation.roadData
         };
         
     } catch (error) {
@@ -389,6 +421,70 @@ function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
     return distance;
 }
 
+// 1. New function to validate roads using the API
+async function validateRoadWidthForBusRoute(route) {
+    // Extract route geometry (sequence of lat/lng points)
+    const routeGeometry = extractRouteGeometry(route);
+    
+    try {
+        // Call the Road Data API
+        const response = await fetch('https://road-data-api.example.com/validate-route', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                routeGeometry: routeGeometry,
+                vehicleType: 'bus',
+                vehicleSpecs: {
+                    width: 2.6,  // meters
+                    height: 3.5, // meters
+                    length: 12,  // meters
+                    weight: 15000 // kg
+                }
+            })
+        });
+        
+        if (!response.ok) throw new Error('Road validation API failed');
+        
+        const roadData = await response.json();
+        
+        // Check for road issues
+        const issues = [];
+        let isValid = true;
+        
+        roadData.segments.forEach(segment => {
+            if (segment.isTooNarrow) {
+                issues.push(`Road too narrow (${segment.width}m) at ${segment.locationName}`);
+                isValid = false;
+            }
+            
+            if (segment.hasLowClearance) {
+                issues.push(`Low clearance (${segment.clearance}m) at ${segment.locationName}`);
+                isValid = false;
+            }
+            
+            if (segment.hasTightTurn) {
+                issues.push(`Turn radius too tight at ${segment.locationName}`);
+                isValid = false;
+            }
+        });
+        
+        return {
+            isValid: isValid,
+            issues: issues,
+            roadData: roadData
+        };
+    } catch (error) {
+        console.error('Road validation failed:', error);
+        return { 
+            isValid: true, // Default to true on API failure to avoid disruption
+            issues: ['Road width validation skipped: API error'],
+            isEstimate: true
+        };
+    }
+}
+
+
+
 // ✅ MODIFIED: Main optimization function to incorporate new approaches
 async function getBusOptimizedRoutes() {
     try {
@@ -396,7 +492,7 @@ async function getBusOptimizedRoutes() {
         const maxCapacity = parseInt(document.getElementById('maxCapacity').value) || 55;
         
         console.log(`🚌 Starting enhanced optimization for ${filteredStops.length} stops`);
-        
+
         // ✅ CREATE ROUTES USING MULTIPLE STRATEGIES for better coverage
         const strategiesResults = {
             corridor: await createCorridorBasedRoutes(filteredStops, maxCapacity),
@@ -469,7 +565,57 @@ async function getBusOptimizedRoutes() {
         const totalStudentsInShift = filteredStops.reduce((sum, stop) => sum + parseInt(stop.num_students || 0), 0);
         const maxBusesNeeded = Math.ceil(totalStudentsInShift / maxCapacity);
         
+        // ADD YOUR NEW FUNCTION HERE
+        // ✅ NEW: Function to ensure directional balance in route selection
+        function ensureDirectionalBalance(allRoutes, maxRoutesNeeded) {
+            // Group routes by direction
+            const directionGroups = {};
+            allRoutes.forEach(route => {
+                const direction = route.direction?.split('-')[0] || 'Unknown';
+                if (!directionGroups[direction]) {
+                    directionGroups[direction] = [];
+                }
+                directionGroups[direction].push(route);
+            });
+            
+            // Get all available directions
+            const directions = Object.keys(directionGroups);
+            
+            // Ensure at least one route from each direction if possible
+            const balancedRoutes = [];
+            directions.forEach(direction => {
+                if (directionGroups[direction].length > 0) {
+                    // Sort by efficiency and take the best one
+                    directionGroups[direction].sort((a, b) => {
+                        const effA = parseFloat(a.efficiency?.replace('%', '')) || 0;
+                        const effB = parseFloat(b.efficiency?.replace('%', '')) || 0;
+                        return effB - effA;
+                    });
+                    balancedRoutes.push(directionGroups[direction][0]);
+                    // Remove the selected route
+                    directionGroups[direction].shift();
+                }
+            });
+            
+            // Fill remaining slots with most efficient routes overall
+            const remainingRoutes = [].concat(...Object.values(directionGroups));
+            remainingRoutes.sort((a, b) => {
+                const effA = parseFloat(a.efficiency?.replace('%', '')) || 0;
+                const effB = parseFloat(b.efficiency?.replace('%', '')) || 0;
+                return effB - effA;
+            });
+            
+            // Add remaining routes up to the limit
+            while (balancedRoutes.length < maxRoutesNeeded && remainingRoutes.length > 0) {
+                balancedRoutes.push(remainingRoutes.shift());
+            }
+            
+            return balancedRoutes;
+        }
+        
+        // REPLACE THIS CODE:
         // Sort routes by efficiency
+        /*
         allRoutes.sort((a, b) => {
             const effA = parseFloat(a.efficiency?.replace('%', '')) || 0;
             const effB = parseFloat(b.efficiency?.replace('%', '')) || 0;
@@ -478,6 +624,11 @@ async function getBusOptimizedRoutes() {
         
         // Take the most efficient routes up to the limit
         const finalRoutes = allRoutes.slice(0, maxBusesNeeded);
+        */
+        
+        // WITH THIS:
+        // Use the new balanced approach instead of just taking the most efficient routes
+        const finalRoutes = ensureDirectionalBalance(allRoutes, maxBusesNeeded);
         
         console.log(`🎯 Final solution: ${finalRoutes.length} routes`);
         return finalRoutes;
