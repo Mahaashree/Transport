@@ -1,28 +1,30 @@
-// server.js - FIXED VERSION
-const express = require('express');
-const { GoogleAuth } = require('google-auth-library');
-const cors = require('cors');
+// server.js - ES MODULE VERSION
+import express from 'express';
+import { GoogleAuth } from 'google-auth-library';
+import cors from 'cors';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
+
 // Enable CORS for your frontend
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:3000'],
+    origin: ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:3000', 'http://localhost:3001'],
     credentials: true
 }));
 
 const projectId = "stunning-shadow-454718-r7";
 
-
-// Initialize Google Auth
 const auth = new GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     // Use service account key file or default credentials
-    keyFilename: 'stunning-shadow-454718-r7-1eb800dfd42b.json' // Update this path
+    keyFilename: join(__dirname, 'stunning-shadow-454718-r7-1eb800dfd42b.json') // Update this path
 });
-
-
 
 // Route to get authentication token (if needed separately)
 app.get('/api/get-token', async (req, res) => {

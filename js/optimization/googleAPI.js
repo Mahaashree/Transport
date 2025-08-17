@@ -96,7 +96,7 @@ function prepareOptimizationRequest() {
 }
 
 // ✅ PRE-FILTER stops by distance before sending to API
-function filterStopsByDistance(stopsData, maxRadiusKm = 50) {
+function filterStopsByDistance(stopsData, maxRadiusKm = 60) {
     const filteredStops = [];
     const excludedStops = [];
     
