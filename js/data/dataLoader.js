@@ -69,6 +69,18 @@ async function loadData() {
             if (mapLegend) {
                 mapLegend.style.display = 'block';
             }
+            
+            // Add button to toggle assignment lines
+            const optimizationSection = document.querySelector('.section:has(#optimizeBtn)');
+            if (optimizationSection && !document.getElementById('toggleAssignmentsBtn')) {
+                const toggleAssignmentsBtn = document.createElement('button');
+                toggleAssignmentsBtn.id = 'toggleAssignmentsBtn';
+                toggleAssignmentsBtn.className = 'btn btn-info';
+                toggleAssignmentsBtn.style.display = 'none';
+                toggleAssignmentsBtn.innerHTML = '<i class="fas fa-bezier-curve"></i> Toggle Assignment Lines';
+                toggleAssignmentsBtn.onclick = toggleAssignmentLines;
+                optimizationSection.appendChild(toggleAssignmentsBtn);
+            }
         }
         
         showStatus('Data loaded successfully! Ready for optimization.', 'success');

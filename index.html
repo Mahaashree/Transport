@@ -250,6 +250,162 @@
             border: 1px solid #ff4757;
             border-radius: 50%;
         }
+        
+        /* Assignment statistics panel */
+        .assignment-stats-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+        
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .stat-card h4 {
+            color: #2d3748;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .value {
+            color: #4299e1;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card .subtitle {
+            color: #718096;
+            font-size: 0.8rem;
+        }
+        
+        .quality-breakdown {
+            margin-top: 20px;
+        }
+        
+        .quality-breakdown h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .quality-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        
+        .quality-label {
+            width: 120px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .quality-label.excellent { color: #26de81; }
+        .quality-label.good { color: #ffa502; }
+        .quality-label.fair { color: #ff6348; }
+        .quality-label.poor { color: #ff4757; }
+        .quality-label.very-poor { color: #8b0000; }
+        
+        .quality-bar {
+            flex: 1;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .quality-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .quality-fill.excellent { background: #26de81; }
+        .quality-fill.good { background: #ffa502; }
+        .quality-fill.fair { background: #ff6348; }
+        .quality-fill.poor { background: #ff4757; }
+        .quality-fill.very-poor { background: #8b0000; }
+        
+        .quality-percentage {
+            width: 50px;
+            text-align: right;
+            font-size: 12px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .legend-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .legend-section h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .line-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+        }
+        
+        .legend-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+        
+        .line-sample {
+            width: 20px;
+            height: 2px;
+            display: inline-block;
+        }
+        
+        .line-sample.excellent-line { background: #26de81; }
+        .line-sample.good-line { background: #ffa502; }
+        .line-sample.fair-line { background: #ff6348; }
+        .line-sample.poor-line { background: #ff4757; }
+        
+        /* Assignment line styles */
+        .assignment-line {
+            cursor: pointer;
+        }
+        
+        .assignment-line:hover {
+            opacity: 1 !important;
+            weight: 2;
+        }
+        
+        /* Update legend to include assignment lines */
+        .map-legend {
+            /* ...existing code... */
+        }
+        
+        .legend-item.assignment {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -421,6 +577,12 @@
                                 <div class="legend-dot"></div>
                             </div>
                             <span>Students</span>
+                        </div>
+                        <div class="legend-item assignment">
+                            <div class="legend-symbol">
+                                <div style="width: 16px; height: 2px; background: #26de81;"></div>
+                            </div>
+                            <span>Assignments</span>
                         </div>
                     </div>
                 </div>

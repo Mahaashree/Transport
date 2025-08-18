@@ -266,6 +266,15 @@ function visualizeData() {
     // Add student assignment dots first (so they appear behind other markers)
     if (studentDataSource && studentDataSource.length > 0) {
         addStudentAssignmentDots(mapInstance, studentDataSource);
+        
+        // Show the assignment lines toggle button
+        const toggleAssignmentsBtn = document.getElementById('toggleAssignmentsBtn');
+        if (toggleAssignmentsBtn) {
+            toggleAssignmentsBtn.style.display = 'inline-flex';
+            toggleAssignmentsBtn.innerHTML = '<i class="fas fa-bezier-curve"></i> Hide Assignment Lines';
+            toggleAssignmentsBtn.classList.remove('btn-info');
+            toggleAssignmentsBtn.classList.add('btn-warning');
+        }
     }
     
     // Add bus stop markers
@@ -341,15 +350,18 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
     
     // Create a feature group for student dots for better performance
     const studentLayer = L.featureGroup();
+    const assignmentLinesLayer = L.featureGroup();
     let validStudents = 0;
+    let totalAssignmentDistance = 0;
+    let assignedStudents = 0;
     
     studentDataSource.forEach((student, index) => {
-        const lat = parseFloat(student.student_lat);
-        const lon = parseFloat(student.student_lon);
+        const studentLat = parseFloat(student.student_lat);
+        const studentLon = parseFloat(student.student_lon);
         
-        if (!isNaN(lat) && !isNaN(lon)) {
+        if (!isNaN(studentLat) && !isNaN(studentLon)) {
             // Create a very small circle marker for each student
-            const studentDot = L.circleMarker([lat, lon], {
+            const studentDot = L.circleMarker([studentLat, studentLon], {
                 radius: 2,
                 fillColor: '#ff6b6b',
                 color: '#ff4757',
@@ -359,12 +371,61 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
                 className: 'student-assignment-dot'
             });
             
-            // Add popup with student info (only if available)
+            // Find assigned stop for this student
+            const assignedStop = findAssignedStop(student);
+            let distanceToStop = null;
+            
+            if (assignedStop) {
+                const stopLat = parseFloat(assignedStop.snapped_lat);
+                const stopLon = parseFloat(assignedStop.snapped_lon);
+                
+                // Calculate distance between student and assigned stop
+                distanceToStop = calculateHaversineDistance(studentLat, studentLon, stopLat, stopLon);
+                totalAssignmentDistance += distanceToStop;
+                assignedStudents++;
+                
+                // Create assignment line
+                const assignmentLine = L.polyline([
+                    [studentLat, studentLon],
+                    [stopLat, stopLon]
+                ], {
+                    color: distanceToStop > 2 ? '#ff4757' : distanceToStop > 1 ? '#ffa502' : '#26de81',
+                    weight: 1,
+                    opacity: 0.6,
+                    dashArray: '2, 4',
+                    className: 'assignment-line'
+                });
+                
+                // Add popup to assignment line showing distance
+                assignmentLine.bindPopup(`
+                    <b>Student Assignment</b><br>
+                    Distance to Stop: ${distanceToStop.toFixed(2)} km<br>
+                    Stop: ${assignedStop.cluster_number}<br>
+                    Quality: ${getAssignmentQuality(distanceToStop)}
+                `);
+                
+                assignmentLinesLayer.addLayer(assignmentLine);
+                
+                // Update student dot color based on distance
+                studentDot.setStyle({
+                    fillColor: distanceToStop > 2 ? '#ff4757' : distanceToStop > 1 ? '#ffa502' : '#26de81',
+                    color: distanceToStop > 2 ? '#ff3742' : distanceToStop > 1 ? '#ff9000' : '#20bf6b'
+                });
+            }
+            
+            // Add popup with student info
             const studentInfo = [];
             if (student.student_id) studentInfo.push(`ID: ${student.student_id}`);
             if (student.name) studentInfo.push(`Name: ${student.name}`);
             if (student.route) studentInfo.push(`Route: ${student.route}`);
-            studentInfo.push(`Location: ${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+            if (assignedStop) {
+                studentInfo.push(`Assigned Stop: ${assignedStop.cluster_number}`);
+                studentInfo.push(`Distance: ${distanceToStop.toFixed(2)} km`);
+                studentInfo.push(`Quality: ${getAssignmentQuality(distanceToStop)}`);
+            } else {
+                studentInfo.push(`Status: No assigned stop found`);
+            }
+            studentInfo.push(`Location: ${studentLat.toFixed(5)}, ${studentLon.toFixed(5)}`);
             
             studentDot.bindPopup(`<b>Student Assignment</b><br>${studentInfo.join('<br>')}`);
             
@@ -373,16 +434,234 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
         }
     });
     
-    // Add the student layer to the map
+    // Add both layers to the map
+    assignmentLinesLayer.addTo(mapInstance);
     studentLayer.addTo(mapInstance);
     
-    console.log(`Added ${validStudents} valid student assignment dots`);
+    console.log(`Added ${validStudents} student dots and ${assignedStudents} assignment lines`);
     
-    // Store reference for later use (e.g., toggling visibility)
+    if (assignedStudents > 0) {
+        const averageDistance = totalAssignmentDistance / assignedStudents;
+        console.log(`Average assignment distance: ${averageDistance.toFixed(2)} km`);
+        
+        // Show assignment statistics
+        showAssignmentStatistics(assignedStudents, validStudents, averageDistance, totalAssignmentDistance);
+    }
+    
+    // Store references for later use (e.g., toggling visibility)
     mapInstance.studentLayer = studentLayer;
+    mapInstance.assignmentLinesLayer = assignmentLinesLayer;
 }
 
-// NEW FUNCTION: Toggle student assignments visibility
+// NEW FUNCTION: Find assigned stop for a student
+function findAssignedStop(student) {
+    const stopsDataSource = window.stopsData || stopsData || [];
+    
+    // Method 1: Try to match by route name if available
+    if (student.route && student.route !== '') {
+        const stopsByRoute = stopsDataSource.filter(stop => 
+            stop.route_name && stop.route_name.toLowerCase() === student.route.toLowerCase()
+        );
+        if (stopsByRoute.length > 0) {
+            return findClosestStop(student, stopsByRoute);
+        }
+    }
+    
+    // Method 2: Try to match by stop ID if available in student data
+    if (student.assigned_stop || student.stop_id) {
+        const stopId = student.assigned_stop || student.stop_id;
+        const assignedStop = stopsDataSource.find(stop => 
+            stop.cluster_number && stop.cluster_number.toString() === stopId.toString()
+        );
+        if (assignedStop) return assignedStop;
+    }
+    
+    // Method 3: Find closest stop within reasonable distance (fallback)
+    return findClosestStop(student, stopsDataSource, 5); // within 5km
+}
+
+// NEW FUNCTION: Find closest stop to a student
+function findClosestStop(student, stops, maxDistance = null) {
+    const studentLat = parseFloat(student.student_lat);
+    const studentLon = parseFloat(student.student_lon);
+    
+    if (isNaN(studentLat) || isNaN(studentLon)) return null;
+    
+    let closestStop = null;
+    let minDistance = Infinity;
+    
+    stops.forEach(stop => {
+        const stopLat = parseFloat(stop.snapped_lat);
+        const stopLon = parseFloat(stop.snapped_lon);
+        
+        if (!isNaN(stopLat) && !isNaN(stopLon)) {
+            const distance = calculateHaversineDistance(studentLat, studentLon, stopLat, stopLon);
+            
+            if (distance < minDistance && (!maxDistance || distance <= maxDistance)) {
+                minDistance = distance;
+                closestStop = stop;
+            }
+        }
+    });
+    
+    return closestStop;
+}
+
+// NEW FUNCTION: Get assignment quality based on distance
+function getAssignmentQuality(distance) {
+    if (distance <= 0.5) return 'Excellent';
+    if (distance <= 1.0) return 'Good';
+    if (distance <= 2.0) return 'Fair';
+    if (distance <= 3.0) return 'Poor';
+    return 'Very Poor';
+}
+
+// NEW FUNCTION: Calculate Haversine distance between two points
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const distance = R * c;
+    return distance;
+}
+
+// NEW FUNCTION: Show assignment statistics
+function showAssignmentStatistics(assignedStudents, totalStudents, averageDistance, totalDistance) {
+    // Create or update assignment statistics panel
+    let statsPanel = document.getElementById('assignmentStatsPanel');
+    
+    if (!statsPanel) {
+        statsPanel = document.createElement('div');
+        statsPanel.id = 'assignmentStatsPanel';
+        statsPanel.className = 'assignment-stats-panel';
+        
+        // Insert after the stops data panel
+        const stopsPanel = document.getElementById('stopsDataPanel');
+        if (stopsPanel && stopsPanel.parentNode) {
+            stopsPanel.parentNode.insertBefore(statsPanel, stopsPanel.nextSibling);
+        } else {
+            document.body.appendChild(statsPanel);
+        }
+    }
+    
+    const assignmentRate = ((assignedStudents / totalStudents) * 100).toFixed(1);
+    const qualityDistribution = calculateQualityDistribution();
+    
+    statsPanel.innerHTML = `
+        <h3><i class="fas fa-chart-bar"></i> Assignment Analysis</h3>
+        <div class="stats-summary">
+            <div class="stat-card">
+                <h4>Assignment Rate</h4>
+                <div class="value">${assignmentRate}%</div>
+                <div class="subtitle">${assignedStudents}/${totalStudents} students</div>
+            </div>
+            <div class="stat-card">
+                <h4>Average Distance</h4>
+                <div class="value">${averageDistance.toFixed(2)} km</div>
+                <div class="subtitle">Student to stop</div>
+            </div>
+            <div class="stat-card">
+                <h4>Total Distance</h4>
+                <div class="value">${totalDistance.toFixed(1)} km</div>
+                <div class="subtitle">All assignments</div>
+            </div>
+        </div>
+        <div class="quality-breakdown">
+            <h4>Assignment Quality Distribution</h4>
+            <div class="quality-bars">
+                <div class="quality-item">
+                    <span class="quality-label excellent">Excellent (≤0.5km)</span>
+                    <div class="quality-bar">
+                        <div class="quality-fill excellent" style="width: ${qualityDistribution.excellent}%"></div>
+                    </div>
+                    <span class="quality-percentage">${qualityDistribution.excellent.toFixed(1)}%</span>
+                </div>
+                <div class="quality-item">
+                    <span class="quality-label good">Good (0.5-1km)</span>
+                    <div class="quality-bar">
+                        <div class="quality-fill good" style="width: ${qualityDistribution.good}%"></div>
+                    </div>
+                    <span class="quality-percentage">${qualityDistribution.good.toFixed(1)}%</span>
+                </div>
+                <div class="quality-item">
+                    <span class="quality-label fair">Fair (1-2km)</span>
+                    <div class="quality-bar">
+                        <div class="quality-fill fair" style="width: ${qualityDistribution.fair}%"></div>
+                    </div>
+                    <span class="quality-percentage">${qualityDistribution.fair.toFixed(1)}%</span>
+                </div>
+                <div class="quality-item">
+                    <span class="quality-label poor">Poor (2-3km)</span>
+                    <div class="quality-bar">
+                        <div class="quality-fill poor" style="width: ${qualityDistribution.poor}%"></div>
+                    </div>
+                    <span class="quality-percentage">${qualityDistribution.poor.toFixed(1)}%</span>
+                </div>
+                <div class="quality-item">
+                    <span class="quality-label very-poor">Very Poor (>3km)</span>
+                    <div class="quality-bar">
+                        <div class="quality-fill very-poor" style="width: ${qualityDistribution.veryPoor}%"></div>
+                    </div>
+                    <span class="quality-percentage">${qualityDistribution.veryPoor.toFixed(1)}%</span>
+                </div>
+            </div>
+        </div>
+        <div class="legend-section">
+            <h4>Line Color Legend</h4>
+            <div class="line-legend">
+                <div class="legend-line"><span class="line-sample excellent-line"></span> Excellent (≤0.5km)</div>
+                <div class="legend-line"><span class="line-sample good-line"></span> Good (0.5-1km)</div>
+                <div class="legend-line"><span class="line-sample fair-line"></span> Fair (1-2km)</div>
+                <div class="legend-line"><span class="line-sample poor-line"></span> Poor (>2km)</div>
+            </div>
+        </div>
+    `;
+    
+    statsPanel.style.display = 'block';
+}
+
+// NEW FUNCTION: Calculate quality distribution
+function calculateQualityDistribution() {
+    const studentDataSource = window.studentData || studentData || [];
+    const qualities = { excellent: 0, good: 0, fair: 0, poor: 0, veryPoor: 0 };
+    let totalAssigned = 0;
+    
+    studentDataSource.forEach(student => {
+        const assignedStop = findAssignedStop(student);
+        if (assignedStop) {
+            const distance = calculateHaversineDistance(
+                parseFloat(student.student_lat),
+                parseFloat(student.student_lon),
+                parseFloat(assignedStop.snapped_lat),
+                parseFloat(assignedStop.snapped_lon)
+            );
+            
+            totalAssigned++;
+            if (distance <= 0.5) qualities.excellent++;
+            else if (distance <= 1.0) qualities.good++;
+            else if (distance <= 2.0) qualities.fair++;
+            else if (distance <= 3.0) qualities.poor++;
+            else qualities.veryPoor++;
+        }
+    });
+    
+    // Convert to percentages
+    const total = totalAssigned || 1; // Avoid division by zero
+    return {
+        excellent: (qualities.excellent / total) * 100,
+        good: (qualities.good / total) * 100,
+        fair: (qualities.fair / total) * 100,
+        poor: (qualities.poor / total) * 100,
+        veryPoor: (qualities.veryPoor / total) * 100
+    };
+}
+
+// MODIFIED FUNCTION: Toggle student assignments and lines visibility
 function toggleStudentAssignments() {
     const mapInstance = window.map || map;
     
@@ -392,26 +671,66 @@ function toggleStudentAssignments() {
     }
     
     const studentLayer = mapInstance.studentLayer;
+    const assignmentLinesLayer = mapInstance.assignmentLinesLayer;
     const toggleBtn = document.getElementById('toggleStudentsBtn');
     
     if (mapInstance.hasLayer(studentLayer)) {
-        // Hide student assignments
+        // Hide student assignments and lines
         mapInstance.removeLayer(studentLayer);
+        if (assignmentLinesLayer) {
+            mapInstance.removeLayer(assignmentLinesLayer);
+        }
         if (toggleBtn) {
             toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Show Students';
             toggleBtn.classList.remove('btn-warning');
             toggleBtn.classList.add('btn-info');
         }
-        showStatus('Student assignments hidden', 'info');
+        showStatus('Student assignments and connection lines hidden', 'info');
     } else {
-        // Show student assignments
+        // Show student assignments and lines
         mapInstance.addLayer(studentLayer);
+        if (assignmentLinesLayer) {
+            mapInstance.addLayer(assignmentLinesLayer);
+        }
         if (toggleBtn) {
             toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Students';
             toggleBtn.classList.remove('btn-info');
             toggleBtn.classList.add('btn-warning');
         }
-        showStatus('Student assignments shown', 'info');
+        showStatus('Student assignments and connection lines shown', 'info');
+    }
+}
+
+// NEW FUNCTION: Toggle just the assignment lines (keep student dots)
+function toggleAssignmentLines() {
+    const mapInstance = window.map || map;
+    
+    if (!mapInstance || !mapInstance.assignmentLinesLayer) {
+        showStatus('No assignment lines to toggle', 'info');
+        return;
+    }
+    
+    const assignmentLinesLayer = mapInstance.assignmentLinesLayer;
+    const toggleBtn = document.getElementById('toggleAssignmentsBtn');
+    
+    if (mapInstance.hasLayer(assignmentLinesLayer)) {
+        // Hide assignment lines
+        mapInstance.removeLayer(assignmentLinesLayer);
+        if (toggleBtn) {
+            toggleBtn.innerHTML = '<i class="fas fa-bezier-curve"></i> Show Assignment Lines';
+            toggleBtn.classList.remove('btn-warning');
+            toggleBtn.classList.add('btn-info');
+        }
+        showStatus('Assignment lines hidden', 'info');
+    } else {
+        // Show assignment lines
+        mapInstance.addLayer(assignmentLinesLayer);
+        if (toggleBtn) {
+            toggleBtn.innerHTML = '<i class="fas fa-bezier-curve"></i> Hide Assignment Lines';
+            toggleBtn.classList.remove('btn-info');
+            toggleBtn.classList.add('btn-warning');
+        }
+        showStatus('Assignment lines shown', 'info');
     }
 }
 
