@@ -75,10 +75,10 @@ async function optimizeRoutes() {
         
         
         // For demo purposes, using simulation. Replace with actual Google API call:
-        const requestData = prepareOptimizationRequest();
+        //const requestData = prepareOptimizationRequest();
         //const results = await callGoogleRouteOptimization(requestData);
         
-        const results = await optimizeWithGoogleAPI();
+        const results = await getBusOptimizedRoutes();
         console.log('Results received in algorithms.js:', results);
 
         // Set global variable
