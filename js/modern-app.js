@@ -123,9 +123,44 @@ function initGoogleMap() {
     AppState.map.addListener('click', function(event) {
         if (window.streetViewMode) {
             openStreetViewAtLocation(event.latLng);
-            // Exit Street View mode after clicking
             window.streetViewMode = false;
             updateStreetViewButton();
+            return;
+        }
+        if (measuring) {
+            const point = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+            measurePath.push(point);
+            const m = new google.maps.Marker({ position: point, map: AppState.map, icon: {
+                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                    <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="5" cy="5" r="4" fill="#111827" stroke="white" stroke-width="1"/>
+                    </svg>
+                `),
+                scaledSize: new google.maps.Size(10,10)
+            }});
+            measureMarkers.push(m);
+            if (!measurePolyline) {
+                measurePolyline = new google.maps.Polyline({
+                    path: measurePath,
+                    geodesic: true,
+                    strokeColor: '#111827',
+                    strokeOpacity: 0.9,
+                    strokeWeight: 3,
+                    map: AppState.map
+                });
+            } else {
+                measurePolyline.setPath(measurePath);
+            }
+            if (measurePath.length >= 2) {
+                let total = 0;
+                for (let i = 1; i < measurePath.length; i++) {
+                    total += calculateHaversineDistance(
+                        measurePath[i-1].lat, measurePath[i-1].lng,
+                        measurePath[i].lat, measurePath[i].lng
+                    );
+                }
+                showToast(`Distance: ${total.toFixed(2)} km`, 'info', 1500);
+            }
         }
     });
     
@@ -247,6 +282,10 @@ async function loadData() {
         AppState.studentData = studentData;
         AppState.stopsData = stopsData;
         AppState.depotsData = depotsData;
+        // Compatibility for algorithms that use global names
+        window.studentData = studentData;
+        window.stopsData = stopsData;
+        window.depotsData = depotsData;
         
         updateMetrics();
         document.getElementById('metricsSection').style.display = 'block';
@@ -1381,6 +1420,10 @@ function deselectAllRoutes() {
 let streetViewService = null;
 let streetViewPanorama = null;
 let currentMapType = 'roadmap';
+let measuring = false;
+let measurePath = [];
+let measurePolyline = null;
+let measureMarkers = [];
 
 function searchLocation() {
     const searchInput = document.getElementById('locationSearch');
@@ -1706,8 +1749,11 @@ async function optimizeRoutes() {
         // Initialize map
         initGoogleMap();
         
-        // Use your REAL optimization algorithm
-        const results = await getBusOptimizedRoutes();
+        // Use enhanced external algorithm if available; otherwise use integrated
+        const usingExternal = (typeof window !== 'undefined' && typeof window.optimizeWithGoogleAPI === 'function');
+        const optimizer = usingExternal ? window.optimizeWithGoogleAPI : getBusOptimizedRoutes;
+        window.optimizationSource = usingExternal ? 'external' : 'integrated';
+        const results = await optimizer();
         console.log('Results received in modern-app.js:', results);
 
         // Set global variable
@@ -1732,6 +1778,20 @@ async function optimizeRoutes() {
             direction: route.direction || 'MIXED'
         }));
         
+        // Analyze outcome: original vs fallback
+        try {
+            const hasEmergency = results.some(r => r?.isEmergencyRoute || (r?.routeType === 'emergency'));
+            const hasMinimal = results.some(r => r?.isFallbackRoute || (r?.routeType === 'fallback'));
+            const source = window.optimizationSource === 'external' ? 'Your comprehensive optimizer' : 'Integrated optimizer';
+            if (hasMinimal) {
+                showToast('🆘 Minimal fallback routes were generated (no optimized routes available).', 'error');
+            } else if (hasEmergency) {
+                showToast('🚨 Emergency fallback routes were used for coverage.', 'warning');
+            } else {
+                showToast(`✅ Original optimization used (${source}).`, 'success');
+            }
+        } catch (_) {}
+
         initializeRouteSelectors();
         visualizeOptimizedRoutes();
         displayResults();
@@ -2413,6 +2473,10 @@ async function drawPrimaryRoadRouteFromSequence(route, color, index, depot) {
                     title: depot['Parking Name'] || 'Depot',
                     icon: createDepotIcon()
                 });
+                const depotInfo = new google.maps.InfoWindow({
+                    content: `<div style="padding:6px 8px;"><strong>${depot['Parking Name'] || 'Depot'}</strong><br/>${dLat.toFixed(6)}, ${dLng.toFixed(6)}</div>`
+                });
+                depotMarker.addListener('click', () => depotInfo.open(AppState.map, depotMarker));
                 AppState.depotMarkersByRoute[index] = depotMarker;
             }
         }
@@ -2436,6 +2500,14 @@ async function drawPrimaryRoadRouteFromSequence(route, color, index, depot) {
                     scaledSize: new google.maps.Size(22, 22)
                 }
             });
+            const info = new google.maps.InfoWindow({
+                content: `<div style="padding:6px 8px;">
+                    <strong>Stop ${stopIndex + 1}</strong><br/>
+                    Students: ${parseInt(stop.num_students || 0)}<br/>
+                    ${sLat.toFixed(6)}, ${sLng.toFixed(6)}
+                </div>`
+            });
+            marker.addListener('click', () => info.open(AppState.map, marker));
             routeMarkers.push(marker);
         });
         AppState.routeMarkersByRoute[index] = routeMarkers;
@@ -3839,6 +3911,21 @@ function toggleMapType() {
     };
     
     showToast(`Map type changed to ${mapTypeNames[currentMapType]}`, 'success');
+}
+
+function toggleMeasureDistance() {
+    measuring = !measuring;
+    showToast(measuring ? 'Measure distance: click points on the map (Esc to finish)' : 'Measure tool disabled', measuring ? 'info' : 'warning');
+    if (!measuring) {
+        clearMeasure();
+    }
+}
+
+function clearMeasure() {
+    measurePath = [];
+    if (measurePolyline) { measurePolyline.setMap(null); measurePolyline = null; }
+    measureMarkers.forEach(m => m.setMap(null));
+    measureMarkers = [];
 }
 
 // Enhanced route visibility update
