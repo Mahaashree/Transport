@@ -181,6 +181,17 @@ app.get('/existing-routes', (req, res) => {
     res.sendFile(path.join(__dirname, 'existing-routes.html'));
 });
 
+// Serve visualization page
+app.get('/visualization', (req, res) => {
+    res.sendFile(path.join(__dirname, 'js', 'visualization', 'vis.html'));
+});
+
+// Serve static files from js directory
+app.use('/js', express.static(path.join(__dirname, 'js')));
+
+// Serve Routes_Data directory
+app.use('/Routes_Data', express.static(path.join(__dirname, 'Routes_Data')));
+
 // API endpoint to get extracted stop coordinates
 app.get('/api/stop-coordinates', (req, res) => {
     const csvPath = path.join(__dirname, 'Routes_Data', 'extracted_stop_coordinates.csv');

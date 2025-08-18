@@ -677,5 +677,55 @@
     
     <!-- Main application -->
     <script src="js/app.js"></script>
+
+    <!-- Add missing core functions -->
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Route Optimization System loaded');
+            showStatus('Application loaded. Please select and load your data files.', 'info');
+            
+            // Add file change listeners
+            const fileInputs = ['studentFile', 'stopsFile', 'depotsFile'];
+            fileInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('change', function() {
+                        if (this.files.length > 0) {
+                            console.log(`📁 Selected ${inputId}: ${this.files[0].name}`);
+                        }
+                    });
+                }
+            });
+            
+            // Add additional export buttons if needed
+            addExportButtons();
+        });
+        
+        // Add additional export buttons to the interface
+        function addExportButtons() {
+            const controlPanel = document.querySelector('.control-panel');
+            if (controlPanel) {
+                const exportSection = document.createElement('div');
+                exportSection.className = 'section';
+                exportSection.innerHTML = `
+                    <h3><i class="fas fa-download"></i> Export Options</h3>
+                    <button class="btn btn-warning" onclick="exportResultsWithDebug()">
+                        <i class="fas fa-file-csv"></i> Export Current Data
+                    </button>
+                    <button class="btn btn-warning" onclick="exportAllData()">
+                        <i class="fas fa-database"></i> Export All Data
+                    </button>
+                `;
+                controlPanel.appendChild(exportSection);
+            }
+        }
+        
+        // Make functions globally available
+        window.loadData = loadData;
+        window.optimizeRoutes = optimizeRoutes;
+        window.visualizeData = visualizeData;
+        window.showStatus = showStatus;
+    </script>
 </body>
 </html>

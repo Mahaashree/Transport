@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Existing Bus Routes - College Transport System</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Route Network Visualization - Google Maps</title>
     <style>
         * {
             margin: 0;
@@ -111,28 +109,65 @@
             box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
         }
         
-        .filter-group {
+        .btn-warning {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+        }
+        
+        .btn-warning:hover {
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.3);
+        }
+        
+        .route-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .route-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+        
+        .route-item:hover {
+            background: #f7fafc;
+        }
+        
+        .route-item.selected {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .stats-summary {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 15px;
         }
         
-        .filter-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: #2d3748;
-        }
-        
-        .filter-select, .search-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
             font-size: 14px;
-            background: white;
         }
         
-        .search-input {
-            margin-bottom: 10px;
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            color: #4a5568;
+        }
+        
+        .stat-value {
+            color: #2d3748;
+            font-weight: 600;
         }
         
         .map-container {
@@ -201,41 +236,14 @@
             100% { transform: rotate(360deg); }
         }
         
-        .stats-summary {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        
-        .stat-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .stat-label {
-            color: #4a5568;
-        }
-        
-        .stat-value {
-            color: #2d3748;
-            font-weight: 600;
-        }
-        
         .route-legend {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 8px;
             position: absolute;
             bottom: 20px;
             right: 20px;
-            max-width: 200px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 250px;
             font-size: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
@@ -243,72 +251,52 @@
         
         .legend-title {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #2d3748;
+            font-size: 14px;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
-        .legend-symbol {
+        .legend-color {
+            width: 16px;
+            height: 3px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .legend-marker {
             width: 12px;
             height: 12px;
             border-radius: 50%;
             margin-right: 8px;
         }
-        
-        .stop-marker {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .stop-marker:hover {
-            transform: scale(1.2);
-        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-route"></i> Existing Bus Routes</h1>
-            <p>Visualizing extracted stop coordinates from existing route data</p>
+            <h1><i class="fas fa-route"></i> Route Network Visualization</h1>
+            <p>Interactive visualization of Chennai bus routes using Google Maps</p>
         </div>
         
         <div class="main-content">
             <div class="control-panel">
                 <div class="section">
                     <h3><i class="fas fa-database"></i> Data Controls</h3>
-                    <button class="btn" onclick="loadStopCoordinates()">
-                        <i class="fas fa-download"></i> Load Actual Stop Data
+                    <button class="btn" onclick="loadRouteData()">
+                        <i class="fas fa-download"></i> Load Route Data
                     </button>
-                    <button class="btn btn-secondary" onclick="centerMapOnCollege()">
-                        <i class="fas fa-university"></i> Center on College
+                    <button class="btn btn-secondary" onclick="showAllRoutes()">
+                        <i class="fas fa-eye"></i> Show All Routes
                     </button>
-                    <button class="btn btn-secondary" onclick="fitAllStops()">
-                        <i class="fas fa-expand-arrows-alt"></i> Fit All Stops
-                    </button>
-                    <button class="btn btn-secondary" onclick="showCoordinateBounds()">
-                        <i class="fas fa-info-circle"></i> Show Data Bounds
-                    </button>
-                </div>
-                
-                <div class="section">
-                    <h3><i class="fas fa-filter"></i> Filters</h3>
-                    <div class="filter-group">
-                        <label for="routeSearch">Search Routes:</label>
-                        <input type="text" id="routeSearch" class="search-input" placeholder="Type route name...">
-                    </div>
-                    <div class="filter-group">
-                        <label for="routeFilter">Filter by Route:</label>
-                        <select id="routeFilter" class="filter-select">
-                            <option value="">All Routes</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-secondary" onclick="clearFilters()">
-                        <i class="fas fa-times"></i> Clear Filters
+                    <button class="btn btn-warning" onclick="clearMap()">
+                        <i class="fas fa-trash"></i> Clear Map
                     </button>
                 </div>
                 
@@ -320,54 +308,63 @@
                             <span class="stat-value" id="totalRoutes">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Total Stops:</span>
-                            <span class="stat-value" id="totalStops">0</span>
+                            <span class="stat-label">Total Points:</span>
+                            <span class="stat-value" id="totalPoints">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Visible Stops:</span>
-                            <span class="stat-value" id="visibleStops">0</span>
+                            <span class="stat-label">Active Routes:</span>
+                            <span class="stat-value" id="activeRoutes">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Success Rate:</span>
-                            <span class="stat-value" id="successRate">0%</span>
+                            <span class="stat-label">College Distance:</span>
+                            <span class="stat-value" id="collegeDistance">-</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="section">
+                    <h3><i class="fas fa-list"></i> Route Selection</h3>
+                    <div class="route-list" id="routeList">
+                        <p style="text-align: center; color: #718096; padding: 20px;">
+                            Load route data to see available routes
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="section">
                     <h3><i class="fas fa-cog"></i> View Options</h3>
-                    <button class="btn btn-secondary" onclick="toggleRouteLines()">
-                        <i class="fas fa-bezier-curve"></i> Toggle Route Lines
+                    <button class="btn btn-secondary" onclick="toggleRouteLabels()">
+                        <i class="fas fa-tags"></i> Toggle Labels
                     </button>
-                    <button class="btn btn-secondary" onclick="toggleStopLabels()">
-                        <i class="fas fa-tags"></i> Toggle Stop Labels
+                    <button class="btn btn-secondary" onclick="fitToRoutes()">
+                        <i class="fas fa-expand-arrows-alt"></i> Fit to Routes
                     </button>
-                    <button class="btn btn-secondary" onclick="exportVisibleData()">
-                        <i class="fas fa-file-export"></i> Export Data
+                    <button class="btn btn-secondary" onclick="centerOnCollege()">
+                        <i class="fas fa-university"></i> Center on College
                     </button>
                 </div>
             </div>
             
             <div class="map-container">
-                <h3><i class="fas fa-map-marked-alt"></i> Route Visualization</h3>
+                <h3><i class="fas fa-map-marked-alt"></i> Route Network Map</h3>
                 <div id="map">
-                    <div class="route-legend">
-                        <div class="legend-title">Legend</div>
+                    <div class="route-legend" id="routeLegend" style="display: none;">
+                        <div class="legend-title">Route Legend</div>
                         <div class="legend-item">
-                            <div class="legend-symbol" style="background: #2d3748;"><i class="fas fa-university" style="color: white; font-size: 8px;"></i></div>
+                            <div class="legend-marker" style="background: #2d3748;"><i class="fas fa-university" style="color: white; font-size: 8px; margin-left: 2px; margin-top: 2px;"></i></div>
                             <span>College</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-symbol" style="background: #4299e1;"></div>
-                            <span>Bus Stops</span>
+                            <div class="legend-marker" style="background: #4299e1;"></div>
+                            <span>Route Points</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-symbol" style="background: #48bb78;"></div>
-                            <span>Selected Route</span>
+                            <div class="legend-color" style="background: #e53e3e;"></div>
+                            <span>Active Route</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-symbol" style="background: #ed8936;"></div>
-                            <span>Search Result</span>
+                            <div class="legend-color" style="background: #38a169;"></div>
+                            <span>All Routes</span>
                         </div>
                     </div>
                 </div>
@@ -377,53 +374,30 @@
         <div id="status" class="status" style="display: none;"></div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="js/existing-routes/existing-routes-manager.js"></script>
-    <script src="js/existing-routes/existing-routes-visualizer.js"></script>
-    <script src="js/existing-routes/existing-routes-filters.js"></script>
+    <!-- Load the JavaScript first -->
+    <script src="/js/visualization/display-network.js"></script>
+    
+    <!-- Google Maps API with proper async loading -->
+    <script>
+        // Define the callback function
+        function initializeMap() {
+            console.log('🗺️ Google Maps API loaded, initializing...');
+            initMap();
+        }
+    </script>
+    <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiVn2TbI7qSuTzw1EKvY4urq7V5aTZkZg&callback=initializeMap&loading=async">
+    </script>
     
     <script>
-        // Add function to show coordinate bounds for verification
-        function showCoordinateBounds() {
-            if (!stopCoordinatesData || stopCoordinatesData.length === 0) {
-                showStatus('No data loaded', 'error');
-                return;
+        // Initialize the application when page loads
+        window.addEventListener('load', function() {
+            console.log('🚀 Route Network Visualization loaded');
+            if (typeof showStatus === 'function') {
+                showStatus('Application loaded. Click "Load Route Data" to begin.', 'info');
+            } else {
+                console.log('📊 Status functions not loaded yet');
             }
-            
-            const lats = stopCoordinatesData.map(s => s.lat);
-            const lngs = stopCoordinatesData.map(s => s.lng);
-            const bounds = {
-                minLat: Math.min(...lats),
-                maxLat: Math.max(...lats),
-                minLng: Math.min(...lngs),
-                maxLng: Math.max(...lngs)
-            };
-            
-            const boundingBox = L.rectangle([
-                [bounds.minLat, bounds.minLng],
-                [bounds.maxLat, bounds.maxLng]
-            ], {
-                color: '#ff7800',
-                weight: 3,
-                fillOpacity: 0.1
-            }).addTo(map);
-            
-            boundingBox.bindPopup(`
-                <b>Data Bounds</b><br>
-                Latitude: ${bounds.minLat.toFixed(6)} to ${bounds.maxLat.toFixed(6)}<br>
-                Longitude: ${bounds.minLng.toFixed(6)} to ${bounds.maxLng.toFixed(6)}<br>
-                Total area: ${stopCoordinatesData.length} stops
-            `);
-            
-            map.fitBounds(boundingBox.getBounds().pad(0.1));
-            showStatus(`Showing bounds: ${bounds.minLat.toFixed(3)},${bounds.minLng.toFixed(3)} to ${bounds.maxLat.toFixed(3)},${bounds.maxLng.toFixed(3)}`, 'info');
-        }
-        
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Initializing Existing Routes Viewer');
-            console.log('📄 Will load actual coordinates from extracted_stop_coordinates.csv');
-            initializeExistingRoutes();
         });
     </script>
 </body>
