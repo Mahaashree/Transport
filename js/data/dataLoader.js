@@ -53,6 +53,24 @@ async function loadData() {
         updateMetrics();
         
         document.getElementById('optimizeBtn').disabled = false;
+        
+        // Show student toggle button and legend if student data is available
+        if (window.studentData && window.studentData.length > 0) {
+            const toggleBtn = document.getElementById('toggleStudentsBtn');
+            const mapLegend = document.getElementById('mapLegend');
+            
+            if (toggleBtn) {
+                toggleBtn.style.display = 'inline-flex';
+                toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Students';
+                toggleBtn.classList.remove('btn-info');
+                toggleBtn.classList.add('btn-warning');
+            }
+            
+            if (mapLegend) {
+                mapLegend.style.display = 'block';
+            }
+        }
+        
         showStatus('Data loaded successfully! Ready for optimization.', 'success');
         
         // Initialize map if not already done

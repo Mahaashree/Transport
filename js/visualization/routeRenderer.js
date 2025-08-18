@@ -221,6 +221,7 @@ function visualizeData() {
     const mapInstance = window.map || map;
     const stopsDataSource = window.stopsData || stopsData || [];
     const depotsDataSource = window.depotsData || depotsData || [];
+    const studentDataSource = window.studentData || studentData || [];
     
     // Check if we have the required variables
     if (!mapInstance) {
@@ -245,7 +246,8 @@ function visualizeData() {
     
     console.log('Visualizing data...', {
         stopsCount: stopsDataSource.length,
-        depotsCount: depotsDataSource.length
+        depotsCount: depotsDataSource.length,
+        studentsCount: studentDataSource.length
     });
     
     // Clear existing markers except college (but keep the college marker)
@@ -256,7 +258,15 @@ function visualizeData() {
         if (layer instanceof L.Polyline) {
             mapInstance.removeLayer(layer);
         }
+        if (layer instanceof L.CircleMarker) {
+            mapInstance.removeLayer(layer);
+        }
     });
+    
+    // Add student assignment dots first (so they appear behind other markers)
+    if (studentDataSource && studentDataSource.length > 0) {
+        addStudentAssignmentDots(mapInstance, studentDataSource);
+    }
     
     // Add bus stop markers
     stopsDataSource.forEach((stop, index) => {
@@ -270,7 +280,8 @@ function visualizeData() {
                     html: `<div style="background: #4299e1; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">${students}</div>`,
                     iconSize: [30, 30],
                     className: 'stop-icon'
-                })
+                }),
+                zIndexOffset: 1000
             }).addTo(mapInstance);
             
             marker.bindPopup(`<b>Stop ${stop.cluster_number || (index + 1)}</b><br>
@@ -292,7 +303,8 @@ function visualizeData() {
                     html: `<i class="fas fa-warehouse" style="color: #e53e3e; font-size: 20px;"></i>`,
                     iconSize: [30, 30],
                     className: 'depot-icon'
-                })
+                }),
+                zIndexOffset: 1000
             }).addTo(mapInstance);
             
             marker.bindPopup(`<b>${depot['Parking Name'] || 'Depot ' + (index + 1)}</b><br>
@@ -316,7 +328,91 @@ function visualizeData() {
     // Display stops data panel
     displayStopsData();
     
-    showStatus(`Displayed ${stopsDataSource.length} stops and ${depotsDataSource.length} depots on map`, 'success');
+    const statusMessage = studentDataSource.length > 0 ? 
+        `Displayed ${stopsDataSource.length} stops, ${depotsDataSource.length} depots, and ${studentDataSource.length} student assignments on map` :
+        `Displayed ${stopsDataSource.length} stops and ${depotsDataSource.length} depots on map`;
+    
+    showStatus(statusMessage, 'success');
+}
+
+// NEW FUNCTION: Add student assignment dots to the map
+function addStudentAssignmentDots(mapInstance, studentDataSource) {
+    console.log(`Adding ${studentDataSource.length} student assignment dots...`);
+    
+    // Create a feature group for student dots for better performance
+    const studentLayer = L.featureGroup();
+    let validStudents = 0;
+    
+    studentDataSource.forEach((student, index) => {
+        const lat = parseFloat(student.student_lat);
+        const lon = parseFloat(student.student_lon);
+        
+        if (!isNaN(lat) && !isNaN(lon)) {
+            // Create a very small circle marker for each student
+            const studentDot = L.circleMarker([lat, lon], {
+                radius: 2,
+                fillColor: '#ff6b6b',
+                color: '#ff4757',
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.6,
+                className: 'student-assignment-dot'
+            });
+            
+            // Add popup with student info (only if available)
+            const studentInfo = [];
+            if (student.student_id) studentInfo.push(`ID: ${student.student_id}`);
+            if (student.name) studentInfo.push(`Name: ${student.name}`);
+            if (student.route) studentInfo.push(`Route: ${student.route}`);
+            studentInfo.push(`Location: ${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+            
+            studentDot.bindPopup(`<b>Student Assignment</b><br>${studentInfo.join('<br>')}`);
+            
+            studentLayer.addLayer(studentDot);
+            validStudents++;
+        }
+    });
+    
+    // Add the student layer to the map
+    studentLayer.addTo(mapInstance);
+    
+    console.log(`Added ${validStudents} valid student assignment dots`);
+    
+    // Store reference for later use (e.g., toggling visibility)
+    mapInstance.studentLayer = studentLayer;
+}
+
+// NEW FUNCTION: Toggle student assignments visibility
+function toggleStudentAssignments() {
+    const mapInstance = window.map || map;
+    
+    if (!mapInstance || !mapInstance.studentLayer) {
+        showStatus('No student assignments to toggle', 'info');
+        return;
+    }
+    
+    const studentLayer = mapInstance.studentLayer;
+    const toggleBtn = document.getElementById('toggleStudentsBtn');
+    
+    if (mapInstance.hasLayer(studentLayer)) {
+        // Hide student assignments
+        mapInstance.removeLayer(studentLayer);
+        if (toggleBtn) {
+            toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Show Students';
+            toggleBtn.classList.remove('btn-warning');
+            toggleBtn.classList.add('btn-info');
+        }
+        showStatus('Student assignments hidden', 'info');
+    } else {
+        // Show student assignments
+        mapInstance.addLayer(studentLayer);
+        if (toggleBtn) {
+            toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Students';
+            toggleBtn.classList.remove('btn-info');
+            toggleBtn.classList.add('btn-warning');
+        }
+        showStatus('Student assignments shown', 'info');
+    }
 }
 
 // Display optimization results
