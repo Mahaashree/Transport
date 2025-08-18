@@ -5,7 +5,7 @@ const path = require('path');
 function extractRoutesFromInnerTxt() {
     try {
         // Read the inner.txt file
-        const innerTxtPath = path.join(__dirname, '../../Routes_Data/Existing-Routes/inner.txt');
+        const innerTxtPath = path.join(__dirname, '../../Routes_Data/Existing-Routes/outer.txt');
         const content = fs.readFileSync(innerTxtPath, 'utf8');
         
         console.log('🔍 Starting comprehensive route extraction...');

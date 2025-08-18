@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<title>REC Map</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.page-loader{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: #272727;
+    z-index: 1000;
+    .txt{
+        color: #666;
+        text-align: center;
+        top: 40%;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 0.3rem;
+        font-weight: bold;
+        line-height: 1.5;
+    }
+}
+
+/* Spinner animation */
+.spinner {
+  position: relative;
+  top: 35%;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+           a:link,  a:visited{color:#00f;}
+     a:hover, a:active{color:f00;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+function hideLoader(){
+  $('.page-loader').fadeOut('slow');
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhu0xNW0rN1nCvqdWoAbJM8sMjU9q4zX4&callback=initMap">
+</script>
+    <script>
+  let map;
+
+
+
+function initMap()           {
+  const map = new google.maps.Map(document.getElementById("map"), { zoom: 11, center:{lat:13.122365,lng:80.100707},});
+    
+   
+  
+ 
+/*this.RECflag = new google.maps.Marker({ position: {lat:13.009780, lng:80.003170},  map,title:'Ennore Rn: 01', icon:{url:"RecF3T_100x200.gif", anchor: new google.maps.Point(-5, 360),}});     RecF3T_100x200.gif*/this.RECflag = new google.maps.Marker({ position: {lat:13.009780, lng:80.003170},  map,title:'Ennore Rn: 01', icon:{url:"RECred180Opt.gif", anchor: new google.maps.Point(-5, 360),}});     this.pole = new google.maps.Marker({ position: {lat:13.009780, lng:80.003170},  map, title:'Post',icon:{url:"recPole350.png",anchor: new google.maps.Point(9,370), size: new google.maps.Size(18, 372),}});this.post = new google.maps.Marker({ position: {lat:13.214983,lng:80.320444},  map,title:'Ennore Rn: 01c', icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});this.flag = new google.maps.Marker({ position: {lat:13.214983,lng:80.320444},  map,title:'Ennore Rn: 01c', icon:{url: "flag0/01e.png", anchor: new google.maps.Point(-30, 0),}});const ennoreRoute1 = [{lat:13.214983,lng:80.320444},{lat:13.211639,lng:80.317288},{lat:13.200628,lng:80.313832},{lat:13.189628,lng:80.309832},{lat:13.189461,lng:80.309092},{lat:13.164326,lng:80.303354},{lat:13.162811,lng:80.303343},{lat:13.152467,lng:80.300195},{lat:13.143896,lng:80.296653},  ]; const enoo = new google.maps.Polyline({    path: ennoreRoute1,    geodesic: true,    strokeColor: "#FF0000",    strokeOpacity: 1.0,    strokeWeight: 2,  });   enoo.setMap(map);
+  
+this.post = new google.maps.Marker({ position: {lat:13.121311, lng:80.293663},  map,title:'Ennore Rn: 01c', icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});this.flag = new google.maps.Marker({ position: {lat:13.121311, lng:80.293663},  map,title:'Ennore Rn: 01c', icon:{url: "flag0/01t.png", anchor: new google.maps.Point(-30, 0),}});this.flag = new google.maps.Marker({ position: {lat:13.085420,lng:80.288722},  map,title:'Ennore Rn: 01c', icon:{url: "flag0/RE01c.png", anchor: new google.maps.Point(15, 0),}});this.flag = new google.maps.Marker({ position:{lat:13.077327,lng:80.240486},   map,title:'Ennore Rn: 01c', icon:{url: "flag0/RE01c.png", anchor: new google.maps.Point(0, 8),}});
+
+
+this.arrow = new google.maps.Marker({ position:{lat:13.114043,lng:80.292129},  map,title:"1c Tollgate 1", icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+
+
+this.arrow = new google.maps.Marker({ position:{lat:13.035008,lng:80.041202},  map, title:"1c Tollgate 5", icon:{url: "12gf/rdrd225.gif", anchor: new google.maps.Point(6, 6),}});
+
+ const tollgateSky1c = [
+{lat:13.143896,lng:80.296653},     
+{lat:13.143227,lng:80.299593},
+{lat:13.121311,lng:80.293663},
+{lat:13.114043,lng:80.292129},
+{lat:13.106043,lng:80.291129},
+{lat:13.105078,lng:80.295272},
+{lat:13.102685,lng:80.294714},
+{lat:13.085420,lng:80.288722},
+{lat:13.085292,lng:80.284120},
+{lat:13.082370,lng:80.281736},
+{lat:13.081912,lng:80.276238},
+ ];
+  const tollSky = new google.maps.Polyline({
+    path: tollgateSky1c,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  tollSky.setMap(map);
+  
+this.Poat = new google.maps.Marker({ position: {lat:13.142479,lng:80.296018},  map, title:"Tondiarpet Rn:02", icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+this.flag = new google.maps.Marker({ position: {lat:13.142479,lng:80.296018},  map, title:"Tondiarpet Rn:02", icon:{url: "flag0/02t.png", anchor: new google.maps.Point(-30, 0),}});  
+
+this.flag = new google.maps.Marker({ position: {lat:13.080837,lng:80.265076},  map, title:"Tondiarpet Rn:02", icon:{url: "flag0/RE02.png", anchor: new google.maps.Point(0,8),}});
+this.flag = new google.maps.Marker({ position: {lat:13.113707,lng:80.282104},  map, title:"Tondiarpet Rn:02", icon:{url: "flag0/RE02.png", anchor: new google.maps.Point(0,8),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.118707, lng:80.284604 },  map, title:"2 Tondiarpet 1", icon:{url: "12gf/grgr195.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.091073, lng:80.275274 },  map, title:"2 Tondiarpet 2",icon:{url: "12gf/grgr180.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.077327, lng:80.240486 },  map, title:"2 Tondiarpet 3 ", icon:{url: "12gf/grgr270.gif", anchor: new google.maps.Point(6, 6),}})
+
+ const tondiarpet2 = [
+{lat:13.142479,lng:80.296018},
+{lat:13.133684,lng:80.292626},
+{lat:13.124049,lng:80.288461},
+{lat:13.123426,lng:80.287637},
+{lat:13.118707,lng:80.284604},
+{lat:13.113707,lng:80.282104},
+{lat:13.109468,lng:80.280836},
+{lat:13.111401,lng:80.278047},
+{lat:13.109230,lng:80.280731},
+{lat:13.105554,lng:80.279736},
+{lat:13.103924,lng:80.273497},
+{lat:13.099564,lng:80.275174},
+{lat:13.091073,lng:80.275274},
+{lat:13.086073,lng:80.275774},
+{lat:13.081889,lng:80.276334},
+{lat:13.080760,lng:80.270721},
+{lat:13.080837,lng:80.265076},
+{lat:13.077327,lng:80.240486},
+{lat:13.074209,lng:80.228412},
+{lat:13.073990,lng:80.225085},
+{lat:13.074437,lng:80.220817},
+
+];
+  const tondi = new google.maps.Polyline({
+    path: tondiarpet2,
+    geodesic: true,
+    strokeColor: "#009999",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  tondi.setMap(map);
+  
+ 
+this.numb = new google.maps.Marker({ position: {lat:13.090284,lng:80.265562},  map, icon:{url:"flag0/RE03.png",anchor: new google.maps.Point(0,0),}});
+
+this.flag = new google.maps.Marker({ position: {lat:13.085624,lng:80.245228},  map, icon:{url: "flag0/RE03.png", anchor: new google.maps.Point(0, 0),}});
+
+ this.arrow = new google.maps.Marker({ position:{ lat:13.090284, lng:80.265562},  map, title:"3 Choolai", icon:{url: "12gf/pkpk225.gif", anchor: new google.maps.Point(6, 6),}});
+
+
+ const choolai3 = [
+{lat:13.090284,lng:80.265562},
+{lat:13.088365,lng:80.263247},
+{lat:13.085605,lng:80.262829},
+{lat:13.086995,lng:80.258404},
+{lat:13.085612,lng:80.254595},
+{lat:13.081845,lng:80.254540},
+{lat:13.081960,lng:80.253328},
+{lat:13.081433,lng:80.252003},
+{lat:13.081443,lng:80.249493},
+{lat:13.085895,lng:80.250362},
+{lat:13.085624,lng:80.245228},
+{lat:13.082257,lng:80.243643},
+{lat:13.083641,lng:80.239608},
+{lat:13.083580,lng:80.233841},
+{lat:13.083246,lng:80.232208},
+{lat:13.083277,lng:80.225427},
+{lat:13.078560,lng:80.225062},
+{lat:13.074060,lng:80.224762},
+
+
+
+];
+const choo = new google.maps.Polyline({
+    path: choolai3,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  choo.setMap(map);
+ 
+this.numb = new google.maps.Marker({ position: {lat:13.095319, lng:80.241450},  map, icon:{url:"flag0/RE03c.png",anchor: new google.maps.Point(16,0),}});
+
+this.numb = new google.maps.Marker({ position: {lat:13.078560,lng:80.225062},  map, icon:{url:"flag0/RE03c.png",anchor: new google.maps.Point(16,0),}});  
+  
+this.arrow = new google.maps.Marker({ position:{ lat:13.097394, lng:80.242076},  map,  title:"3C ESI Ayanavaram",icon:{url: "12gf/pkpk195.gif", anchor: new google.maps.Point(6, 6),}});
+
+ this.arrow = new google.maps.Marker({ position:{ lat:13.083580, lng:80.233841},  map,  title:"3 + 3C",icon:{url: "12gf/pkpk270.gif", anchor: new google.maps.Point(6, 6),}});
+
+ const esiayya3c = [
+
+{lat:13.097394,lng:80.242076},
+{lat:13.095319,lng:80.241450},
+{lat:13.093679,lng:80.241137},
+{lat:13.092435,lng:80.240973},
+{lat:13.090215,lng:80.240901},
+{lat:13.089714,lng:80.241115},
+{lat:13.088077,lng:80.242250},
+{lat:13.087874,lng:80.243347},
+{lat:13.087555,lng:80.243762},
+{lat:13.086590,lng:80.244299},
+{lat:13.085690,lng:80.245299},
+{lat:13.085624,lng:80.245228},
+];
+  const esi3 = new google.maps.Polyline({
+    path: esiayya3c,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  esi3.setMap(map);
+  
+this.numb = new google.maps.Marker({ position: {lat:13.075161,lng:80.270774},  map, icon:{url:"flag0/RE04.png",anchor: new google.maps.Point(-2,0),}});
+
+this.numb = new google.maps.Marker({ position: {lat:13.071166,lng:80.247606},
+  map, icon:{url:"flag0/RE04.png",anchor: new google.maps.Point(0,0),}});
+  
+this.numb = new google.maps.Marker({ position: {lat:13.067202,lng:80.227713},
+  map, icon:{url:"flag0/RE04c.png",anchor: new google.maps.Point(0,-10),}});
+  
+   
+   this.arrow = new google.maps.Marker({ position:{lat:13.071766,lng:80.249006},  map,title:"4 Chindaripet 1", icon:{url: "12gf/grgr255.gif", anchor: new google.maps.Point(6, 6),}});
+   
+ this.arrow = new google.maps.Marker({ position:{lat:13.069567,lng:80.224831},  map,title:"4 Chindaripet 2", icon:{url: "12gf/grgr300.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.077383, lng:80.210949 },  map, title:"4c Layola",  icon:{url: "12gf/blblgrgr270.gif", anchor: new google.maps.Point(6, 6),}});
+
+    const chinda4layola4c = [
+{lat:13.075161,lng:80.270774},
+{lat:13.076405,lng:80.265377},
+{lat:13.074047,lng:80.265522},
+{lat:13.071086,lng:80.268143},
+{lat:13.069832,lng:80.268637},
+{lat:13.068599,lng:80.268498},
+{lat:13.069008,lng:80.267303},
+{lat:13.072251,lng:80.263809},
+{lat:13.073155,lng:80.261202},
+{lat:13.066100,lng:80.260673},
+{lat:13.063873,lng:80.260007},
+{lat:13.065413,lng:80.257100},
+{lat:13.067409,lng:80.254847},
+{lat:13.068747,lng:80.256027},
+{lat:13.071091,lng:80.254024},
+{lat:13.072350,lng:80.252334},
+{lat:13.071766,lng:80.249006},
+{lat:13.071166,lng:80.247606},
+{lat:13.069141,lng:80.242434},
+{lat:13.065856,lng:80.243508},
+{lat:13.064752,lng:80.237133},
+{lat:13.064303,lng:80.236253},
+{lat:13.062464,lng:80.236103},
+{lat:13.065401,lng:80.234386},
+{lat:13.066763,lng:80.230128},
+{lat:13.066721,lng:80.228711},
+{lat:13.067202,lng:80.227713},
+{lat:13.069567,lng:80.224831},
+{lat:13.072849,lng:80.220983},
+{lat:13.074448,lng:80.220861},
+
+{lat:13.075377, lng:80.214959 },
+{lat:13.077383, lng:80.210949 },
+{lat:13.076111, lng:80.198998 },
+
+];
+  const chinlayo= new google.maps.Polyline({
+    path: chinda4layola4c,
+    geodesic: true,
+    strokeColor: "#008800",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  chinlayo.setMap(map);
+this.numb = new google.maps.Marker({position:{lat:13.078354,lng:80.217759},  map, title:"MMDA Rno 5", icon:{url: "flag0/Rno05.png", anchor: new google.maps.Point(15, 30),}});  
+this.arrow = new google.maps.Marker({position:{lat:13.084512,lng:80.222886},  map, title:"5 MMDA 1", icon:{url: "12gf/pkpk270.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.078354,lng:80.217759},  map, title:"5 MMDA 2", icon:{url: "12gf/pkpk180.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.065734,lng:80.214402},  map, title:"5 MMDA 3", icon:{url: "12gf/pkpk180.gif", anchor: new google.maps.Point(6, 6),}}); 
+this.arrow = new google.maps.Marker({position:{lat:13.066845,lng:80.209603},  map, title:"5 MMDA 4",icon:{url: "12gf/pkpk300.gif", anchor: new google.maps.Point(6, 6),}}); 
+ this.arrow = new google.maps.Marker({position:{lat:13.074151,lng:80.191042},  map, title:"5 MMDA 5",icon:{url: "12gf/pkpk240.gif", anchor: new google.maps.Point(6, 6),}});
+
+ this.arrow = new google.maps.Marker({position:{lat:13.067640,lng:80.178015},  map, title:"5 MMDA 6",icon:{url: "12gf/pkpk255.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+  const ChindaMMDA5 = [
+{lat:13.085156,lng:80.223980},
+{lat:13.084512,lng:80.222886},
+{lat:13.084587,lng:80.217893},
+
+{lat:13.078354,lng:80.217759},
+{lat:13.077105,lng:80.218036},
+{lat:13.074977,lng:80.217835},
+{lat:13.075172,lng:80.215999},
+{lat:13.068848,lng:80.215215},
+{lat:13.068754,lng:80.214378},
+{lat:13.065734,lng:80.214402},
+{lat:13.062734,lng:80.214432},
+{lat:13.062713,lng:80.213735},
+{lat:13.063791,lng:80.211592},
+{lat:13.064845,lng:80.211262},
+{lat:13.066845,lng:80.209603},
+{lat:13.068345,lng:80.206403},
+{lat:13.069733,lng:80.204989},
+{lat:13.074341,lng:80.199623},
+{lat:13.076034,lng:80.198851},
+
+{lat:13.074193,lng:80.193874},
+{lat:13.074151,lng:80.191042},
+{lat:13.070595,lng:80.182766},
+{lat:13.067640,lng:80.178015},
+{lat:13.067400,lng:80.175955},
+{lat:13.064338,lng:80.171256},
+{lat:13.064202,lng:80.168670},
+{lat:13.061529,lng:80.165244},
+{lat:13.061347,lng:80.161006},
+];
+  const chinda5 = new google.maps.Polyline({
+    path:ChindaMMDA5,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  chinda5.setMap(map);
+this.name = new google.maps.Marker({position:{lat:13.087885,lng:80.234352},  map, title:"New Avadi Rn 6",icon:{url: "flag0/Rno06.png", anchor: new google.maps.Point(6, 6),}});
+this.name = new google.maps.Marker({position:{lat:13.089634,lng:80.218184},  map, title:"New Avadi Rn 6",icon:{url: "flag0/Rno06.png", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.089335,lng:80.229646},  map, title:"6 New Avadi Rd 1",icon:{url: "12gf/rdrd300.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.094138,lng:80.218332},  map, title:"6 New Avadi Rd 2",icon:{url: "12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.084998,lng:80.208529},  map, title:"6 New Avadi Rd 3",icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.083011,lng:80.198527},  map, title:"6 New Avadi Rd 4",icon:{url: "12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});
+    const LotusColony6 = [
+
+{lat:13.087885,lng:80.234352},
+{lat:13.089335,lng:80.229646},
+{lat:13.095106,lng:80.223036},
+{lat:13.096458,lng:80.219147},
+{lat:13.094138,lng:80.218332},
+{lat:13.089634,lng:80.218184},
+{lat:13.084634,lng:80.217884},
+{lat:13.084998,lng:80.208529},
+{lat:13.085398,lng:80.198529},
+{lat:13.083011,lng:80.198527},
+{lat:13.081011,lng:80.198526},
+{lat:13.076143,lng:80.199107},
+];
+  const Lotus= new google.maps.Polyline({
+    path:LotusColony6,
+    geodesic: true,
+    strokeColor: "#dd5500",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  Lotus.setMap(map);
+  
+this.arrow = new google.maps.Marker({position:{lat:13.092378,lng:80.215457},  map, title:"7  - 1",icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}});
+
+this.arrow = new google.maps.Marker({position:{lat:13.094680,lng:80.202543},  map, title:"7  - 2",icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+this.arrow = new google.maps.Marker({position:{lat:13.091161,lng:80.198592},  map, title:"7  - 3",icon:{url: "12gf/blbl180.gif", anchor: new google.maps.Point(6, 6),}});  
+
+this.arrow = new google.maps.Marker({position:{lat:13.087509,lng:80.192638},  map, title:"7  - 4",icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+this.arrow = new google.maps.Marker({position:{lat:13.088209,lng:80.180328},  map, title:"7  - 5",icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}}); 
+this.arrow = new google.maps.Marker({position:{lat:13.088709,lng:80.170328},  map, title:"7  - 6",icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+     const AnnanagarEast7 = [
+{lat:13.095402,lng:80.222344},
+{lat:13.093646,lng:80.225048},
+{lat:13.092068,lng:80.223580},
+{lat:13.092378,lng:80.215457},
+{lat:13.092778,lng:80.206457},
+{lat:13.094680,lng:80.202543},
+{lat:13.094777,lng:80.198615},
+{lat:13.094911,lng:80.198615},
+{lat:13.091161,lng:80.198592},
+{lat:13.087261,lng:80.198572},
+{lat:13.087509,lng:80.192638},
+{lat:13.087909,lng:80.186328},
+{lat:13.088209,lng:80.180328},
+{lat:13.088709,lng:80.170328},
+{lat:13.089209,lng:80.161328},
+
+];
+  const annaE = new google.maps.Polyline({
+    path: AnnanagarEast7,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ annaE.setMap(map);
+  
+ 
+
+   const padiFlyover8 = [
+{ lat:13.103473, lng:80.200882},
+{ lat:13.103097, lng:80.198350},
+{ lat:13.101971, lng:80.194381},
+{ lat:13.099687, lng:80.195039},
+{ lat:13.098440, lng:80.197679},
+{ lat:13.097333, lng:80.198607},
+{ lat:13.087248, lng:80.198559},
+{ lat:13.087385, lng:80.192799},
+{ lat:13.087813, lng:80.189505},
+{ lat:13.087861, lng:80.188014},
+{ lat:13.085447, lng:80.188186},
+{ lat:13.085329, lng:80.187426},
+{ lat:13.081525, lng:80.187878},
+{ lat:13.080886, lng:80.183240},
+{ lat:13.080535, lng:80.180216},
+{ lat:13.079072, lng:80.180526},
+{ lat:13.078191, lng:80.181089},
+{ lat:13.077397, lng:80.181285},
+{ lat:13.075777, lng:80.181457},
+{ lat:13.074293, lng:80.181167},
+{ lat:13.072642, lng:80.181124},
+{ lat:13.072558, lng:80.182014},
+{ lat:13.070363, lng:80.182352},
+
+ ];
+ const padi = new google.maps.Polyline({
+    path: padiFlyover8,
+    geodesic: true,
+    strokeColor: "#990000",
+    strokeOpacity: 1.0,
+    strokeWeight:2,
+  });
+ padi.setMap(map);
+ 
+
+ const  MogappairEast9 = [
+{ lat:13.086832, lng:80.181460},
+{ lat:13.086632, lng:80.179560},
+{ lat:13.080525, lng:80.180207},
+
+];
+ const mogaE = new google.maps.Polyline({
+    path: MogappairEast9,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ mogaE.setMap(map);
+ 
+
+ 
+
+
+
+
+
+
+ const  Mogappair9b =[
+{ lat:13.078358, lng:80.180665},
+{ lat:13.078064, lng:80.178486},
+{ lat:13.078074, lng:80.176747},
+{ lat:13.078476, lng:80.176163},
+{ lat:13.078827, lng:80.175503},
+{ lat:13.078764, lng:80.175213},
+{ lat:13.078403, lng:80.174022},
+{ lat:13.083339, lng:80.172720},
+];
+ const moga = new google.maps.Polyline({
+    path: Mogappair9b,
+    geodesic: true,
+    strokeColor: "#0099ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,  });
+ moga.setMap(map);
+
+ 
+ 
+ 
+
+ const  Mogappairwest9c =[
+{ lat:13.083339, lng:80.172720},
+{ lat:13.080011, lng:80.161343},
+
+];
+ const mogaW = new google.maps.Polyline({
+    path: Mogappairwest9c,
+    geodesic: true,
+    strokeColor: "#ff33ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ mogaW.setMap(map);
+
+ this.name = new google.maps.Marker({position:{lat:13.101010,lng:80.260030},  map, title:"10 puliyanthope",icon:{url: "flag0/RE10.png", anchor: new google.maps.Point(15, 18),}});
+
+ this.name = new google.maps.Marker({position:{lat:13.101010,lng:80.260030},  map, title:"10 - 1",icon:{url: "12gf/blbl180.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+ this.name = new google.maps.Marker({position:{lat:13.097609,lng:80.254424},  map, title:"10 - 2",icon:{url:"12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}});  
+
+ this.name = new google.maps.Marker({position:{lat:13.096916,lng:80.246398}, map, title:"10 - 3",icon:{url:"12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+ this.name = new google.maps.Marker({position:{lat:13.100016,lng:80.226797}, map, title:"10 - 3",icon:{url:"12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}});  
+  
+ this.name = new google.maps.Marker({position:{lat:13.103698,lng:80.206429}, map, title:"10c - 4",icon:{url:"12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}});  
+  
+ 
+ 
+
+
+ 
+ const puliyanBinny10 = [
+{lat:13.101010,lng:80.260030},    
+{lat:13.097181,lng:80.260502},
+{lat:13.097609,lng:80.254424},
+{lat:13.097902,lng:80.250680},
+{lat:13.097717,lng:80.249945},
+{lat:13.096916,lng:80.246398},
+{lat:13.097394,lng:80.242076},
+{lat:13.098477,lng:80.235032},
+{lat:13.100016,lng:80.226797},
+{lat:13.099405,lng:80.223702},
+{lat:13.098757,lng:80.222744},
+{lat:13.100142,lng:80.215715},
+{lat:13.103698,lng:80.206429},
+{lat:13.103834,lng:80.205978},
+{lat:13.103492,lng:80.201740},
+{lat:13.103473,lng:80.200882},
+];
+ const puliB = new google.maps.Polyline({
+    path:puliyanBinny10 ,
+    geodesic: true,
+    strokeColor: "#009900",
+    strokeOpacity: 1,
+    strokeWeight: 2,
+  });
+ puliB.setMap(map);
+ 
+ this.name = new google.maps.Marker({position:{lat:13.128874,lng:80.241589},  map, title:"11 Madhavaram",icon:{url: "flag0/RE11.png", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({position:{lat:13.136874,lng:80.231589},  map, title:"11 - 1",icon:{url: "12gf/rdrd315.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({position:{lat:13.140617,lng:80.218574},  map, title:"11 - 2",icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({position:{lat:13.121840,lng:80.200134},  map, title:"11 - 3",icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+  
+ this.arrow = new google.maps.Marker({position:{lat:13.108939,lng:80.196086},  map, title:"11 - 4",icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+ this.arrow = new google.maps.Marker({position:{lat:13.101939,lng:80.194386},  map, title:"11 - 5",icon:{url: "12gf/rdrd255.gif", anchor: new google.maps.Point(6, 6),}}); 
+ this.arrow = new google.maps.Marker({position:{lat:13.099158,lng:80.182978},  map, title:"11 - 6",icon:{url: "12gf/rdrd255.gif", anchor: new google.maps.Point(6, 6),}});  
+ this.arrow = new google.maps.Marker({position:{lat:13.099332,lng:80.169154},  map, title:"11 - 7",icon:{url: "12gf/rdrd285.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ const Madhavaram11 = [ 
+{lat:13.128874,lng:80.241589},
+{lat:13.136874,lng:80.231589},
+{lat:13.144551,lng:80.220280},
+{lat:13.140617,lng:80.218574},
+{lat:13.139224,lng:80.217919},
+{lat:13.137733,lng:80.217308},
+{lat:13.135936,lng:80.216525},
+{lat:13.135696,lng:80.216503},
+{lat:13.132798,lng:80.215162},
+{lat:13.130259,lng:80.213789},
+{lat:13.123570,lng:80.202277},
+{lat:13.121840,lng:80.200134},
+{lat:13.116478,lng:80.197738},
+{lat:13.108939,lng:80.196086},
+{lat:13.101939,lng:80.194386},
+{lat:13.100401,lng:80.188600},
+{lat:13.099158,lng:80.182978},
+{lat:13.097958,lng:80.176978},
+{lat:13.099332,lng:80.169154},
+{lat:13.101332,lng:80.162154},
+
+
+ ];
+ const madha11 = new google.maps.Polyline({
+    path:Madhavaram11 ,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1,
+    strokeWeight: 2,
+  });
+ madha11.setMap(map);
+ 
+ 
+this.numb = new google.maps.Marker({position:{lat:13.103275,lng:80.186610},  map, title:"11c - 1",icon:{url: "12gf/rdrd360.gif", anchor: new google.maps.Point(6, 6),}});  
+ 
+this.numb = new google.maps.Marker({position:{lat:13.109000,lng:80.171882},  map, title:"11c - 1",icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+
+ const koratur11c = [
+{lat:13.099801,lng:80.186656},
+{lat:13.103275,lng:80.186610},
+{lat:13.107275,lng:80.186570},
+{lat:13.108726,lng:80.176731},
+{lat:13.109000,lng:80.171882},
+{lat:13.109280,lng:80.166882},
+{lat:13.109860,lng:80.163615},
+  ];
+ const kora11c = new google.maps.Polyline({
+    path:koratur11c ,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1,
+    strokeWeight: 2,
+  });
+ kora11c.setMap(map);
+ 
+this.numb = new google.maps.Marker({position:{ lat:13.124014, lng:80.259161},  map, title:"12 MKB Nagar",icon:{url: "flag0/RE12.png", anchor: new google.maps.Point(6, 6),}});
+ 
+this.arrow = new google.maps.Marker({position:{ lat:13.129014, lng:80.258911},  map, title:"12  1",icon:{url: "12gf/blbl360.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+this.arrow = new google.maps.Marker({position:{ lat:13.123642, lng:80.248243},  map, title:"12 2",icon:{url: "12gf/blbl300.gif", anchor: new google.maps.Point(15,15),}});
+ 
+  const MKBnagar12 = [
+{ lat:13.124014, lng:80.259161},
+{ lat:13.129014, lng:80.258911},
+{ lat:13.135625, lng:80.258654},
+{ lat:13.136293, lng:80.258015},
+{ lat:13.136479, lng:80.257230},
+{ lat:13.136567, lng:80.255555},
+{ lat:13.136248, lng:80.255137},
+{ lat:13.134686, lng:80.253865},
+{ lat:13.132356, lng:80.253312},
+{ lat:13.129974, lng:80.249722},
+{ lat:13.129455, lng:80.249829},
+{ lat:13.128993, lng:80.249829},
+{ lat:13.123642, lng:80.248243},
+{ lat:13.124133, lng:80.247626},
+{ lat:13.128874, lng:80.241589},
+];
+  const mkb12 = new google.maps.Polyline({
+    path:MKBnagar12,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ mkb12.setMap(map);
+
+  this.arrow = new google.maps.Marker({position:{lat:13.121232,lng:80.223867},  map, title:"12b Kolathur ",icon:{url: "flag0/RE12b.png", anchor: new google.maps.Point(6, 6),}});
+  
+  const kolathur12b= [
+{lat:13.112848,lng:80.236733},
+{lat:13.113597,lng:80.235593},
+{lat:13.114153,lng:80.234896},
+{lat:13.114919,lng:80.232706},
+{lat:13.115468,lng:80.232596},
+{lat:13.117688,lng:80.228546},
+{lat:13.118569,lng:80.225965},
+{lat:13.121232,lng:80.223867},
+{lat:13.123485,lng:80.222692},
+{lat:13.126073,lng:80.219319},
+{lat:13.130188,lng:80.213923},
+
+];
+  const kola12b= new google.maps.Polyline({
+    path: kolathur12b,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ kola12b.setMap(map);
+this.name = new google.maps.Marker({position:{lat:13.110726,lng:80.252477},  map, title:"Perambur 12c",icon:{url: "flag0/RE12c.png", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({position:{lat:13.122111,lng:80.237387},  map, title:"12c Perambur 1",icon:{url: "12gf/rdrd90.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ 
+this.arrow = new google.maps.Marker({position:{lat:13.115683,lng:80.246123},  map, title:"12c Perambur 2",icon:{url: "12gf/rdrd90.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+this.arrow = new google.maps.Marker({position:{lat:13.108196,lng:80.247912},  map, title:"12c Perambur 3",icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+this.arrow = new google.maps.Marker({position:{lat:13.112738,lng:80.236925},  map, title:"12c Perambur 4",icon:{url: "12gf/rdrd300.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+  const perambur12c = [
+{lat:13.121572,lng:80.234986},
+{lat:13.122111,lng:80.237387},
+{lat:13.122268,lng:80.238713},
+{lat:13.121761,lng:80.240912},
+{lat:13.121380,lng:80.242674},
+{lat:13.120748,lng:80.242704},
+{lat:13.118253,lng:80.242438},
+{lat:13.116036,lng:80.242496},
+{lat:13.115683,lng:80.246123},
+{lat:13.115404,lng:80.249500},
+{lat:13.115419,lng:80.250626},
+{lat:13.115304,lng:80.251286},
+{lat:13.114412,lng:80.252745},
+{lat:13.108726,lng:80.252477},
+{lat:13.108196,lng:80.247912},
+{lat:13.107968,lng:80.245165},
+{lat:13.108054,lng:80.244752},
+{lat:13.108156,lng:80.244462},
+{lat:13.108334,lng:80.244130},
+{lat:13.108679,lng:80.241877},
+{lat:13.109307,lng:80.241796},
+{lat:13.110784,lng:80.240026},
+{lat:13.111552,lng:80.238798},
+{lat:13.112738,lng:80.236925},
+
+];
+  const perab = new google.maps.Polyline({
+    path: perambur12c,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ perab.setMap(map);
+  
+  this.name = new google.maps.Marker({position:{lat:13.113916,lng:80.225690},  map, title:"Peravalur 13",icon:{url: "flag0/RE13.png", anchor: new google.maps.Point(6, 6),}});
+  
+ const  peravalur13 =[
+
+{lat:13.116065,lng:80.231630},
+{lat:13.114774,lng:80.231486},
+{lat:13.113575,lng:80.231515},
+{lat:13.112400,lng:80.231604},
+{lat:13.113916,lng:80.225690},
+{lat:13.115258,lng:80.222328},
+{lat:13.116755,lng:80.222943},
+{lat:13.116416,lng:80.224932},
+{lat:13.117364,lng:80.224911},
+{lat:13.118580,lng:80.225991},
+];
+ const perava13 = new google.maps.Polyline({
+    path:peravalur13,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ perava13.setMap(map);
+ 
+   this.name = new google.maps.Marker({position:{lat:13.119082,lng:80.232210},  map, title:"Peravalur 113",icon:{url: "flag0/RE13b.png", anchor: new google.maps.Point(6, 6),}});
+   const TVKnagar13b = [
+{lat:13.121572,lng:80.234986},
+{lat:13.121019,lng:80.232578},
+{lat:13.119082,lng:80.232210},
+{lat:13.118675,lng:80.232033},
+{lat:13.116068,lng:80.231620},
+];
+  const TVK = new google.maps.Polyline({
+    path: TVKnagar13b,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ TVK.setMap(map);
+ 
+    this.name = new google.maps.Marker({position:{lat:13.124275,lng:80.216434},  map, title:"13c poom 1",icon:{url: "12gf/blbl255.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+    this.name = new google.maps.Marker({position:{lat:13.120835,lng:80.208312},  map, title:"13c poom 2",icon:{url: "12gf/blbl180.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+    this.name = new google.maps.Marker({position:{lat:13.120015,lng:80.202096},  map, title:"13c poom 3",icon:{url: "12gf/blbl345.gif", anchor: new google.maps.Point(6, 6),}});     
+   const poombukar13c = [
+
+{lat:13.126099,lng:80.219282},
+{lat:13.125373,lng:80.218745},
+{lat:13.125213,lng:80.216595},
+{lat:13.124275,lng:80.216434},
+{lat:13.124235,lng:80.214398},
+{lat:13.123960,lng:80.213487},
+{lat:13.123842,lng:80.211782},
+{lat:13.123099,lng:80.210296},
+{lat:13.122046,lng:80.208426},
+{lat:13.120835,lng:80.208312},
+{lat:13.118835,lng:80.208202},
+{lat:13.118743,lng:80.202696},
+{lat:13.119132,lng:80.202798},
+{lat:13.119208,lng:80.202439},
+{lat:13.120015,lng:80.202096},
+{lat:13.122337,lng:80.201737},
+{lat:13.122365,lng:80.200707},
+
+];
+  const poomb = new google.maps.Polyline({
+    path: poombukar13c,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ poomb.setMap(map);
+ 
+
+   
+    
+ 
+    
+this.arrow = new google.maps.Marker({ position:{lat:13.145071,lng:80.198953},
+    map, title:"14 Minjur 5", icon:{url: "12gf/blbl240.gif", anchor: new google.maps.Point(6, 6),}});  
+    
+this.arrow = new google.maps.Marker({position:{lat:13.116443,lng:80.164139},
+    map, title:"14 Minjur 6", icon:{url:"12gf/blbl180.gif", anchor: new google.maps.Point(6, 6),}}); 
+    
+ this.arrow = new google.maps.Marker({position:{lat:13.101472,lng:80.162632},
+    map, title:"14 Minjur 7", icon:{url:"12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});     
+    
+ this.arrow = new google.maps.Marker({position:{lat:13.109860,lng:80.163615},
+    map, title:"14 Minjur 8", icon:{url:"12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});  
+    
+ this.arrow = new google.maps.Marker({position:{lat:13.081257,lng:80.161118},
+    map, title:"14 Minjur 9", icon:{url:"12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});        
+     
+
+
+ this.arrow = new google.maps.Marker({position:{lat:13.071257,lng:80.161118},
+    map, title:"14 Minjur 10", icon:{url:"12gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}}); 
+       
+          
+     
+ this.arrow = new google.maps.Marker({position:{lat:13.061347,lng:80.157612},
+    map, title:"14 Minjur 11", icon:{url:"12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}});      
+     
+ this.arrow = new google.maps.Marker({position:{lat:13.061578,lng:80.142690},
+    map, title:"14 Minjur 12", icon:{url:"12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}});  
+    
+
+  const minjur14 = [
+{lat:13.144052,lng:80.220048},
+{lat:13.151351,lng:80.210529},
+{lat:13.151294,lng:80.210191},
+{lat:13.151127,lng:80.209885},
+{lat:13.149080,lng:80.208596},
+{lat:13.147743,lng:80.205989},
+{lat:13.145071,lng:80.198953},
+
+{lat:13.140901,lng:80.192560},
+{lat:13.136884,lng:80.175136},
+{lat:13.130872,lng:80.170555},
+{lat:13.116443,lng:80.164139},
+{lat:13.101472,lng:80.162632},
+{lat:13.081257,lng:80.161118},
+{lat:13.071257,lng:80.161118},
+
+{lat:13.061347,lng:80.161006},
+{lat:13.061347,lng:80.157612},
+{lat:13.060618,lng:80.155346},
+{lat:13.062081,lng:80.149941},
+
+{lat:13.061578,lng:80.142690},
+{lat:13.061242,lng:80.138390},
+
+
+];
+  const minj = new google.maps.Polyline({
+    path: minjur14,
+    geodesic: true,
+    strokeColor: "#0099bb",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ minj.setMap(map);
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.104536,lng:80.132844},
+    map, title:"15a selvimahal 1", icon:{url: "12gf/vovo120.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.098297, lng:80.134297},
+    map, title:"15a selvimahal 2", icon:{url: "12gf/vovo270.gif", anchor: new google.maps.Point(6, 6),}}); 
+  
+this.arrow = new google.maps.Marker({ position:{lat:13.086648,lng:80.125669},  map, title:"15a selvimahal 3", icon:{url: "12gf/vovo165.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.057356, lng:80.101389},  map, title:"15a selvimahal 4", icon:{url: "12gf/vovo270.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.100993,lng:80.139975},  map, title:"15a selvimahal 5", icon:{url: "12gf/vovo90.gif", anchor: new google.maps.Point(6, 6),}});
+
+
+
+ const selviMahal15a = [
+{lat:13.104536,lng:80.132844},
+{lat:13.101440,lng:80.135915},
+{lat:13.100993,lng:80.139975},
+{lat:13.100593,lng:80.142675},
+{lat:13.097615,lng:80.142272},
+{lat:13.098160,lng:80.137380},
+{lat:13.098297,lng:80.134297},
+{lat:13.098427,lng:80.131097},
+{lat:13.097120,lng:80.128424},
+{lat:13.094537,lng:80.125235},
+{lat:13.094395,lng:80.125101},
+{lat:13.094251,lng:80.124730},
+{lat:13.088563,lng:80.122893},
+{lat:13.086648,lng:80.125669},
+{lat:13.083062,lng:80.126445},
+{lat:13.076718,lng:80.125300},
+{lat:13.070556,lng:80.123063},
+{lat:13.067907,lng:80.128371},
+{lat:13.066750,lng:80.135588},
+{lat:13.065910,lng:80.137467},
+{lat:13.064392,lng:80.137527},
+{lat:13.063404,lng:80.138168},
+{lat:13.061242,lng:80.138390}, 
+{lat:13.060978,lng:80.135690},
+{lat:13.057646,lng:80.128392},
+{lat:13.055204,lng:80.125194},
+{lat:13.054727,lng:80.124006},
+{lat:13.054593,lng:80.122765},
+{lat:13.056841,lng:80.114459},
+{lat:13.057356,lng:80.101389},
+{lat:13.056174,lng:80.094616},
+{lat:13.054627,lng:80.091322},
+{lat:13.053362,lng:80.090389},
+{lat:13.049269,lng:80.087951},
+{lat:13.048445,lng:80.083881},
+];
+  const selmaha = new google.maps.Polyline({
+    path:selviMahal15a ,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ selmaha.setMap(map);
+ 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.097409,lng:80.146422},  map, title:"15 ayapakkam 1", icon:{url: "12gf/rdrd30.gif", anchor: new google.maps.Point(6, 6),}}); 
+
+this.arrow = new google.maps.Marker({ position:{lat:13.110111,lng:80.152283},  map, title:"15 ayapakkam 2", icon:{url: "12gf/rdrd315.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.120663,lng:80.149056},  map, title:"15 ayapakkam 3", icon:{url: "12gf/rdrd315.gif", anchor: new google.maps.Point(6, 6),}}); 
+ this.arrow = new google.maps.Marker({ position:{lat:13.126161,lng:80.142893},  map, title:"15 ayapakkam 3a", icon:{url: "12gf/rdrd330.gif", anchor: new google.maps.Point(6, 6),}}); 
+this.arrow = new google.maps.Marker({ position:{lat:13.130161,lng:80.137893},  map, title:"15 ayapakkam 4", icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.124158,lng:80.114890},  map, title:"15 ayapakkam 5", icon:{url: "12gf/rdrd240.gif", anchor: new google.maps.Point(6, 6),}}); 
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.118589,lng:80.089806},  map, title:"15 ayapakkam 6", icon:{url: "12gf/rdrd105.gif", anchor: new google.maps.Point(6, 6),}});
+
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.119471,lng:80.099221},  map, title:"15 ayapakkam 7", icon:{url: "12gf/rdrd255.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.119362,lng:80.079386},  map, title:"15 ayapakkam 8", icon:{url: "12gf/rdrd105.gif", anchor: new google.maps.Point(6, 6),}});
+
+  const ayapakkamAmbattur15 = [
+{lat:13.097346,lng:80.145950},
+{lat:13.097409,lng:80.146422},
+{lat:13.103428,lng:80.150263},
+{lat:13.107723,lng:80.152216},
+{lat:13.110111,lng:80.152283},
+{lat:13.112811,lng:80.150242},
+{lat:13.113835,lng:80.148311},
+{lat:13.115611,lng:80.147839},
+{lat:13.117758,lng:80.149609},
+{lat:13.119754,lng:80.149818},
+{lat:13.120663,lng:80.149056},
+{lat:13.121539,lng:80.148408},
+{lat:13.122192,lng:80.147227},
+{lat:13.126161,lng:80.142893},
+{lat:13.130161,lng:80.137893},
+{lat:13.131342,lng:80.127540},
+{lat:13.126420,lng:80.121312},
+{lat:13.124158,lng:80.114890},
+{lat:13.123160,lng:80.110819},
+{lat:13.119607,lng:80.104221},
+{lat:13.119471,lng:80.099232},
+{lat:13.118589,lng:80.089806},
+{lat:13.119362,lng:80.079386},
+{lat:13.119728,lng:80.069507},
+{lat:13.122058,lng:80.062555},
+
+];
+  const ayyaAmb = new google.maps.Polyline({
+    path:ayapakkamAmbattur15 ,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ ayyaAmb.setMap(map);
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.103437,lng:80.157377},  map, title:"15 ayapakkam 3", icon:{url: "12gf/rdrd300.gif", anchor: new google.maps.Point(6, 6),}}); 
+  const ambIndEst15c = [
+{lat:13.102049,lng:80.159104},
+{lat:13.103437,lng:80.157377},
+{lat:13.104858,lng:80.152881},
+{lat:13.105360,lng:80.152452},
+{lat:13.106279,lng:80.152302},
+
+{lat:13.107723, lng:80.152216},
+
+];
+  const ambEst = new google.maps.Polyline({
+    path:ambIndEst15c ,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ ambEst.setMap(map); 
+ 
+ 
+  this.arrow = new google.maps.Marker({ position:{lat:13.131182,lng: 80.160274},    map,title:"16 Redhills 1 ", icon:{url:"12gf/pkpk240.gif",anchor: new google.maps.Point(6,6),}});  
+
+  this.arrow = new google.maps.Marker({ position:{lat:13.122955,lng:80.148816},    map,title:"16 Redhills 2 ", icon:{url:"12gf/pkpk240.gif",anchor: new google.maps.Point(6,6),}});  
+  
+    
+   
+  const redhills16 = [
+
+{lat:13.137213,lng:80.177266},
+{lat:13.132261,lng:80.172835},
+{lat:13.132021,lng:80.165116},
+{lat:13.131182,lng:80.160274},
+{lat:13.130124,lng:80.157771},
+{lat:13.127501,lng:80.153941},
+{lat:13.124983,lng:80.152428},
+{lat:13.122955,lng:80.148816},     /*
+{lat:13.122457,lng:80.148622},
+{lat:13.121926,lng:80.148546},
+{lat:13.121529,lng:80.148547}, 
+{lat:13.121539,lng:80.148408},   */
+{lat:13.122457,lng:80.146984},
+];
+  const redhill = new google.maps.Polyline({
+    path: redhills16,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ redhill.setMap(map);
+ 
+  const redhillsbyepass16 = [
+      /*
+{ lat:13.197022, lng: 80.180874},
+{ lat:13.196364, lng: 80.183418},
+{ lat:13.194734, lng: 80.185844},
+{ lat:13.189971, lng: 80.191093},
+{ lat:13.184904, lng: 80.192053},
+{ lat:13.181828, lng: 80.193015},           */
+];
+  const redbypass = new google.maps.Polyline({
+    path:redhillsbyepass16,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ redbypass.setMap(map);
+
+this.flag = new google.maps.Marker({ position:{lat:13.140578,lng:80.200791},   map,title:" Vinayakapuram Rno:16b", icon:{url: "flag0/RE16b.png", anchor: new google.maps.Point(16, 8),}});
+
+ this.arrow = new google.maps.Marker({ position:{lat:13.138426,lng:80.206981},    map,title:"16b Vinayakapuram 1", icon:{url:"12gf/pkpk315.gif",anchor: new google.maps.Point(6,6),}});
+ 
+  this.arrow = new google.maps.Marker({ position:{lat:13.136606,lng:80.178593},    map,title:"16b Vinayakapuram 2 ", icon:{url:"12gf/pkpk240.gif",anchor: new google.maps.Point(6,6),}});
+ 
+  this.arrow = new google.maps.Marker({ position:{lat:13.132139,lng:80.171665},    map,title:"16b Vinayakapuram 3 ", icon:{url:"12gf/pkpk255.gif",anchor: new google.maps.Point(6,6),}});
+
+ 
+  
+ const vinayakapuram16b = [
+{lat:13.130188,lng:80.213923},
+{lat:13.131741,lng:80.212362},
+{lat:13.133698,lng:80.210838},
+{lat:13.135706,lng:80.209486},
+{lat:13.138426,lng:80.206981},
+{lat:13.140578,lng:80.200791},
+{lat:13.141519,lng:80.194960},
+{lat:13.141088,lng:80.193989},
+{lat:13.138387,lng:80.186913},
+{lat:13.137128,lng:80.184333},
+{lat:13.136606,lng:80.178593},
+{lat:13.136475,lng:80.174945},
+{lat:13.133210,lng:80.172354},
+{lat:13.132139,lng:80.171665},
+
+];
+  const vpuram = new google.maps.Polyline({
+    path:vinayakapuram16b,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ vpuram.setMap(map);
+ 
+ 
+
+this.arrow = new google.maps.Marker({ position:{lat:13.108973, lng:79.922633},   map,title:"17-1", icon:{url:"12gf/blbl90.gif",anchor: new google.maps.Point(6,6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:13.098774, lng:79.977036},   map,title:"17-2", icon:{url:"12gf/blbl105.gif",anchor: new google.maps.Point(6,6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:13.085649, lng:80.018500},   map,title:"17-3", icon:{url:"12gf/blbl135.gif",anchor: new google.maps.Point(6,6),}}); 
+
+this.arrow = new google.maps.Marker({ position:{lat:13.065212, lng:80.043281},  map,title:"17-4", icon:{url:"12gf/blbl135.gif",anchor: new google.maps.Point(6,6),}}); 
+     
+
+ const uthukottai17 = [
+{lat:13.136104, lng:79.908441},
+{lat:13.135154, lng:79.908666},
+{lat:13.135154, lng:79.908666},
+{lat:13.125463, lng:79.910930},
+{lat:13.122447, lng:79.911724},
+{lat:13.119740, lng:79.909835},
+{lat:13.110461, lng:79.910581},
+{lat:13.111082, lng:79.910820},
+{lat:13.108973, lng:79.922633},
+{lat:13.108225, lng:79.944575},
+{lat:13.106707, lng:79.958501},
+{lat:13.098774, lng:79.977036},
+{lat:13.096077, lng:79.991199},
+{lat:13.085649, lng:80.018500},
+{lat:13.075649, lng:80.030500},
+{lat:13.065212, lng:80.043281},
+{lat:13.050220, lng:80.065870},
+{lat:13.044158, lng:80.065506},
+];
+  const uthu = new google.maps.Polyline({
+    path:uthukottai17  ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ uthu.setMap(map);
+ 
+this.arrow = new google.maps.Marker({ position:{lat:13.133261, lng:79.946828},    map, icon:{url:"12gf/vovo270.gif",anchor: new google.maps.Point(6,6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.126736, lng:79.992936},    map, icon:{url:"12gf/vovo285.gif",anchor: new google.maps.Point(6,6),}});
+
+ const veppampattuThiru17c = [
+{ lat:13.124772, lng:80.006358},
+{ lat:13.124688, lng:79.996068},
+{ lat:13.126736, lng:79.992936},
+{ lat:13.127885, lng:79.988022},
+{ lat:13.129113, lng:79.980496},
+{ lat:13.129217, lng:79.970378},
+{ lat:13.131615, lng:79.964032},
+{ lat:13.131975, lng:79.963705},
+{ lat:13.131965, lng:79.959360},
+{ lat:13.133443, lng:79.955492},
+{ lat:13.133261, lng:79.946828},
+{ lat:13.133877, lng:79.933911},
+{ lat:13.134979, lng:79.928573},
+{ lat:13.136959, lng:79.921425},
+{ lat:13.136104, lng:79.908441},
+
+];
+  const vepathi = new google.maps.Polyline({
+    path:veppampattuThiru17c ,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ vepathi.setMap(map);
+this.pole = new google.maps.Marker({ position: { lat:13.110691, lng:79.910635},   anchor: new google.maps.Point(4,0), map, icon:{url:"flag0/post.png",}});
+
+this.flag = new google.maps.Marker({ position: { lat:13.110691, lng:79.910635},   anchor: new google.maps.Point(3, 0), map, icon:{url: "flag0/17a.png", anchor: new google.maps.Point(0, 61),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.058518, lng:79.912231},    map, icon:{url:"12gf/vovo165.gif",anchor: new google.maps.Point(6,6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.031929,lng:79.917145},    map, icon:{url:"12gf/pkpk165.gif",anchor: new google.maps.Point(6,6),}});
+
+ const ThivalValarThandalam17 = [
+
+{lat:13.110691,lng:79.910635},
+{lat:13.101272,lng:79.907125},
+{lat:13.086457,lng:79.907839},
+{lat:13.077473,lng:79.909176},
+{lat:13.058518,lng:79.912231},
+{lat:13.031929,lng:79.917145},
+{lat:13.028542,lng:79.919087},
+{lat:13.015538,lng:79.926821},
+
+];
+  const thithan = new google.maps.Polyline({
+    path:ThivalValarThandalam17 ,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ thithan.setMap(map);
+ 
+  this.arrow = new google.maps.Marker({ position:{lat:13.127077, lng:80.103342},    map, title:"17b 1", icon:{url:"gf/blbl360.gif",anchor: new google.maps.Point(6,6),}});
+  
+  this.arrow = new google.maps.Marker({ position:{lat:13.140742, lng:80.092191},    map, title:"17b 2", icon:{url:"gf/blbl315.gif",anchor: new google.maps.Point(6,6),}});
+  
+  this.arrow = new google.maps.Marker({ position:{lat:13.145688, lng:80.064240},    map, title:"17b 3", icon:{url:"gf/blbl240.gif",anchor: new google.maps.Point(6,6),}});
+   
+  this.arrow = new google.maps.Marker({ position:{lat:13.128646, lng:80.052850},    map, title:"17b 4", icon:{url:"gf/blbl180.gif",anchor: new google.maps.Point(6,6),}});
+ 
+ 
+
+ const AvadiMuthapudupetai17b = [
+{lat:13.127077, lng:80.103342},
+{lat:13.133642, lng:80.103046},
+{lat:13.133799, lng:80.102906},
+{lat:13.136448, lng:80.097405},
+{lat:13.140742, lng:80.092191},
+{lat:13.145312, lng:80.086159},
+{lat:13.150839, lng:80.086963},
+{lat:13.151664, lng:80.082403},
+{lat:13.151361, lng:80.079989},
+{lat:13.148520, lng:80.078080},             
+{lat:13.146994, lng:80.074604},
+{lat:13.145688, lng:80.064240},
+{lat:13.142063, lng:80.057899},
+{lat:13.140506, lng:80.056611},
+{lat:13.136390, lng:80.056547},
+{lat:13.133885, lng:80.056412},
+{lat:13.134023, lng:80.054728},
+{lat:13.133216, lng:80.053047},
+{lat:13.128646, lng:80.052850},
+{lat:13.124646, lng:80.052700},            
+];
+  const   avamutha= new google.maps.Polyline({
+    path:AvadiMuthapudupetai17b ,
+    geodesic: true,
+    strokeColor: "#0099cc",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ avamutha.setMap(map);
+ 
+
+   this.arrow = new google.maps.Marker({ position:{lat:13.124494, lng:80.051694},    map, title:"17b 5", icon:{url:"gf/blbl270.gif",anchor: new google.maps.Point(6,6),}});
+
+   this.arrow = new google.maps.Marker({ position:{lat:13.125559, lng:80.025719},    map, title:"17b 6", icon:{url:"gf/blbl270.gif",anchor: new google.maps.Point(6,6),}}); 
+   
+   this.arrow = new google.maps.Marker({ position:{lat:13.124559, lng:80.037719},    map, title:"17b 6", icon:{url:"gf/blbl90.gif",anchor: new google.maps.Point(6,6),}});  
+ 
+ const nemiliVeppam17b = [
+
+{lat:13.124494, lng:80.051694},
+{lat:13.125267, lng:80.041954},
+{lat:13.125585, lng:80.035399},
+{lat:13.125134, lng:80.034142},
+{lat:13.124559, lng:80.031719},
+{lat:13.124595, lng:80.028487},
+{lat:13.124846, lng:80.025129},
+{lat:13.125124, lng:80.020612},
+{lat:13.125287, lng:80.018389},
+{lat:13.125120, lng:80.018300},   /*
+{lat:13.124775, lng:80.022355},           
+{lat:13.124532, lng:80.026185},
+{lat:13.124379, lng:80.028631},
+{lat:13.124421, lng:80.031472},
+{lat:13.124881, lng:80.034047},
+{lat:13.125377, lng:80.035399},
+{lat:13.125481, lng:80.037491},
+{lat:13.124750, lng:80.045830},
+{lat:13.124301, lng:80.051806},
+{lat:13.124191, lng:80.052324},
+{lat:13.123663, lng:80.052588},  */
+];
+  const nemili = new google.maps.Polyline({
+    path:nemiliVeppam17b ,
+    geodesic: true,
+    strokeColor: "#0099cc",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ nemili.setMap(map);
+
+
+const nemiliOrr17b = [
+/*{ lat:13.123697, lng:80.052303},
+{ lat:13.107290, lng:80.052426},
+{ lat:13.096742, lng:80.052302},
+{ lat:13.091169, lng:80.055489},
+{ lat:13.075025, lng:80.068475},
+{ lat:13.048367, lng:80.083959},
+{ lat:13.047466, lng:80.084603},
+{ lat:13.047738, lng:80.085720},
+{ lat:13.048576, lng:80.084730},
+{ lat:13.047644, lng:80.081750}, 
+*/
+
+{lat:13.047113, lng:80.079481},
+{lat:13.046851, lng:80.074817},
+{lat:13.046109, lng:80.072913},
+{lat:13.045973, lng:80.071626},
+{lat:13.045535, lng:80.069898},
+{lat:13.043511, lng:80.063449},
+{lat:13.037345, lng:80.048383},
+{lat:13.035008, lng:80.041202},
+{lat:13.023040, lng:80.020873},
+{lat:13.022270, lng:80.016552},
+{lat:13.015869, lng:80.005199},
+{lat:13.012678, lng:80.000426},
+{lat:13.012228, lng:80.000417},
+];
+  const nemorr = new google.maps.Polyline({
+    path:nemiliOrr17b,
+    geodesic: true,
+    strokeColor: "#0000cc",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ nemorr.setMap(map);
+ 
+ 
+this.arrow = new google.maps.Marker({position:{lat:13.124191,lng:80.052149}, map, title:"18b 1", icon:{url: "gf/rdrd90.gif", anchor: new google.maps.Point(6, 6),}});  
+ 
+this.arrow = new google.maps.Marker({position:{lat:13.122002,lng:80.062436},  map, title:"18b 1", icon:{url: "gf/rdrd90.gif", anchor: new google.maps.Point(6, 6),}});  
+ 
+
+ 
+  const pattabiramOneway = [
+
+
+{ lat:13.123699, lng:80.054492},
+{ lat:13.123013, lng:80.059806},
+{ lat:13.122002, lng:80.062436},               
+];
+  const patta1w = new google.maps.Polyline({
+    path:pattabiramOneway ,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ patta1w.setMap(map);
+ 
+ 
+ 
+  const pattaThiru18b = [
+/*      
+{lat:13.124350, lng:80.031604},
+{lat:13.122168, lng:80.031685},
+{lat:13.120930, lng:80.029345},
+{lat:13.118735, lng:80.029137},
+{lat:13.116132, lng:80.027252},
+{lat:13.115507, lng:80.025950},
+{lat:13.111719, lng:80.025489},
+{lat:13.111573, lng:80.024339},
+{lat:13.108123, lng:80.023019},
+{lat:13.102830, lng:80.023323},
+{lat:13.101786, lng:80.023640},
+{lat:13.099178, lng:80.023134},
+{lat:13.097047, lng:80.021054},
+{lat:13.094142, lng:80.020766},
+{lat:13.093943, lng:80.019624},
+{lat:13.092888, lng:80.018850},
+{lat:13.094121, lng:80.012632},
+{lat:13.094121, lng:80.006632},
+{lat:13.090472, lng:80.005494},
+
+*/
+];
+  const pathiru = new google.maps.Polyline({
+    path:pattaThiru18b ,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 5,
+  });
+ pathiru.setMap(map);
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.117522, lng:80.095126}, map, title:"18c 1", icon:{url: "gf/rdrd105.gif", anchor: new google.maps.Point(6, 6),}});  
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.098413, lng:80.108186}, map, title:"18c 2", icon:{url: "gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});   
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.070991, lng:80.112621}, map, title:"18c 2", icon:{url: "gf/rdrd180.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+  const avadiMarket18c = [
+{lat:13.119162, lng:80.094836},
+{lat:13.117522, lng:80.095126},
+{lat:13.115488, lng:80.107830},
+{lat:13.111655, lng:80.108550},
+{lat:13.098413, lng:80.108186},
+{lat:13.082886, lng:80.108806},
+{lat:13.070991, lng:80.112621},
+{lat:13.063618, lng:80.112422},
+{lat:13.056939, lng:80.113828},
+];
+  const avamar = new google.maps.Polyline({
+    path: avadiMarket18c,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ avamar.setMap(map);
+ 
+ 
+
+
+ this.arrow = new google.maps.Marker({ position:{lat:12.990325, lng:80.089024}, map, title:"1", icon:{url: "12gf/rdrd345.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.040183, lng:80.091842}, map, title:"21", icon:{url: "12gf/rdrd315.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+  this.arrow = new google.maps.Marker({ position:{lat:12.928503, lng:80.079173}, map, title:"3", icon:{url: "12gf/rdrd30.gif", anchor: new google.maps.Point(6, 6),}});
+   const chengulpet19 = [
+/*
+{lat:12.683916, lng:79.983222},
+{lat:12.686072, lng:79.983460},
+{lat:12.689618, lng:79.982318},
+{lat:12.697717, lng:79.976319},
+{lat:12.697208, lng:79.972630},
+{lat:12.699831, lng:79.968426},
+{lat:12.707261, lng:79.976158},
+{lat:12.712621, lng:79.979674},
+{lat:12.732612, lng:79.983140},
+{lat:12.756523, lng:80.002063},
+{lat:12.764964, lng:80.004813},
+{lat:12.785472, lng:80.014075},
+{lat:12.825946, lng:80.040858},
+{lat:12.860739, lng:80.072593},
+{lat:12.884495, lng:80.082027},
+{lat:12.888416, lng:80.072836},
+{lat:12.891423, lng:80.070805},
+*/
+{lat:12.915503, lng:80.075173},
+{lat:12.928503, lng:80.079173},
+{lat:12.938503, lng:80.083173},
+{lat:12.958072, lng:80.090322},
+{lat:12.970189, lng:80.089932},
+{lat:12.990325, lng:80.089024},
+{lat:12.993325, lng:80.088224},
+{lat:12.996011, lng:80.087313},
+{lat:13.008183, lng:80.091342},
+{lat:13.017183, lng:80.094842},
+{lat:13.033183, lng:80.099842},
+{lat:13.040683, lng:80.091842},
+{lat:13.048522, lng:80.083773},
+];
+  const cheng = new google.maps.Polyline({
+    path:chengulpet19 ,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ cheng.setMap(map);
+ 
+ this.flag = new google.maps.Marker({ position: {lat:12.898330, lng:80.089840},  map, icon:{url: "flag0/19a.png", anchor: new google.maps.Point(125, -2),}});
+
+ this.arrow = new google.maps.Marker({ position:{lat:12.919002, lng:80.084310}, map, icon:{url: "12gf/rdrd240.gif", anchor: new google.maps.Point(3, 6),}});
+  this.arrow = new google.maps.Marker({ position:{lat:12.909599, lng:80.099000}, map, icon:{url: "12gf/rdrd45.gif", anchor: new google.maps.Point(3, 6),}});
+ 
+ 
+  const perungalathur19a = [
+{lat:12.898330, lng:80.089840},
+{lat:12.909599, lng:80.099000},
+{lat:12.910899, lng:80.101046},
+{lat:12.913702, lng:80.101587},
+{lat:12.921017, lng:80.112074},
+{lat:12.924316, lng:80.115078},
+{lat:12.925870, lng:80.106115},
+{lat:12.925544, lng:80.103813},
+{lat:12.925670, lng:80.101954},
+{lat:12.922396, lng:80.095445},
+{lat:12.920035, lng:80.087643},
+{lat:12.919002, lng:80.084310},
+{lat:12.918002, lng:80.080810},
+{lat:12.915608, lng:80.078349},
+{lat:12.915503, lng:80.075173},
+];
+  const perungal = new google.maps.Polyline({
+    path:perungalathur19a ,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ perungal.setMap(map);
+ this.arrow = new google.maps.Marker({ position:{lat:12.927971, lng:80.126886},
+    map, icon:{url: "12gf/blbl195.gif", anchor: new google.maps.Point(6, 6),}});
+    
+  const varatharajaTheatre19b = [
+{lat:12.937349, lng:80.138642},
+{lat:12.938084, lng:80.132812},
+{lat:12.933955, lng:80.129467},
+{lat:12.932226, lng:80.127992},
+{lat:12.927971, lng:80.126886},
+{lat:12.922971, lng:80.125686},
+];
+  const varatha19b = new google.maps.Polyline({
+    path:varatharajaTheatre19b ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ varatha19b.setMap(map);
+ 
+this.arrow = new google.maps.Marker({ position:{lat:12.941823, lng:80.143965},
+    map, icon:{url: "12gf/grbk300.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:12.934944, lng:80.125553},
+    map, icon:{url: "12gf/grbk210.gif", anchor: new google.maps.Point(6, 6),}});
+             
+   const hasthinapuram19c = [
+{lat:12.940277, lng:80.150723},
+{lat:12.941823, lng:80.143965},
+{lat:12.943423, lng:80.137965},
+{lat:12.946225, lng:80.137986},
+{lat:12.947030, lng:80.136827},
+{lat:12.943671, lng:80.134221},
+{lat:12.939874, lng:80.130357},
+{lat:12.934944, lng:80.125553},
+{lat:12.930044, lng:80.121153},
+{lat:12.930687, lng:80.117102},
+{lat:12.930265, lng:80.114813},
+{lat:12.925839, lng:80.106211},
+];
+  const hasthi = new google.maps.Polyline({
+    path:hasthinapuram19c ,
+    geodesic: true,
+    strokeColor: "#0099cc",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ hasthi.setMap(map);
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.935755, lng:80.204305},
+    map, icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+     
+this.arrow = new google.maps.Marker({ position:{lat:12.922656, lng:80.151844},
+    map, icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}});
+    
+  this.arrow = new google.maps.Marker({ position:{lat:12.923300, lng:80.121073},
+    map, icon:{url: "12gf/rdrd270.gif", anchor: new google.maps.Point(6, 6),}});
+       
+    
+  const eastTambaram20 = [
+      
+{lat:12.948481, lng:80.209840},
+{lat:12.943299, lng:80.207873},
+{lat:12.941283, lng:80.205997},
+{lat:12.935755, lng:80.204305},
+{lat:12.928755, lng:80.202805},
+{lat:12.928123, lng:80.199320},
+{lat:12.926805, lng:80.197652},
+{lat:12.922196, lng:80.197242},
+{lat:12.919284, lng:80.196178},
+{lat:12.917139, lng:80.193998}, 
+{lat:12.917671, lng:80.189434},
+{lat:12.920601, lng:80.185555},
+{lat:12.923000, lng:80.184029},
+{lat:12.928297, lng:80.177950},
+{lat:12.922492, lng:80.162533},
+{lat:12.923679, lng:80.156010},
+{lat:12.922656, lng:80.151844},
+{lat:12.922740, lng:80.142952},
+{lat:12.923049, lng:80.125681},
+{lat:12.922971, lng:80.125686},
+{lat:12.923300, lng:80.121073},
+{lat:12.923700, lng:80.117073},
+{lat:12.924223, lng:80.115313},
+];
+  const eTamb = new google.maps.Polyline({
+    path:eastTambaram20 ,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ eTamb.setMap(map);
+ 
+
+this.arrow = new google.maps.Marker({ position:{lat:12.964860, lng:80.196114},
+    map, icon:{url: "12gf/rdrd90.gif", anchor: new google.maps.Point(6, 6),}});
+    
+   const madippakkam20c = [
+{lat:12.965309, lng:80.191818},
+{lat:12.964997, lng:80.193926},
+{lat:12.964691, lng:80.196122},
+{lat:12.964860, lng:80.196114},
+{lat:12.964833, lng:80.198322},
+{lat:12.965019, lng:80.199971},
+{lat:12.965554, lng:80.200110},
+{lat:12.963534, lng:80.215870},
+{lat:12.948481, lng:80.209840},
+];
+  const madip = new google.maps.Polyline({
+    path:madippakkam20c,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ madip.setMap(map);
+ 
+  const Adhambakkam21 = [
+{ lat:12.989027, lng:80.204889},
+{ lat:12.987971, lng:80.204685},
+{ lat:12.987821, lng:80.205442},
+{ lat:12.978963, lng:80.202266},
+ { lat:12.978064, lng:80.204111},
+];
+  const adamp = new google.maps.Polyline({
+    path:Adhambakkam21 ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ adamp.setMap(map);
+
+   const Kaiveli21b = [
+{ lat:12.963746, lng:80.215882},
+{ lat:12.967117, lng:80.217204},
+{ lat:12.978064, lng:80.204111}, 
+{lat:12.983122, lng:80.196420},
+];
+  const kaivel = new google.maps.Polyline({
+    path: Kaiveli21b,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ kaivel.setMap(map);
+
+ 
+   const part1of21c = [
+{ lat:12.985465, lng:80.217887},
+{ lat:12.988525, lng:80.218520},
+{ lat:12.991568, lng:80.219529},
+
+];
+  const part1 = new google.maps.Polyline({
+    path: part1of21c ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ part1.setMap(map);
+
+this.arrow = new google.maps.Marker({ position:{lat:12.990381, lng:80.195450},
+    map, title:"21C- 4", icon:{url: "12gf/blbl345.gif", anchor: new google.maps.Point(6, 6),}});
+
+  const part2of21c = [
+{lat:12.983122, lng:80.196420},
+{lat:12.985885, lng:80.196072},
+{lat:12.987903, lng:80.195490},
+{lat:12.990381, lng:80.195450},
+{lat:12.992031, lng:80.193469},
+{lat:12.996850, lng:80.193262},
+{lat:12.998387, lng:80.192103},
+];
+  const part2 = new google.maps.Polyline({
+    path: part2of21c ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ part2.setMap(map);
+
+ this.post = new google.maps.Marker({ position:{lat:12.893748, lng:80.227492},    map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+
+this.flag = new google.maps.Marker({ position: {lat:12.893748, lng:80.227492},   anchor: new google.maps.Point(3, 0), map, icon:{url: "flag0/22s.png", anchor: new google.maps.Point(-60, 0),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:12.893748, lng:80.227492},
+    map, title:"22- 1", icon:{url: "12gf/blbl360.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:12.932932, lng:80.232401},
+    map, title:"22- 2", icon:{url: "12gf/blbl15.gif", anchor: new google.maps.Point(6, 6),}});    
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.948773, lng:80.240532},
+    map, title:"22- 3", icon:{url: "12gf/blbl15.gif", anchor: new google.maps.Point(6, 6),}});
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.978628, lng:80.243207},
+    map, title:"22- 4", icon:{url: "12gf/blbl345.gif", anchor: new google.maps.Point(6, 6),}});
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.979584, lng:80.221135},
+    map, title:"22- 5", icon:{url: "12gf/blbl00.gif", anchor: new google.maps.Point(6, 6),}});
+       
+    
+   const solinganallur22 = [
+{lat:12.893748, lng:80.227492},
+{lat:12.907133, lng:80.228238},
+{lat:12.929310, lng:80.231336},
+{lat:12.932932, lng:80.232401},
+{lat:12.940193, lng:80.235826},
+{lat:12.942975, lng:80.236704},
+{lat:12.945317, lng:80.239033},
+{lat:12.948773, lng:80.240532},
+{lat:12.954757, lng:80.242795},
+{lat:12.963497, lng:80.246609},
+{lat:12.967180, lng:80.245882},
+{lat:12.978628, lng:80.243207},
+{lat:12.981308, lng:80.243140},
+{lat:12.981198, lng:80.234373},
+{lat:12.982238, lng:80.231558},
+{lat:12.976162, lng:80.221290},
+{lat:12.976282, lng:80.221212},
+{lat:12.979584, lng:80.221135},
+{lat:12.980806, lng:80.220972},
+{lat:12.985272, lng:80.223341},
+{lat:12.985840, lng:80.222993},
+{lat:12.987824, lng:80.223029},
+{lat:12.988598, lng:80.222438},
+{lat:12.990088, lng:80.220698},
+{lat:12.995158, lng:80.216933},
+{lat:12.997321, lng:80.216410},
+{lat:13.002549, lng:80.212080},
+{lat:13.003723, lng:80.211998},
+{lat:13.003566, lng:80.209325},
+{lat:13.000493, lng:80.207774},
+{lat:12.994568, lng:80.206491},
+{lat:12.989027, lng:80.204889},
+
+
+
+];
+  const soling22 = new google.maps.Polyline({
+    path:solinganallur22,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+soling22.setMap(map);
+
+this.arrow = new google.maps.Marker({ position:{lat:13.037624, lng:80.136559},
+    map, icon:{url: "12gf/blbl300.gif", anchor: new google.maps.Point(6, 6),}});
+    
+this.arrow = new google.maps.Marker({ position:{lat:13.020327, lng:80.185390},
+    map, icon:{url: "12gf/blbl315.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+  const guindyPoona = [
+{lat:13.007354, lng:80.201838},
+{lat:13.007439, lng:80.196201},
+{lat:13.008673, lng:80.196201},
+{lat:13.010617, lng:80.195868},
+{lat:13.014458, lng:80.193313},
+{lat:13.017908, lng:80.187181},
+{lat:13.020327, lng:80.185390},
+{lat:13.020803, lng:80.184155},
+{lat:13.034524, lng:80.159444},
+{lat:13.034378, lng:80.156998},
+{lat:13.036250, lng:80.152846},
+{lat:13.036223, lng:80.146290},
+{lat:13.037624, lng:80.136559},
+{lat:13.045250, lng:80.116902},
+{lat:13.046397, lng:80.119177},
+{lat:13.052543, lng:80.123341},
+{lat:13.054727, lng:80.124006},
+];
+  const guipoo = new google.maps.Polyline({
+    path:guindyPoona ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ guipoo.setMap(map);
+
+
+  const gangaSubwayKathiopara = [
+{lat:12.998387, lng:80.192103},
+{lat:13.002041, lng:80.196812},
+{lat:13.001684, lng:80.200211},
+{lat:13.004987, lng:80.201295},
+{lat:13.007354, lng:80.201838},
+];
+  const ganga = new google.maps.Polyline({
+    path:gangaSubwayKathiopara ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ganga.setMap(map);
+
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.933077, lng:80.181886},
+    map, icon:{url: "12gf/pkpk360.gif", anchor: new google.maps.Point(6, 6),}});
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.953640, lng:80.186497},
+    map, icon:{url: "12gf/pkpk360.gif", anchor: new google.maps.Point(6, 6),}});
+
+ this.arrow = new google.maps.Marker({ position:{lat:12.965820, lng:80.188446},
+    map, icon:{url: "12gf/pkpk15.gif", anchor: new google.maps.Point(6, 6),}});
+    
+  this.arrow = new google.maps.Marker({ position:{lat:12.982323, lng:80.193933},
+    map, icon:{url: "12gf/pkpk270.gif", anchor: new google.maps.Point(6, 6),}});
+  const madippakamMedaw23 = [
+{lat:12.923000, lng:80.184029}, 
+{lat:12.930725, lng:80.181485},
+{lat:12.933077, lng:80.181886},
+{lat:12.935377, lng:80.182286},
+{lat:12.937576, lng:80.182188},
+{lat:12.945548, lng:80.183015},
+{lat:12.948339, lng:80.184984},
+{lat:12.953640, lng:80.186497},
+{lat:12.957011, lng:80.186939},
+{lat:12.961391, lng:80.187266},
+{lat:12.965820, lng:80.188446},
+{lat:12.976640, lng:80.193327},
+{lat:12.979344, lng:80.194277},
+{lat:12.981581, lng:80.195618},
+{lat:12.981508, lng:80.194974},
+{lat:12.982323, lng:80.193933},
+{lat:12.982448, lng:80.193947},
+{lat:12.983049, lng:80.188414},
+{lat:12.981389, lng:80.188277},
+{lat:12.980706, lng:80.188265},
+{lat:12.980899, lng:80.185572},
+{lat:12.981176, lng:80.185298},
+{lat:12.980591, lng:80.183919},
+{lat:12.980584, lng:80.182837},
+{lat:12.979569, lng:80.182877},
+{lat:12.979402, lng:80.180573},
+{lat:12.979299, lng:80.180600},
+{lat:12.978933, lng:80.177680},
+{lat:12.982344, lng:80.176314},
+{lat:12.985062, lng:80.176875},
+{lat:12.987216, lng:80.175834},
+
+];
+  const madiMedaw = new google.maps.Polyline({
+    path:madippakamMedaw23 ,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ madiMedaw.setMap(map);
+ 
+ 
+  const moovarNanganallur24 = [
+{ lat:12.969515, lng:80.186291},
+{ lat:12.970821, lng:80.186323},
+{ lat:12.971114, lng:80.182847},
+{ lat:12.975139, lng:80.183426},
+{ lat:12.979792, lng:80.182879},
+{ lat:12.980586, lng:80.182836},
+{ lat:12.980612, lng:80.184097},
+{ lat:12.981161, lng:80.185245},
+{ lat:12.981365, lng:80.185481}, 
+{ lat:12.985337, lng:80.185851},
+{ lat:12.986916, lng:80.186082},
+{ lat:12.987094, lng:80.185663},
+{ lat:12.988108, lng:80.185239},
+{ lat:12.990664, lng:80.184955},
+{ lat:12.993879, lng:80.185459},
+{ lat:12.992593, lng:80.182986},
+{ lat:12.991563, lng:80.181543},
+{ lat:12.987123, lng:80.1757087},
+
+];
+  const moonang = new google.maps.Polyline({
+    path: moovarNanganallur24,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ moonang.setMap(map);
+ 
+     this.arrow = new google.maps.Marker({ position:{lat:12.987216, lng:80.175834}, map, icon:{url: "12gf/vovo240.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{ lat:12.961197, lng:80.139940},
+    map, icon:{url: "12gf/vovo270.gif", anchor: new google.maps.Point(6, 6),}});
+  
+this.arrow = new google.maps.Marker({ position:{lat:12.975670, lng:80.155922},
+    map, icon:{url: "12gf/vovo240.gif", anchor: new google.maps.Point(6, 6),}});   
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.967092, lng:80.106216},
+    map, icon:{url: "12gf/vovo285.gif", anchor: new google.maps.Point(6, 6),}});   
+
+ const chrompetOrr24 = [
+{lat:12.987216, lng:80.175834},
+{lat:12.985322, lng:80.173159},
+{lat:12.979551, lng:80.162408},
+{lat:12.975670, lng:80.155922},
+{lat:12.972170, lng:80.151422},
+{lat:12.961835, lng:80.146314},
+{lat:12.961835, lng:80.146314},
+{lat:12.961281, lng:80.144055},
+{lat:12.961197, lng:80.139940},
+{lat:12.960827, lng:80.134396},
+{lat:12.959712, lng:80.130651},
+{lat:12.957747, lng:80.127518},
+{lat:12.957412, lng:80.125759},
+{lat:12.957454, lng:80.124578},
+{lat:12.957454, lng:80.122840},
+{lat:12.958039, lng:80.120759},
+{lat:12.957579, lng:80.119987},
+{lat:12.957914, lng:80.119321},
+{lat:12.961490, lng:80.115802},
+{lat:12.962847, lng:80.113249},
+{lat:12.965419, lng:80.113152},
+{lat:12.967092, lng:80.106216},
+{lat:12.968892, lng:80.099216},
+{lat:12.969489, lng:80.094532},
+{lat:12.970189, lng:80.089932},
+];
+  const chrorr = new google.maps.Polyline({
+    path:chrompetOrr24 ,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ chrorr.setMap(map);
+ 
+ this.post = new google.maps.Marker({ position:{lat:12.925452, lng:80.251154},    map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+
+this.flag = new google.maps.Marker({ position: {lat:12.925452, lng:80.251154},   anchor: new google.maps.Point(3, 0), map, icon:{url: "flag0/25v.png", anchor: new google.maps.Point(-30, 0),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:12.901348, lng:80.248645},
+    map, icon:{url: "12gf/pkpk360.gif", anchor: new google.maps.Point(6, 6),}});
+    
+this.arrow = new google.maps.Marker({ position:{lat:12.956778, lng:80.255211},
+    map, icon:{url: "12gf/pkpk15.gif", anchor: new google.maps.Point(6, 6),}});
+    
+  const vgpThiru25 = [
+{lat:12.901348, lng:80.248645},
+{lat:12.925452, lng:80.251154},
+{lat:12.947347, lng:80.254114},
+{lat:12.956778, lng:80.255211},
+{lat:12.966826, lng:80.256938},
+{lat:12.977211, lng:80.259107},
+{lat:12.983948, lng:80.259462},
+{lat:12.984206, lng:80.257635},
+{lat:12.987457, lng:80.258052},
+{lat:12.988087, lng:80.251300},
+{lat:13.003387, lng:80.247498},
+{lat:13.006740, lng:80.247126},
+{lat:13.006687, lng:80.241643},
+{lat:13.006901, lng:80.240228},
+{lat:13.009230, lng:80.228408},
+{lat:13.012173, lng:80.221104},
+{lat:13.010724, lng:80.216894},
+{lat:13.010230, lng:80.215599},
+{lat:13.010076, lng:80.214601},
+{lat:13.008186, lng:80.209329},
+{lat:13.007615, lng:80.205888},
+{lat:13.007354, lng:80.201838},
+  ]; 
+  const vgpthi = new google.maps.Polyline({
+    path:vgpThiru25,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ vgpthi.setMap(map);
+ 
+ this.post = new google.maps.Marker({ position:{lat:12.996894,lng:80.267749},   map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+
+this.flag = new google.maps.Marker({ position:{lat:12.996894,lng:80.267749},   map, icon:{url: "flag0/25a.png", anchor: new google.maps.Point(-30, 0),}});
+
+this.flag = new google.maps.Marker({ position:{lat:13.006478,lng:80.257323},   map, icon:{url: "12gf/vovo270.gif", anchor: new google.maps.Point(15, 6),}});
+    const adyar25c = [ 
+{lat:12.995240, lng:80.252972},
+{lat:12.996772, lng:80.254584},
+{lat:12.996944, lng:80.255866},
+{lat:12.995704, lng:80.267687},
+{lat:12.996894, lng:80.267749},
+{lat:13.000153, lng:80.266811},
+{lat:13.000551, lng:80.263578},
+{lat:13.000797, lng:80.263166},
+{lat:13.001091, lng:80.259731},
+{lat:13.001199, lng:80.256490},
+{lat:13.006478, lng:80.257323},
+{lat:13.006740, lng:80.247126},
+  ]; 
+  const ada = new google.maps.Polyline({
+    path:adyar25c,
+    geodesic: true,
+    strokeColor: "#dd00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ ada.setMap(map);
+this.poat = new google.maps.Marker({ position: {lat:13.064787, lng:80.278364},   map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+ 
+this.flag = new google.maps.Marker({ position: {lat:13.064787, lng:80.278364},  anchor: new google.maps.Point(3, 0), map, icon:{url: "flag0/26t.png", anchor: new google.maps.Point(-30, 0),}});
+
+ const triplicane26 =[
+{lat:13.068371, lng:80.271948},
+{lat:13.066722, lng:80.273847},
+{lat:13.064787, lng:80.278364},
+{lat:13.058258, lng:80.277245},
+{lat:13.058868, lng:80.274149},
+{lat:13.052821, lng:80.273652},
+{lat:13.054811, lng:80.254346},
+{lat:13.052250, lng:80.250948},
+{lat:13.051810, lng:80.250357},
+{lat:13.048201, lng:80.249546},
+{lat:13.047305, lng:80.248596},
+{lat:13.039181, lng:80.246884},
+{lat:13.034891, lng:80.245811},
+{lat:13.031049, lng:80.239796},
+{lat:13.028079, lng:80.235539},
+{lat:13.026359, lng:80.232410},
+{lat:13.025722, lng:80.230321},
+{lat:13.023500, lng:80.227416},
+{lat:13.019311, lng:80.224257},
+{lat:13.016362, lng:80.225404},
+{lat:13.015897, lng:80.225263},
+{lat:13.015123, lng:80.224727},
+{lat:13.012324, lng:80.221196},
+
+  ]; 
+  const tripli = new google.maps.Polyline({
+    path:triplicane26,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ tripli.setMap(map);
+ 
+
+
+ 
+ const Nandanam26c =[
+
+
+{lat:13.032127, lng:80.239004},
+{lat:13.039161, lng:80.234602},
+{lat:13.039850, lng:80.235978},
+{lat:13.040916, lng:80.236069},
+{lat:13.040174, lng:80.242174},
+{lat:13.039181, lng:80.246884},
+
+  ]; 
+  const nand = new google.maps.Polyline({
+    path:Nandanam26c,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ nand.setMap(map);
+ 
+this.post = new google.maps.Marker({ position: {lat:13.022829, lng:80.276104},  map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+
+this.flag = new google.maps.Marker({ position: {lat:13.022829, lng:80.276104},   map, icon:{url: "flag0/27p.png", anchor: new google.maps.Point(-30, 0),}});
+
+this.flag = new google.maps.Marker({ position:{lat:13.029119, lng:80.253971},  map, icon:{url: "12gf/vovo270.gif", anchor: new google.maps.Point(6, 6),}});
+
+this.flag = new google.maps.Marker({ position:{lat:13.014078, lng:80.240419},  map, icon:{url: "12gf/vovo180.gif", anchor: new google.maps.Point(6, 6),}});
+
+const foreshore27 =[
+
+{lat:13.022829, lng:80.276104},
+{lat:13.024031, lng:80.273872},
+{lat:13.025032, lng:80.270743},
+{lat:13.025074, lng:80.267914},
+{lat:13.026270, lng:80.265895},
+{lat:13.021493, lng:80.263085},
+{lat:13.022361, lng:80.259180},
+{lat:13.027138, lng:80.256498},
+{lat:13.028878, lng:80.256470},
+{lat:13.029119, lng:80.253971},
+{lat:13.029254, lng:80.250135},
+{lat:13.028799, lng:80.249759},
+{lat:13.029580, lng:80.245754},
+{lat:13.027646, lng:80.245464},
+{lat:13.027249, lng:80.244166},
+{lat:13.017474, lng:80.240940},
+{lat:13.014078, lng:80.240419},
+{lat:13.006901, lng:80.240228},
+  ]; 
+  const forsho = new google.maps.Polyline({
+    path:foreshore27,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ forsho.setMap(map);
+ this.post = new google.maps.Marker({ position: {lat:13.0389220, lng:80.278594},  map, icon:{url: "flag0/postR61.png", anchor: new google.maps.Point(0, 0),}});
+ 
+this.flag = new google.maps.Marker({ position: {lat:13.0389220, lng:80.278594},   map, icon:{url: "flag0/27c.png", anchor: new google.maps.Point(-30, 0),}});
+ const santhom27c =[
+{lat:13.0389220, lng:80.278594},
+{lat:13.033501, lng:80.277283},
+{lat:13.035085, lng:80.270666},
+{lat:13.036607, lng:80.268296},
+{lat:13.037639, lng:80.264310},
+{lat:13.039622, lng:80.264679},
+{lat:13.039930, lng:80.264530},
+{lat:13.041573, lng:80.264668},
+{lat:13.042523, lng:80.264226},
+{lat:13.043150, lng:80.263352},
+{lat:13.044624, lng:80.263529},
+{lat:13.046681, lng:80.254924},
+{lat:13.047256, lng:80.254366},
+{lat:13.049599, lng:80.253153},
+{lat:13.052250, lng:80.250948},
+  ]; 
+  const san = new google.maps.Polyline({
+    path:santhom27c,
+    geodesic: true,
+    strokeColor: "#990099",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ san.setMap(map);
+
+  this.arrow = new google.maps.Marker({position:{lat:13.052319, lng:80.220144 }, map, icon:{url: "12gf/grbk240.gif", anchor: new google.maps.Point(6, 6),}});
+  this.arrow = new google.maps.Marker({position:{lat:13.044923, lng:80.186018 }, map, icon:{url: "12gf/grbk240.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+ this.arrow = new google.maps.Marker({position:{lat:13.045623, lng:80.187005 }, map, icon:{url: "12gf/rdrd240.gif", anchor: new google.maps.Point(6, 6),}});
+  
+ this.arrow = new google.maps.Marker({position:{lat:13.039076, lng:80.169076 }, map, icon:{url: "12gf/grbk255.gif", anchor: new google.maps.Point(6, 6),}});
+ const LICvadapalani28 =[
+{lat:13.064923, lng:80.266409 },
+{lat:13.066532, lng:80.268394 },
+{lat:13.068267, lng:80.269306 },
+{lat:13.068054, lng:80.271190 },
+{lat:13.066486, lng:80.269441 },
+{lat:13.066270, lng:80.268371 },
+{lat:13.065664, lng:80.267617 },
+{lat:13.062759, lng:80.267091 },
+{lat:13.061035, lng:80.265027 },
+{lat:13.060047, lng:80.265611 },
+{lat:13.058182, lng:80.265394 },
+{lat:13.056392, lng:80.256606 },
+{lat:13.052347, lng:80.251025 },
+{lat:13.055974, lng:80.248954 },
+{lat:13.061270, lng:80.246979 },
+{lat:13.061742, lng:80.246472 },
+{lat:13.062142, lng:80.245152 },
+{lat:13.063145, lng:80.244424 },
+{lat:13.063514, lng:80.243475 },
+{lat:13.059258, lng:80.242480 },
+{lat:13.056927, lng:80.242598 },
+{lat:13.052743, lng:80.241657 },
+{lat:13.052496, lng:80.240941 },
+{lat:13.053787, lng:80.234597 },
+{lat:13.054009, lng:80.227871 },
+{lat:13.052319, lng:80.220144 },
+{lat:13.050115, lng:80.213341 },
+{lat:13.049386, lng:80.208443 },
+{lat:13.047977, lng:80.203847 },
+{lat:13.047429, lng:80.201676 },
+{lat:13.047416, lng:80.199024 },
+{lat:13.047404, lng:80.194989 },
+{lat:13.046747, lng:80.193995 },
+{lat:13.046654, lng:80.193647 },
+{lat:13.046646, lng:80.192564 },
+{lat:13.046472, lng:80.189344 },
+{lat:13.045623, lng:80.187005 },
+{lat:13.044923, lng:80.186018 },
+{lat:13.043101, lng:80.182173 },
+{lat:13.042641, lng:80.181706 },
+{lat:13.041956, lng:80.178910 },
+{lat:13.042003, lng:80.176910 },
+{lat:13.040546, lng:80.171872 },
+{lat:13.039076, lng:80.169076 },
+{lat:13.037308, lng:80.158976 },
+{lat:13.036524, lng:80.157377 },
+{lat:13.034799, lng:80.155950 },
+  ]; 
+  const vadapa = new google.maps.Polyline({
+    path:LICvadapalani28,
+    geodesic: true,
+    strokeColor: "#009900",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ vadapa.setMap(map);
+
+ const saligramam29 =[
+{lat:13.047977, lng:80.203847 },
+{lat:13.050475, lng:80.203847 },
+{lat:13.054421, lng:80.204064 },
+{lat:13.054593, lng:80.199761 },
+{lat:13.053548, lng:80.199589 },
+{lat:13.053860, lng:80.197023 },
+{lat:13.053259, lng:80.197016 },
+{lat:13.052985, lng:80.199511 },
+{lat:13.051492, lng:80.199231 },
+{lat:13.047416, lng:80.199024 },
+  ]; 
+  const salig = new google.maps.Polyline({
+    path:saligramam29,
+    geodesic: true,
+    strokeColor: "#ff3310",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ salig.setMap(map);
+ 
+ this.arrow = new google.maps.Marker({ position:{lat:13.053129, lng:80.192182 }, map, icon:{url: "12gf/rdrd195.gif", anchor: new google.maps.Point(6, 6),}});
+ const chinElango30 =[
+{lat:13.065962, lng:80.198779 },
+{lat:13.053129, lng:80.192182 },
+{lat:13.049039, lng:80.192133 },
+{lat:13.047691, lng:80.192532 },
+{lat:13.046646, lng:80.192564 },
+ 
+  ]; 
+  const chinla = new google.maps.Polyline({
+    path: chinElango30,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+chinla .setMap(map);
+
+
+
+ const valluvarKottam31=[
+{lat:13.052343, lng:80.240718 },
+{lat:13.046289, lng:80.239542 },
+{lat:13.046952, lng:80.236002 },
+{lat:13.043545, lng:80.235325 },
+{lat:13.042657, lng:80.235851 },
+{lat:13.041779, lng:80.234113 },
+{lat:13.040525, lng:80.233802 },
+{lat:13.040880, lng:80.232000 },
+{lat:13.040577, lng:80.231850 },
+{lat:13.042172, lng:80.224929 },
+{lat:13.041481, lng:80.224752 },
+{lat:13.042341, lng:80.221902 },
+{lat:13.035881, lng:80.220533 },
+{lat:13.036198, lng:80.216283 },
+{lat:13.034254, lng:80.216133 },
+{lat:13.034806, lng:80.212173 },
+{lat:13.031966, lng:80.211729 },
+  ]; 
+  const valko = new google.maps.Polyline({
+    path:valluvarKottam31,
+    geodesic: true,
+    strokeColor: "#008899",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ valko.setMap(map);
+
+ const citNagar32 =[
+{lat:13.027586, lng:80.230973 },
+{lat:13.030746, lng:80.230673 },
+{lat:13.030349, lng:80.229257 },
+{lat:13.030413, lng:80.227427 },
+{lat:13.027913, lng:80.227013 },
+{lat:13.028477, lng:80.224052 },
+{lat:13.028920, lng:80.224037 },
+{lat:13.029155, lng:80.224281 },
+{lat:13.031218, lng:80.224286 },
+{lat:13.031228, lng:80.222987 },
+{lat:13.032245, lng:80.220424 },
+{lat:13.032235, lng:80.218428 },
+{lat:13.031587, lng:80.218310 },
+{lat:13.031353, lng:80.215931 },
+{lat:13.031966, lng:80.211729 },
+{lat:13.032249, lng:80.209619 },
+{lat:13.027851, lng:80.208306 },
+{lat:13.025612, lng:80.207038 },
+{lat:13.019648, lng:80.206272 },
+{lat:13.012146, lng:80.203753 },
+{lat:13.007524, lng:80.203632 },
+ 
+  ]; 
+  const citN = new google.maps.Polyline({
+    path:citNagar32,
+    geodesic: true,
+    strokeColor: "#9900ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ citN.setMap(map);
+
+ this.arrow = new google.maps.Marker({ position:{lat:13.036962, lng:80.197916 }, map, icon:{url: "12gf/rdrd285.gif", anchor: new google.maps.Point(6, 6),}});
+ 
+  const mgrKKnagar33 =[
+{lat:13.047781, lng:80.219053 },
+{lat:13.045055, lng:80.218277 },
+{lat:13.043741, lng:80.217384 },
+{lat:13.044355, lng:80.216299 },
+{lat:13.044585, lng:80.214786 },
+{lat:13.044383, lng:80.212287 },
+{lat:13.043995, lng:80.207472 },
+{lat:13.042688, lng:80.205423 },
+{lat:13.035962, lng:80.204316 },
+{lat:13.036962, lng:80.197916 },
+{lat:13.037697, lng:80.192758 },
+{lat:13.044397, lng:80.193681 },
+{lat:13.044533, lng:80.192812 },
+{lat:13.045808, lng:80.192758 },
+{lat:13.046623, lng:80.192551 },
+  ]; 
+  const kkna = new google.maps.Polyline({
+    path:mgrKKnagar33,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ kkna.setMap(map);
+this.arrow = new google.maps.Marker({position:{lat:12.972046, lng:80.140108},
+    map, icon:{url: "12gf/grbk300.gif", anchor: new google.maps.Point(6, 6),}});
+ this.arrow = new google.maps.Marker({position:{lat:12.985177, lng:80.121208},
+    map, icon:{url: "12gf/grbk300.gif", anchor: new google.maps.Point(6, 6),}});
+  this.arrow = new google.maps.Marker({position:{lat:13.027662, lng:80.111120 },
+    map, icon:{url: "12gf/grbk15.gif", anchor: new google.maps.Point(6, 6),}});   
+  const pallaPammal35 =[
+{lat:12.967627, lng:80.149007 },
+{lat:12.970460, lng:80.146928 },
+{lat:12.969844, lng:80.145952 },
+{lat:12.970398, lng:80.145481 },
+{lat:12.972046, lng:80.140108 },
+{lat:12.974464, lng:80.135148 },
+{lat:12.974976, lng:80.132541 },
+{lat:12.976691, lng:80.132766 },
+{lat:12.977684, lng:80.130556 },
+{lat:12.979681, lng:80.128957 },
+{lat:12.982493, lng:80.129279 },
+{lat:12.983071, lng:80.128650 },
+{lat:12.983606, lng:80.125623 },
+{lat:12.985033, lng:80.123548 },
+{lat:12.984887, lng:80.122175 },
+{lat:12.985177, lng:80.121208 },
+{lat:12.986482, lng:80.119284 },
+{lat:12.990285, lng:80.116556 },
+{lat:12.995254, lng:80.111329 },
+{lat:12.998696, lng:80.101985 },
+{lat:12.998377, lng:80.096654 },
+{lat:13.014823, lng:80.103016 },
+{lat:13.017838, lng:80.102614 },
+{lat:13.027662, lng:80.111120 },
+{lat:13.031989, lng:80.111131 },
+{lat:13.044886, lng:80.115623 },
+{lat:13.046316, lng:80.111697 },
+{lat:13.052778, lng:80.112759 },
+{lat:13.055854, lng:80.113936 },
+{lat:13.056822, lng:80.113890 },
+
+  ]; 
+  const palPam = new google.maps.Polyline({
+    path:pallaPammal35,
+    geodesic: true,
+    strokeColor: "#008800",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ palPam.setMap(map);
+ 
+  this.flag = new google.maps.Marker({ position:{lat:13.017789, lng:80.141163},  map, icon:{url: "12gf/pkpk45.gif", anchor: new google.maps.Point(6, 6),}});
+  
+  const porurKovur36 =[
+{lat:13.005521, lng:80.109664 },
+{lat:13.008819, lng:80.114442 },
+{lat:13.011098, lng:80.114393 },
+{lat:13.009743, lng:80.121119 },
+{lat:13.009910, lng:80.122793 },
+{lat:13.011499, lng:80.124660 },
+{lat:13.011820, lng:80.129727 },
+{lat:13.017789, lng:80.141163 },
+{lat:13.027370, lng:80.150577 },
+{lat:13.034799, lng:80.155950 },
+  ]; 
+  const kovur = new google.maps.Polyline({
+    path:porurKovur36,
+    geodesic: true,
+    strokeColor: "#ff00ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ kovur.setMap(map);
+ 
+const poonamalle37 =[
+{lat:13.046316, lng:80.111697 },
+{lat:13.049703, lng:80.104113 },
+{lat:13.049693, lng:80.100862 },
+{lat:13.050370, lng:80.099221 },
+{lat:13.050886, lng:80.094066 },
+{lat:13.049269, lng:80.087951 },
+  ]; 
+  
+  const pooma = new google.maps.Polyline({
+    path:poonamalle37,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ pooma.setMap(map);
+ 
+
+
+
+
+ 
+  
+
+
+
+this.arrow = new google.maps.Marker({ position:{lat:12.902410,lng:79.484476},    map,title:"41 3", icon:{url: "12gf/grbk105.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:12.894120,lng:79.585135},    map, title:"41 4", icon:{url: "12gf/yepk105.gif", anchor: new google.maps.Point(6, 6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:12.993499,lng:79.987256},    map,title:"41 7", icon:{url: "12gf/blgr45.gif", anchor: new google.maps.Point(6, 6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:13.007430,lng:79.995970},    map,title:"41 8", icon:{url: "12gf/rdrd30.gif", anchor: new google.maps.Point(6, 6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.010706,lng:80.002158},    map,title:"41 9", icon:{url: "12gf/rdrd135.gif", anchor: new google.maps.Point(6, 6),}});
+
+
+const vellore41c =[
+
+{lat:13.009780,lng:80.003170},
+{lat:13.010069,lng:80.002971},
+{lat:13.010706,lng:80.002158},
+{lat:13.011291,lng:80.001058},
+{lat:13.012190,lng:80.000430},
+{lat:13.012373,lng:80.000226},
+{lat:13.012493,lng:79.999904},
+{lat:13.011597,lng:79.998892},
+{lat:13.007430,lng:79.995970},
+{lat:12.998074,lng:79.989966},
+{lat:12.995538,lng:79.988918},
+{lat:12.993499,lng:79.987256},
+{lat:12.984819,lng:79.975164},
+{lat:12.979677,lng:79.963629},
+{lat:12.975313,lng:79.957491},
+{lat:12.965865,lng:79.952949},
+{lat:12.964486,lng:79.950870},
+{lat:12.962624,lng:79.945181},
+{lat:12.957344,lng:79.943567},
+{lat:12.955857,lng:79.942086},
+{lat:12.954829,lng:79.934746},
+/*
+{lat:12.947914,lng:79.925058},
+{lat:12.933119,lng:79.907685},
+{lat:12.933819,lng:79.903156},
+{lat:12.930053,lng:79.893938},
+{lat:12.920656,lng:79.880995},
+{lat:12.922682,lng:79.874736},
+{lat:12.912065,lng:79.851147},
+{lat:12.903714,lng:79.817218},
+{lat:12.892059,lng:79.795735},
+{lat:12.878020,lng:79.775948},
+{lat:12.875221,lng:79.765818},
+{lat:12.871228,lng:79.719510},
+
+{lat:12.874248,lng:79.690678},
+{lat:12.869500,lng:79.647490},
+{lat:12.874745,lng:79.626007},
+{lat:12.874354,lng:79.616890},
+{lat:12.877529,lng:79.612354},
+{lat:12.883437,lng:79.598617},
+{lat:12.890001,lng:79.594181},
+{lat:12.894120,lng:79.585135},
+{lat:12.898158,lng:79.564505},
+{lat:12.898195,lng:79.533371},
+{lat:12.898688,lng:79.530729},
+{lat:12.897284,lng:79.506756},
+{lat:12.896242,lng:79.498895},
+{lat:12.902410,lng:79.484476},
+{lat:12.900217,lng:79.453022},
+{lat:12.901327,lng:79.435000},
+{lat:12.904345,lng:79.420098},
+{lat:12.917854,lng:79.386775},
+{lat:12.917035, lng:79.389118},
+
+{lat:12.916909, lng:79.385942},
+{lat:12.911904, lng:79.371181},
+{lat:12.914073, lng:79.357943},
+{lat:12.914075, lng:79.350874},
+{lat:12.919189, lng:79.341131},
+{lat:12.921216, lng:79.331176},
+{lat:12.920578, lng:79.329792},
+{lat:12.919302, lng:79.328773},
+{lat:12.911867, lng:79.326662},
+{lat:12.913363, lng:79.327080},
+{lat:12.906272, lng:79.324945},
+{lat:12.904765, lng:79.323939},
+{lat:12.905608, lng:79.303918},
+{lat:12.908065, lng:79.302502},
+{lat:12.910578, lng:79.294033},
+{lat:12.912857, lng:79.294339},
+{lat:12.917238, lng:79.282493},
+{lat:12.924306, lng:79.274628},
+
+{lat:12.926282, lng:79.269457},
+{lat:12.926000, lng:79.266303},
+{lat:12.928893, lng:79.262652},
+{lat:12.933745, lng:79.260360},
+{lat:12.935417, lng:79.257899},
+{lat:12.936446, lng:79.250703},
+{lat:12.938370, lng:79.247824},
+{lat:12.938484, lng:79.242926},
+{lat:12.943560, lng:79.232514},
+{lat:12.944072, lng:79.229049},
+{lat:12.946804, lng:79.223899},
+{lat:12.947517, lng:79.213133},
+{lat:12.948144, lng:79.210000},
+{lat:12.944289, lng:79.198262},
+{lat:12.942423, lng:79.189469},
+{lat:12.942083, lng:79.184433},
+{lat:12.934744, lng:79.152123},
+{lat:12.934805, lng:79.146886},
+{lat:12.932274, lng:79.138128},
+*/
+];
+   
+const vell = new google.maps.Polyline({
+    
+    path:vellore41c,
+    geodesic: true,
+    strokeColor: "#009900",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ vell.setMap(map);
+ 
+
+
+ 
+
+ 
+
+
+this.arrow = new google.maps.Marker({ position:{lat:13.017867, lng:79.979098},    map, title:"6", icon:{url:"12gf/rdblrd90.gif",anchor: new google.maps.Point(6,6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:13.015898, lng:79.941412},    map, title:"7", icon:{url:"12gf/rdrd90.gif",anchor: new google.maps.Point(6,6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.018417, lng:79.993886},    map, title:"8", icon:{url:"12gf/rdrd90.gif",anchor: new google.maps.Point(6,6),}});
+this.arrow = new google.maps.Marker({ position:{lat:13.018378, lng:80.010531},    map, title:"9", icon:{url:"12gf/rdrd195.gif",anchor: new google.maps.Point(6,6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:13.013780, lng:80.007170},    map, title:"10", icon:{url:"12gf/rdrd195.gif",anchor: new google.maps.Point(6,6),}});
+const Arakkonam42 =[
+
+{lat:13.015538, lng:79.926821},
+{lat:13.015898, lng:79.941412},
+{lat:13.014309, lng:79.944009},
+{lat:13.022135, lng:79.957199},
+
+{lat:13.021421, lng:79.972989},
+{lat:13.017867, lng:79.979098},
+{lat:13.017915, lng:79.988621},
+{lat:13.018898, lng:79.990810},
+
+{lat:13.018417, lng:79.993886},
+{lat:13.018541, lng:80.003194},
+{lat:13.018751, lng:80.004715},
+{lat:13.018378, lng:80.010531},
+{lat:13.013780, lng:80.007170},
+{lat:13.009780, lng:80.003170},
+];
+
+const arako = new google.maps.Polyline({
+    
+    path:Arakkonam42,
+    geodesic: true,
+    strokeColor: "#ff0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ arako.setMap(map);
+
+ 
+this.flag = new google.maps.Marker({ position: {lat:12.951671, lng:80.041492},  map, icon:{url: "flag0/45s.png", anchor: new google.maps.Point(50, 0),}});
+
+this.flag = new google.maps.Marker({ position:{lat:12.968469, lng:80.026397},    map,title:"45 Somangalam", icon:{url: "12gf/blbl270.gif", anchor: new google.maps.Point(6, 6),}});
+
+this.arrow = new google.maps.Marker({ position:{lat:12.967878, lng:79.980902},   map, title:"45 Somangalam",icon:{url: "12gf/blbl240.gif", anchor: new google.maps.Point(6, 6),}});
+
+const somangalam45 =[
+{lat:12.951671, lng:80.041492},
+{lat:12.953894, lng:80.042410},
+{lat:12.956067, lng:80.044521},
+{lat:12.956281, lng:80.043834},
+{lat:12.958593, lng:80.042384},
+{lat:12.959570, lng:80.036946},
+{lat:12.959089, lng:80.035905},
+{lat:12.958974, lng:80.035100},
+{lat:12.959037, lng:80.034199},
+{lat:12.958546, lng:80.031935},
+{lat:12.958692, lng:80.031120},
+{lat:12.958274, lng:80.030981},
+{lat:12.958346, lng:80.029674},
+{lat:12.959675, lng:80.030033},
+{lat:12.960496, lng:80.029962},
+{lat:12.961374, lng:80.029991},
+{lat:12.969037, lng:80.032285},
+{lat:12.969309, lng:80.032360},
+{lat:12.968469, lng:80.026397},
+{lat:12.970404, lng:80.011552},
+{lat:12.969992, lng:80.006326},
+{lat:12.970918, lng:79.997662},
+{lat:12.970154, lng:79.992402},
+{lat:12.967669, lng:79.983713},
+{lat:12.967878, lng:79.980902},
+{lat:12.965998, lng:79.975298},
+{lat:12.962034, lng:79.973307},
+{lat:12.958834, lng:79.968354},
+{lat:12.954053, lng:79.955713},
+{lat:12.954301, lng:79.950962},
+{lat:12.955613, lng:79.947075},
+{lat:12.955898, lng:79.942199},
+
+];
+
+const somang = new google.maps.Polyline({
+    path:somangalam45 ,
+    geodesic: true,
+    strokeColor: "#0000ff",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+ somang.setMap(map);
+
+
+
+
+
+
+
+}
+
+
+ 
+ 
+
+
+ 
+
+
+    </script>
+
+
+
+</head>
+
+<body onload="hideLoader()">
+<div class="page-loader">
+    <div class="spinner"></div>
+    <div class="txt">Loading...</div>
+</div>
+<div id="map" style="top:0px;z-index:10;"></div>
+
+<div style="position:absolute; left:50vw; margin-left:-150px; text-align:center;top:5px; background:#fff;z-index:100;">  <span style="font:bold 20pt arial; color:#000;">Inner Chennai Routes </span> 
+|<br> <a href="https://fit25.com/recroutes/location.php">Outer Chennai Routes</a><br><a href="https://fit25.com/recroutes/map00.php">College Location Map</a></div>
+
+
+
+
+
+
+  
+  </body>
+</html>
+
+
+
+

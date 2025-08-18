@@ -73,6 +73,9 @@
               <button class="map-control-btn" onclick="toggleRouteSelector()" title="Toggle Route Selector" style="background: #10b981; color: white;">
                   <i class="fas fa-route"></i>
               </button>
+              <button class="map-control-btn" onclick="toggleExistingRoutesDisplay()" title="Show Existing Routes" style="background: #8b5cf6; color: white;">
+                  <i class="fas fa-map-marked-alt"></i>
+              </button>
           </div>
 
         <!-- Floating Route Selector -->
@@ -113,6 +116,36 @@
             <!-- Individual Route Toggles -->
             <div class="route-toggles" id="routeToggles">
                 <!-- Route toggles will be generated here -->
+            </div>
+        </div>
+
+        <!-- Existing Routes Display Panel -->
+        <div class="existing-routes-panel" id="existingRoutesPanel" style="display: none;">
+            <div class="existing-routes-header">
+                <h4><i class="fas fa-map-marked-alt"></i> Existing Routes Display</h4>
+                <button class="close-existing-routes" onclick="toggleExistingRoutesDisplay()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Search and Controls -->
+            <div class="existing-routes-controls">
+                <div class="search-container">
+                    <input type="text" id="existing-route-search" placeholder="Search routes..." class="search-input">
+                    <button id="clear-existing-search" class="control-btn">Clear</button>
+                </div>
+                <div class="control-buttons">
+                    <button id="select-all-existing-routes" class="control-btn">Select All</button>
+                    <button id="deselect-all-existing-routes" class="control-btn">Deselect All</button>
+                    <button id="fit-to-existing-routes" class="control-btn">Fit to Routes</button>
+                    <button id="clear-existing-routes" class="control-btn">Clear All</button>
+                    <button id="export-existing-coordinates" class="control-btn">Export CSV</button>
+                </div>
+            </div>
+
+            <!-- Existing Routes List -->
+            <div class="existing-route-list" id="existingRouteList">
+                <!-- Existing routes will be populated here -->
             </div>
         </div>
 
