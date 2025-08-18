@@ -24,21 +24,29 @@ async function loadData() {
         const studentFile = document.getElementById('studentFile').files[0];
         const stopsFile = document.getElementById('stopsFile').files[0];
         const depotsFile = document.getElementById('depotsFile').files[0];
-        const apiKey = GOOGLE_API_KEY;
         
         if (!studentFile || !stopsFile || !depotsFile) {
             showStatus('Please select all required CSV files', 'error');
             return;
         }
         
-        // API key is now hardcoded in the code
-        
         showStatus('Loading and processing data...', 'info');
         
-        // Parse CSV files
-        studentData = await parseCSV(studentFile);
-        stopsData = await parseCSV(stopsFile);
-        depotsData = await parseCSV(depotsFile);
+        // Parse CSV files and assign to global variables
+        window.studentData = await parseCSV(studentFile);
+        window.stopsData = await parseCSV(stopsFile);
+        window.depotsData = await parseCSV(depotsFile);
+        
+        // Also assign to non-window global variables for backward compatibility
+        studentData = window.studentData;
+        stopsData = window.stopsData;
+        depotsData = window.depotsData;
+        
+        console.log('Data loaded:', {
+            students: window.studentData.length,
+            stops: window.stopsData.length,
+            depots: window.depotsData.length
+        });
         
         // Validate and process data
         validateData();
@@ -48,7 +56,11 @@ async function loadData() {
         showStatus('Data loaded successfully! Ready for optimization.', 'success');
         
         // Initialize map if not already done
-        initMap();
+        if (typeof initMap === 'function') {
+            initMap();
+        }
+        
+        // Auto-visualize data after loading
         visualizeData();
         
     } catch (error) {
