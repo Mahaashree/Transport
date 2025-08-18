@@ -2,6 +2,8 @@
 const express = require('express');
 const { GoogleAuth } = require('google-auth-library');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 app.use(cors());
@@ -172,6 +174,53 @@ app.post('/api/directions', async (req, res) => {
         console.error('Directions API error:', error);
         res.status(500).json({ error: 'Directions failed', details: error.message });
     }
+});
+
+// Serve existing routes page
+app.get('/existing-routes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'existing-routes.html'));
+});
+
+// API endpoint to get extracted stop coordinates
+app.get('/api/stop-coordinates', (req, res) => {
+    const csvPath = path.join(__dirname, 'Routes_Data', 'extracted_stop_coordinates.csv');
+    
+    // Check if CSV file exists
+    fs.access(csvPath, fs.constants.F_OK, (err) => {
+        if (err) {
+            // CSV doesn't exist, return routes.json as fallback
+            const routesPath = path.join(__dirname, 'Routes_Data', 'Existing-Routes', 'routes.json');
+            fs.readFile(routesPath, 'utf8', (err, data) => {
+                if (err) {
+                    return res.status(404).json({ error: 'No route data found' });
+                }
+                
+                try {
+                    const routesData = JSON.parse(data);
+                    res.json({ 
+                        type: 'routes_json', 
+                        data: routesData,
+                        message: 'Extracted coordinates not found, returning routes.json'
+                    });
+                } catch (parseErr) {
+                    res.status(500).json({ error: 'Failed to parse routes data' });
+                }
+            });
+        } else {
+            // CSV exists, return it
+            fs.readFile(csvPath, 'utf8', (err, data) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Failed to read CSV file' });
+                }
+                
+                res.json({ 
+                    type: 'csv', 
+                    data: data,
+                    message: 'Returning extracted stop coordinates'
+                });
+            });
+        }
+    });
 });
 
 // Health check endpoint

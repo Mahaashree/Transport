@@ -1,0 +1,1392 @@
+{
+  "routes": [
+    {
+      "routename": "Ennore Bus Stand",
+      "stops": {
+        "stop1": "Ernavur anna nagar",
+        "stop2": "Lift Gate",
+        "stop3": "ITC",
+        "stop4": "Wimco nagar",
+        "stop5": "Thiruvottiyur Market",
+        "stop6": "Theradi",
+        "stop7": "Kaladipet market",
+        "stop8": "Raja Kadai",
+        "stop9": "Thangal",
+        "stop10": "Tollgate"
+      }
+    },
+    {
+      "routename": "Tondiarpet (RTO Office)",
+      "stops": {
+        "stop1": "Tondiarpet Depot",
+        "stop2": "Kasimedu",
+        "stop3": "Kasimedu Petrol Bunk",
+        "stop4": "kalmandapam Police Station",
+        "stop5": "ST Anne's School",
+        "stop6": "Royapuram Bridge",
+        "stop7": "Beach Station",
+        "stop8": "Annamalai Mandram",
+        "stop9": "GH (Rajiv Gandhi Hospital)",
+        "stop10": "Everest Hotel",
+        "stop11": "Neyveli House",
+        "stop12": "KMC"
+      }
+    },
+    {
+      "routename": "Tondiarpet",
+      "stops": {
+        "stop1": "Tondiarpet Mani Cycle Shop",
+        "stop2": "Police Quarters",
+        "stop3": "Post Office",
+        "stop4": "Maharani (Singapore Shoppee)"
+      }
+    },
+    {
+      "routename": "Ajax",
+      "stops": {
+        "stop1": "Ajax Bus Depot",
+        "stop2": "Periyar nagar",
+        "stop3": "Ellaiamman koil",
+        "stop4": "Lakshmi koil",
+        "stop5": "Cemetery road",
+        "stop6": "Mint Old Bus stand",
+        "stop7": "Mint New Bus stand",
+        "stop8": "Padmanabha Theatre"
+      }
+    },
+    {
+      "routename": "Choolai",
+      "stops": {
+        "stop1": "Choolai post office",
+        "stop2": "Veperi Police Station",
+        "stop3": "Muthumari amman Koil- Pursaiwakkam",
+        "stop4": "Gangadeeswarar Koil",
+        "stop5": "Alagappa Road",
+        "stop6": "Pathala Ponniammam Koil",
+        "stop7": "Motcham theatre",
+        "stop8": "Mummy Daddy"
+      }
+    },
+    {
+      "routename": "Dovton Bridge",
+      "stops": {
+        "stop1": "Muthumariamman kovil (Dovton Bridge)",
+        "stop2": "Kellys - Signal",
+        "stop3": "Murugan Hospital",
+        "stop4": "Kallarai- Road",
+        "stop5": "Periyapalayathamman Temple",
+        "stop6": "Shenoy nagar Bus Stop"
+      }
+    },
+    {
+      "routename": "Chintadripet",
+      "stops": {
+        "stop1": "Chintadripet Fish Market",
+        "stop2": "Chintadripet Market",
+        "stop3": "Chintadripet Police Quarters",
+        "stop4": "Pudupet",
+        "stop5": "Egmore Court",
+        "stop6": "Rajarthinam Stadium",
+        "stop7": "Egmore (Co-Optex) Bridge",
+        "stop8": "Halls Road Junction",
+        "stop9": "Chepet Signal",
+        "stop10": "Harington Road Junction",
+        "stop11": "Pantaloon",
+        "stop12": "Skywalk bridge"
+      }
+    },
+    {
+      "routename": "Loyola College",
+      "stops": {
+        "stop1": "Loyola College",
+        "stop2": "Nungambakkam Railway Station",
+        "stop3": "Mehta Nagar",
+        "stop4": "Anna Arch",
+        "stop5": "Arumpakkam- Indian Hospital"
+      }
+    },
+    {
+      "routename": "Chintamani",
+      "stops": {
+        "stop1": "Chintamani",
+        "stop2": "K3 Police station",
+        "stop3": "Razack Garden",
+        "stop4": "MMDA",
+        "stop5": "MMDA Bus Depot"
+      }
+    },
+    {
+      "routename": "Maduravoyal Erikarai",
+      "stops": {
+        "stop1": "Maduravoyal Erikarai",
+        "stop2": "Vanagaram bus stop",
+        "stop3": "Shrivari Signal",
+        "stop4": "Velappanchavadi (Harsha Toyota)"
+      }
+    },
+    {
+      "routename": "Thirunagar (Ambica Empire Hotel)",
+      "stops": {
+        "stop1": "Thirunagar (Ambica Empire Hotel)",
+        "stop2": "Vallavan Hotel",
+        "stop3": "SAF Games Village",
+        "stop4": "Vijayakanth kalayana Mandapam",
+        "stop5": "Toyota Show Room",
+        "stop6": "Jems Apartment",
+        "stop7": "Nerkundram",
+        "stop8": "Vengaya Mandi",
+        "stop9": "College campus"
+      }
+    },
+    {
+      "routename": "New Avadi Road Water Tank",
+      "stops": {
+        "stop1": "New Avadi Road Water Tank",
+        "stop2": "Gangaiamman koil",
+        "stop3": "Lotus Colony",
+        "stop4": "14- Shop",
+        "stop5": "Kandasamy College",
+        "stop6": "Nalli Silks",
+        "stop7": "Ayyappan Temple",
+        "stop8": "Blue star",
+        "stop9": "Tower Park Metro Station",
+        "stop10": "Santhosh Super Market",
+        "stop11": "Hot chips",
+        "stop12": "Senthil Nursing Home",
+        "stop13": "CPWD Quarters"
+      }
+    },
+    {
+      "routename": "Anna Nagar East",
+      "stops": {
+        "stop1": "Anna Nagar RTO Office",
+        "stop2": "Anna Nagar East 1st Avenue",
+        "stop3": "Anna Nagar East 6th Avenue",
+        "stop4": "Chennai Mobiles",
+        "stop5": "Kovai Palamuthircholai",
+        "stop6": "Akshyam Hotel",
+        "stop7": "Nuts Piczs",
+        "stop8": "SBI Bank - 6th Avenue",
+        "stop9": "Bata Show Room",
+        "stop10": "Vijaya Maruthi",
+        "stop11": "Reliance Fresh"
+      }
+    },
+    {
+      "routename": "Krishna Nagar (Vellammal School)",
+      "stops": {
+        "stop1": "Vellammal School",
+        "stop2": "Golden flats"
+      }
+    },
+    {
+      "routename": "Thriumangalam",
+      "stops": {
+        "stop1": "Thriumangalam EB Bus Stop",
+        "stop2": "Collector nagar",
+        "stop3": "TSK Nagar"
+      }
+    },
+    {
+      "routename": "SIDCO Villivakkam",
+      "stops": {
+        "stop1": "SIDCO Villivakkam",
+        "stop2": "Singarampillai School",
+        "stop3": "Anbu Colony",
+        "stop4": "Anna Nagar West Depot"
+      }
+    },
+    {
+      "routename": "Waves",
+      "stops": {
+        "stop1": "Waves",
+        "stop2": "V3 JJ Nagar Police Booth",
+        "stop3": "Water Tank",
+        "stop4": "IOB Mogappair East"
+      }
+    },
+    {
+      "routename": "Mogappair East",
+      "stops": {
+        "stop1": "Spartan school",
+        "stop2": "Mogappair East Bus Stop (7H)"
+      }
+    },
+    {
+      "routename": "Mogappair (Golden Flat)",
+      "stops": {
+        "stop1": "SBI",
+        "stop2": "Greater Chennai corporation park",
+        "stop3": "VGN Service Road",
+        "stop4": "MGR University"
+      }
+    },
+    {
+      "routename": "Mogappairt",
+      "stops": {
+        "stop1": "Grace Super Market",
+        "stop2": "Ambedkar Ground",
+        "stop3": "Velammal School (Mogappair West)",
+        "stop4": "Mogappair Water Tank Road",
+        "stop5": "(7M) Amutha Matri. School"
+      }
+    },
+    {
+      "routename": "Mogappair West",
+      "stops": {
+        "stop1": "DRJ Super Market"
+      }
+    },
+    {
+      "routename": "Vyasarpadi (Erikarai)",
+      "stops": {
+        "stop1": "Vyasarpadi (Erikarai)",
+        "stop2": "Jeeva Station",
+        "stop3": "Binny mill Corner",
+        "stop4": "Otteri",
+        "stop5": "Podikadai Bus Stop",
+        "stop6": "TP Hospital",
+        "stop7": "Ayanavaram - Indian Bank",
+        "stop8": "Sayani Theatre"
+      }
+    },
+    {
+      "routename": "Binny Mill Church",
+      "stops": {
+        "stop1": "Jamalia School",
+        "stop2": "Binny Mill Church",
+        "stop3": "Noor Hotel",
+        "stop4": "Joint Office",
+        "stop5": "Arisi mandi",
+        "stop6": "Kambar Arangam",
+        "stop7": "ICF Signal",
+        "stop8": "Kallukadai Bus Stop",
+        "stop9": "Villivakkam Kalpana Hotel",
+        "stop10": "Nadhamuni Theatre"
+      }
+    },
+    {
+      "routename": "Moolakadai",
+      "stops": {
+        "stop1": "Erukkancheri ABR kalyana Mandapam",
+        "stop2": "Erukkancheri - Rajalakshmi Cars Showroom",
+        "stop3": "Moolakadai",
+        "stop4": "M1.Police Station",
+        "stop5": "Kanakan chatram (Shell Petrol Bunk)",
+        "stop6": "Kalpana Lamps",
+        "stop7": "Madavaram Andhra Bus Stand",
+        "stop8": "Retteri RTO Office"
+      }
+    },
+    {
+      "routename": "Korattur",
+      "stops": {
+        "stop1": "Korattur Police Station",
+        "stop2": "Bakthavatchlam School Signal",
+        "stop3": "Church"
+      }
+    },
+    {
+      "routename": "MKB. Nagar",
+      "stops": {
+        "stop1": "MKB Nagar",
+        "stop2": "KKD Nagar",
+        "stop3": "MR Nagar",
+        "stop4": "Pavithra Hospital"
+      }
+    },
+    {
+      "routename": "Erukkanchery",
+      "stops": {
+        "stop1": "Erukkanchery",
+        "stop2": "Madhavaram rountana",
+        "stop3": "Retteri RTO Office",
+        "stop4": "Korattur police station",
+        "stop5": "Ambattur Telephone Exchange"
+      }
+    },
+    {
+      "routename": "Kolathur",
+      "stops": {
+        "stop1": "Vyasarpadi Fire Service",
+        "stop2": "BB Road Junction",
+        "stop3": "Lakshmi amman Koil",
+        "stop4": "Brindha Theatre",
+        "stop5": "Welding Shop"
+      }
+    },
+    {
+      "routename": "Perambur",
+      "stops": {
+        "stop1": "BP Road",
+        "stop2": "Perambur Bus Depot",
+        "stop3": "Perambur Rly Station",
+        "stop4": "Perumbur Church",
+        "stop5": "Ajantha Bakers",
+        "stop6": "Venus Bus Stop",
+        "stop7": "Lakshmi Amman Koil (kolathur)",
+        "stop8": "BPCL Petrol Bunk"
+      }
+    },
+    {
+      "routename": "Peravallur",
+      "stops": {
+        "stop1": "Peravalur",
+        "stop2": "Jawahar Nagar Bus Stop",
+        "stop3": "Axis Bank",
+        "stop4": "Agaram BPCL Bunk",
+        "stop5": "Thiruvalluvar Kalyanamandabam",
+        "stop6": "Periyar Nagar Vegetable market"
+      }
+    },
+    {
+      "routename": "Kolathur (Don Bosco School)",
+      "stops": {
+        "stop1": "Kolathur (Don Bosco School)",
+        "stop2": "Retteri Junction",
+        "stop3": "Saravana Store (Padi)",
+        "stop4": "Korattur Signal",
+        "stop5": "Britannia"
+      }
+    },
+    {
+      "routename": "TVK Nagar",
+      "stops": {
+        "stop1": "TVK Idugadu",
+        "stop2": "TVK Bus stand",
+        "stop3": "Senthil Nagar"
+      }
+    },
+    {
+      "routename": "Poombukar Nagar",
+      "stops": {
+        "stop1": "SBI-Bank",
+        "stop2": "Poombukar Nagar Post Office",
+        "stop3": "Grace Super Market",
+        "stop4": "Temple School"
+      }
+    },
+    {
+      "routename": "Minjur",
+      "stops": {
+        "stop1": "Rice Mill",
+        "stop2": "Kattur Koot Road",
+        "stop3": "Hemachandra Nagar",
+        "stop4": "Pachaiyamman Koil Archi",
+        "stop5": "Valluvar Nagar",
+        "stop6": "Patamanthri",
+        "stop7": "Manali New Town",
+        "stop8": "Vichoor",
+        "stop9": "Andarkuppam Check Post",
+        "stop10": "Manjampakkam Ring Road"
+      }
+    },
+    {
+      "routename": "Veterinary college (Mathur)",
+      "stops": {
+        "stop1": "Manali Market",
+        "stop2": "Shastri nagar",
+        "stop3": "Mathur 3rd Main Road",
+        "stop4": "Mathur 1st Main Road",
+        "stop5": "Veterinary college",
+        "stop6": "Arul Nagar",
+        "stop7": "Thapalpetti",
+        "stop8": "Madhavaram Old Bus stand",
+        "stop9": "Madhavaram New Bus stand"
+      }
+    },
+    {
+      "routename": "Ayappakkam",
+      "stops": {
+        "stop1": "Dunlop",
+        "stop2": "Canara Bank",
+        "stop3": "Cake World - Ambattur",
+        "stop4": "Murugappa Polytechnic"
+      }
+    },
+    {
+      "routename": "Ayappakkam Water Tank",
+      "stops": {
+        "stop1": "Ayappakkam Water Tank",
+        "stop2": "VGN Platina",
+        "stop3": "Aparna Nagar",
+        "stop4": "Shivan Koil",
+        "stop5": "Koladi HP Petrol Bunk",
+        "stop6": "Thiruverkadu Bus Stand",
+        "stop7": "Pallavan Nagar",
+        "stop8": "VGN Mahalakshmi Appartments",
+        "stop9": "Velapanchavadi Kendra Vihar Appartment"
+      }
+    },
+    {
+      "routename": "Thirumullaivoyal",
+      "stops": {
+        "stop1": "Thirumullaivoyal",
+        "stop2": "Vaishnawi Nagar",
+        "stop3": "Outer Ring Road bye Pass - Chokanallur"
+      }
+    },
+    {
+      "routename": "Ambattur OT",
+      "stops": {
+        "stop1": "Singapore shopping",
+        "stop2": "Anaikattucherry",
+        "stop3": "Sitharkadu"
+      }
+    },
+    {
+      "routename": "Ayappakkam Church (water tank)",
+      "stops": {
+        "stop1": "Ayappakkam church (water tank)",
+        "stop2": "Pillaiyar kovil",
+        "stop3": "ICMR",
+        "stop4": "Selvi Mahal",
+        "stop5": "Ration shop",
+        "stop6": "EB"
+      }
+    },
+    {
+      "routename": "Ponneri",
+      "stops": {
+        "stop1": "Krishnapuram (Ponneri)",
+        "stop2": "Andarkuppam",
+        "stop3": "Velammal School",
+        "stop4": "Thachoor Koot Road",
+        "stop5": "Panchati",
+        "stop6": "Irulipattu",
+        "stop7": "Janapachathiram Koot Road",
+        "stop8": "Karanodai",
+        "stop9": "Cholavaram",
+        "stop10": "Padiyanallur",
+        "stop11": "MA Nagar",
+        "stop12": "Redhills Bye Pass",
+        "stop13": "Redhills Market",
+        "stop14": "Redhills Bus Stand",
+        "stop15": "Redhills Koot Road"
+      }
+    },
+    {
+      "routename": "Kallikuppam",
+      "stops": {
+        "stop1": "Surapet",
+        "stop2": "Kallikuppam Arch",
+        "stop3": "Wireless",
+        "stop4": "Oragadam",
+        "stop5": "P.T.R.Kalyanamanadapam",
+        "stop6": "Ajay Stadiuem"
+      }
+    },
+    {
+      "routename": "RedHills Bypass",
+      "stops": {
+        "stop1": "Sothupakkam Signal",
+        "stop2": "SSR Palace",
+        "stop3": "Nel arisi kalyana mandapam (Signal)",
+        "stop4": "Redhills Market",
+        "stop5": "Redhills Bus Stand",
+        "stop6": "Alamaram",
+        "stop7": "Gandhi Nagar",
+        "stop8": "Petrol Bunk (Pammathukulam)",
+        "stop9": "Outer ring road Bridge",
+        "stop10": "Perumal Adipatham",
+        "stop11": "Saint Michaels Polytechnic"
+      }
+    },
+    {
+      "routename": "Puzhal Byepass",
+      "stops": {
+        "stop1": "Kavankarai",
+        "stop2": "Puzhal Jail",
+        "stop3": "Puzhual Camp",
+        "stop4": "Shanmugapuram",
+        "stop5": "Pudur"
+      }
+    },
+    {
+      "routename": "Puzhal",
+      "stops": {
+        "stop1": "Umayal Achi nursing college",
+        "stop2": "Velammal college",
+        "stop3": "Singapore shopping",
+        "stop4": "Stedford Hospital",
+        "stop5": "Moorthy Nagar"
+      }
+    },
+    {
+      "routename": "Oragadam (Ambattur)",
+      "stops": {
+        "stop1": "Oragadam - PTR Kalyana Mandapam",
+        "stop2": "Stedford",
+        "stop3": "Saraswathi Nagar",
+        "stop4": "Avadi Check post",
+        "stop5": "Paruthipattu"
+      }
+    },
+    {
+      "routename": "Uthukottai",
+      "stops": {
+        "stop1": "Uthukottai Bus Stand",
+        "stop2": "Peruncheri",
+        "stop3": "Seethancheri",
+        "stop4": "Poondi Koot Road",
+        "stop5": "Thiruvallur - Meera Theatre",
+        "stop6": "Thiruvallur GRT",
+        "stop7": "College campus"
+      }
+    },
+    {
+      "routename": "Kakkalur",
+      "stops": {
+        "stop1": "Kakkalur Bus stop",
+        "stop2": "Manavalanagar Railway Station",
+        "stop3": "NDP Mahal",
+        "stop4": "Ondikuppam (Sangeetha Hotel)",
+        "stop5": "Putlur Bus Stop",
+        "stop6": "Aranvoyal Bus Stop",
+        "stop7": "Thirumazhisai bus stand"
+      }
+    },
+    {
+      "routename": "Thiruvallur",
+      "stops": {
+        "stop1": "Vasantha Bhavan Hotel",
+        "stop2": "State Bank of India",
+        "stop3": "Oil Mill",
+        "stop4": "Caterpillar",
+        "stop5": "Melnallathur",
+        "stop6": "TCL",
+        "stop7": "Athikulam"
+      }
+    },
+    {
+      "routename": "Veppampattu",
+      "stops": {
+        "stop1": "Veppampattu Tea Kadai",
+        "stop2": "Kandankollai",
+        "stop3": "Chevappettai",
+        "stop4": "Tholuvur",
+        "stop5": "Thaneerkulam",
+        "stop6": "Thiruvalur GRT"
+      }
+    },
+    {
+      "routename": "Thirunindravur",
+      "stops": {
+        "stop1": "Veppampattu Rly Station",
+        "stop2": "Veppampattu Rly 2nd Gate",
+        "stop3": "Thirunindravur- Murugan Koil",
+        "stop4": "Thirunindravur",
+        "stop5": "Nadukuthagai",
+        "stop6": "Jaya college",
+        "stop7": "Nemelichery rountana"
+      }
+    },
+    {
+      "routename": "Avadi",
+      "stops": {
+        "stop1": "Avadi Ramarathinam",
+        "stop2": "Ponnu Supermarket"
+      }
+    },
+    {
+      "routename": "Ambattur Stedford Hospital",
+      "stops": {
+        "stop1": "JB Estate",
+        "stop2": "Vasantham Nagar",
+        "stop3": "Paruthipattu police Booth",
+        "stop4": "Kaduvetti",
+        "stop5": "Bharat bunk"
+      }
+    },
+    {
+      "routename": "Avadi (GRT)",
+      "stops": {
+        "stop1": "Avadi Pillyarkoil",
+        "stop2": "Kavarapalayam",
+        "stop3": "Sindhu Nagar",
+        "stop4": "Sekkadu",
+        "stop5": "Hindu College",
+        "stop6": "Pattabiram Bridge"
+      }
+    },
+    {
+      "routename": "Avadi Market",
+      "stops": {
+        "stop1": "Govarthnagiri",
+        "stop2": "Ayankulam",
+        "stop3": "Paruthipatu",
+        "stop4": "Kaduveti",
+        "stop5": "Seneerkuppam"
+      }
+    },
+    {
+      "routename": "Avadi (Veerapuram)",
+      "stops": {
+        "stop1": "Kollumedu GH",
+        "stop2": "Kannadapalayam",
+        "stop3": "Vel Tech junction",
+        "stop4": "Kovilpathagai",
+        "stop5": "Ajay stadium",
+        "stop6": "Kalainar Nagar",
+        "stop7": "Brinda nagar",
+        "stop8": "CRPF junction",
+        "stop9": "Mittanemili"
+      }
+    },
+    {
+      "routename": "Chengalpet",
+      "stops": {
+        "stop1": "Chengalpet GH",
+        "stop2": "Chengalpet Rotanakenar",
+        "stop3": "Chengalpet New Bus Stop",
+        "stop4": "Chengalpet Old Bus Stop",
+        "stop5": "Mahindra city",
+        "stop6": "S.P.Koil"
+      }
+    },
+    {
+      "routename": "Perungalathur",
+      "stops": {
+        "stop1": "Perungalathur Bus stop",
+        "stop2": "Perungalathur Earikarai",
+        "stop3": "Irumpuliyur",
+        "stop4": "Old Tambaram Kulam",
+        "stop5": "Lakshmipuram",
+        "stop6": "Krishnanagar"
+      }
+    },
+    {
+      "routename": "Varatharaja Theatre",
+      "stops": {
+        "stop1": "Varatharaja Theatre",
+        "stop2": "Santorium",
+        "stop3": "Bharathamada Street",
+        "stop4": "Bharathi Nagar",
+        "stop5": "Gandhi Nagar",
+        "stop6": "Padmavathy Kalyanamandapam",
+        "stop7": "Parvathy Nagar",
+        "stop8": "Outer Ring Road (Service Road)"
+      }
+    },
+    {
+      "routename": "Hasthinapuram",
+      "stops": {
+        "stop1": "Hasthinapuram Bus Stand",
+        "stop2": "Amman Koil",
+        "stop3": "Kumaran Kundram",
+        "stop4": "Bharathi Nagar Auto Stand",
+        "stop5": "Tambaram Gandhi Road",
+        "stop6": "Madanapuram Bridge (outer ring Road)"
+      }
+    },
+    {
+      "routename": "Guduvanchery",
+      "stops": {
+        "stop1": "Guduvanchery Bus stand",
+        "stop2": "Guduvanchery EB",
+        "stop3": "Urapakkam Tea Kadai",
+        "stop4": "Urapakkam School stop",
+        "stop5": "Vandalur"
+      }
+    },
+    {
+      "routename": "Kamatchi Hospital (Pallikaranai)",
+      "stops": {
+        "stop1": "Kamachi Hospital",
+        "stop2": "Narayanapuram",
+        "stop3": "Pallikaranai Oil Mill",
+        "stop4": "Pallikaranai Govt School",
+        "stop5": "Pallikaranai Jayachandran",
+        "stop6": "Nilgiris Supermarket"
+      }
+    },
+    {
+      "routename": "Medavakkam X Road",
+      "stops": {
+        "stop1": "Medavakkam X Road",
+        "stop2": "Puthukoil Bus Stop",
+        "stop3": "Santhoshpuram Signal",
+        "stop4": "Sembakkam Signal",
+        "stop5": "Rajakilpakkam Signal"
+      }
+    },
+    {
+      "routename": "Padur",
+      "stops": {
+        "stop1": "Siruseri Roundtana",
+        "stop2": "Padur Market",
+        "stop3": "Hindustan College",
+        "stop4": "Kelambakkam(Vandalur X Road)",
+        "stop5": "Pudupakkam",
+        "stop6": "Mambakkam",
+        "stop7": "Mambakkam Sivan Koil",
+        "stop8": "Thiruvanchery",
+        "stop9": "Theeder Nagar",
+        "stop10": "Lakshmi Ammal College",
+        "stop11": "Bharath Engineering College",
+        "stop12": "Indra Nagar",
+        "stop13": "Malar Hospital"
+      }
+    },
+    {
+      "routename": "Madippakam",
+      "stops": {
+        "stop1": "Ponniamman Koil",
+        "stop2": "PNB Bank",
+        "stop3": "Sathasiva Nagar",
+        "stop4": "Ram Nagar",
+        "stop5": "Kaiveli Signal"
+      }
+    },
+    {
+      "routename": "Nanmangalam",
+      "stops": {
+        "stop1": "Nanmangalam",
+        "stop2": "Vadakupattu Road",
+        "stop3": "Vellakal",
+        "stop4": "Kamarajapuram",
+        "stop5": "Mahalakshmi Nagar",
+        "stop6": "Selaiyur",
+        "stop7": "Sankara vidyalaya School",
+        "stop8": "Poondi Bazaar",
+        "stop9": "Tambaram Railway Station"
+      }
+    },
+    {
+      "routename": "NGO Colony",
+      "stops": {
+        "stop1": "NGO Colony Dept",
+        "stop2": "Kakkanpalam",
+        "stop3": "Arun Ice Parler",
+        "stop4": "Prem Care Hospital",
+        "stop5": "Puzuthiwakkam Road",
+        "stop6": "Sakthi Cars"
+      }
+    },
+    {
+      "routename": "Adambakkam",
+      "stops": {
+        "stop1": "Thandeeswarm Bus Stop",
+        "stop2": "Gandhi Road",
+        "stop3": "Race Course Road",
+        "stop4": "NGO Colony",
+        "stop5": "St.Thomas Mount Rly Station",
+        "stop6": "Jayalakshmi Theatre",
+        "stop7": "Thillaiganga nagar subway"
+      }
+    },
+    {
+      "routename": "Sholinganallur (OMR)",
+      "stops": {
+        "stop1": "Sholinganallur",
+        "stop2": "Saravana Stores",
+        "stop3": "Karapakkam Bus Stop",
+        "stop4": "RRE Bus Stop",
+        "stop5": "Thorapakkam",
+        "stop6": "Perunkudi",
+        "stop7": "MGR Road",
+        "stop8": "Thramani Rly Station",
+        "stop9": "Baby Nagar",
+        "stop10": "Tanci Nagar",
+        "stop11": "Vijaya Nagar Kajana Jewlers"
+      }
+    },
+    {
+      "routename": "Kovilampakkam",
+      "stops": {
+        "stop1": "Kovilambakkam",
+        "stop2": "Kaiveli Signal",
+        "stop3": "Vanuvampet Perumal Kovil",
+        "stop4": "Nayara Petrol Bunk"
+      }
+    },
+    {
+      "routename": "Pallavaram Bus Stand",
+      "stops": {
+        "stop1": "Pallavaram Bus Stand",
+        "stop2": "Pallavaram Ponds Singal",
+        "stop3": "nagalkeni (Nayara Petrol Bunk)",
+        "stop4": "nagalkeni Erikarai"
+      }
+    },
+    {
+      "routename": "Keelkatalai",
+      "stops": {
+        "stop1": "Echangadu Singal",
+        "stop2": "Kaiveli Singal",
+        "stop3": "Vanuvampet Perumal Kovil",
+        "stop4": "Nagalkeni",
+        "stop5": "Thiruneermalai Erikarai",
+        "stop6": "Thirumudivakkam"
+      }
+    },
+    {
+      "routename": "Nanganallur",
+      "stops": {
+        "stop1": "Moovarasampettai kulam",
+        "stop2": "JK Mahal",
+        "stop3": "Nanganallur Bus Stand",
+        "stop4": "Ranga theatre",
+        "stop5": "Independence Park"
+      }
+    },
+    {
+      "routename": "VGP (ECR)",
+      "stops": {
+        "stop1": "VGB",
+        "stop2": "Vettuvakani",
+        "stop3": "Neelankarai Puhari",
+        "stop4": "Neelankarai Police Station",
+        "stop5": "Palavakkam Anoty Church",
+        "stop6": "Palavakkam Periyar Street",
+        "stop7": "Kotivakkam Bus Stop",
+        "stop8": "Thiruvanmiur RTO Office",
+        "stop9": "Murutheswarar Koil",
+        "stop10": "Thiruvanmiur Depot",
+        "stop11": "Thiruvanmiur Signal",
+        "stop12": "Tidel Park",
+        "stop13": "Butt Road",
+        "stop14": "Sangeetha Hotel Signal",
+        "stop15": "Kumanan Chavadi Petrol Bunk"
+      }
+    },
+    {
+      "routename": "Adyar",
+      "stops": {
+        "stop1": "Indra Nagar Water Tank",
+        "stop2": "Besant Nagar",
+        "stop3": "BSNL Office Adyar",
+        "stop4": "Adyar Signal",
+        "stop5": "Adyar Bus Stand (Ambica Appalam)",
+        "stop6": "Madhya Kailash",
+        "stop7": "Balaji hospital (Guindy)",
+        "stop8": "Butt Road"
+      }
+    },
+    {
+      "routename": "Triplicane",
+      "stops": {
+        "stop1": "D1 Police Station",
+        "stop2": "Rathna Café",
+        "stop3": "ICE House",
+        "stop4": "Meesapet Market",
+        "stop5": "New College",
+        "stop6": "Fire Office"
+      }
+    },
+    {
+      "routename": "Teynampet",
+      "stops": {
+        "stop1": "Teynampet Signal",
+        "stop2": "Teynampet Metro",
+        "stop3": "Nandanam Signal",
+        "stop4": "Nandanam Fire Office",
+        "stop5": "Saidapet (Metro Station)",
+        "stop6": "Kalaignar Arch",
+        "stop7": "Chinnamalai Court"
+      }
+    },
+    {
+      "routename": "Pattinapakkam",
+      "stops": {
+        "stop1": "Airtel Office",
+        "stop2": "Mandaveli Bus Depot",
+        "stop3": "Devanathan Street",
+        "stop4": "Mandaveli Post office",
+        "stop5": "Billrtoth Hospital",
+        "stop6": "C.P.Ramasamy Road",
+        "stop7": "TTK Road",
+        "stop8": "Kaliappa Hospital",
+        "stop9": "Adyar Gate Hotel",
+        "stop10": "Kotturpuram"
+      }
+    },
+    {
+      "routename": "Santhome (Light house)",
+      "stops": {
+        "stop1": "Pattinapakkam Signal",
+        "stop2": "Santhome Church",
+        "stop3": "Light House",
+        "stop4": "Jain Temple",
+        "stop5": "Luz Corner",
+        "stop6": "Vivekanada College",
+        "stop7": "Ajantha Bridge",
+        "stop8": "New Woodlands",
+        "stop9": "Music Academy",
+        "stop10": "Stella Marrys College"
+      }
+    },
+    {
+      "routename": "Nungambakkam (Shastri bhawan)",
+      "stops": {
+        "stop1": "Shastri bhawan",
+        "stop2": "Taj Coromandel hotel(sterling road)",
+        "stop3": "Valluvarkottam",
+        "stop4": "Periyar salai bus stop",
+        "stop5": "Kodambakkam Bridge",
+        "stop6": "Sekar Emporium",
+        "stop7": "Five lights junction signal(kodambakkam)",
+        "stop8": "Power House",
+        "stop9": "Samiyar Madam"
+      }
+    },
+    {
+      "routename": "Lakshman Sruthi",
+      "stops": {
+        "stop1": "Vadapalani Bus Stand",
+        "stop2": "Lakshman Sruthi",
+        "stop3": "la martin school",
+        "stop4": "Karapakkam",
+        "stop5": "Porur Bus stand",
+        "stop6": "Kattupakkam (Hyundai showroom)"
+      }
+    },
+    {
+      "routename": "Saligramam",
+      "stops": {
+        "stop1": "Surya Hospital",
+        "stop2": "Parvathi Bhavan",
+        "stop3": "Dasarathapuram",
+        "stop4": "Sudharma Mahal",
+        "stop5": "Kamachi Store",
+        "stop6": "Saligramam Bus Stand",
+        "stop7": "AVM Colony"
+      }
+    },
+    {
+      "routename": "Alwarthirunagar",
+      "stops": {
+        "stop1": "Mega Mart",
+        "stop2": "Valasaravakkam Signal"
+      }
+    },
+    {
+      "routename": "Chinmaya Nagar",
+      "stops": {
+        "stop1": "Natesan Nagar",
+        "stop2": "Sai Nagar Bus Stop",
+        "stop3": "Chinmaya Nagar Bus Stop"
+      }
+    },
+    {
+      "routename": "Elango Nagar",
+      "stops": {
+        "stop1": "Elango Nagar",
+        "stop2": "Virugambakkam Market",
+        "stop3": "Kesavarthini",
+        "stop4": "Friends Park Hotel",
+        "stop5": "Lakshmi Nagar",
+        "stop6": "Saibaba Koil (Kumanan Chavadi)"
+      }
+    },
+    {
+      "routename": "Valluvarkottam",
+      "stops": {
+        "stop1": "Valluvarkottam",
+        "stop2": "Madras Coffee House",
+        "stop3": "Kannadasan Silai",
+        "stop4": "Panagal Park",
+        "stop5": "Nalli Silks",
+        "stop6": "SRM Hospitel",
+        "stop7": "J.P.Road (West Mambalam)",
+        "stop8": "Ayodhya Mandapam",
+        "stop9": "Postal Colony",
+        "stop10": "Sangamam Hotel",
+        "stop11": "Ambica Empire Hotel"
+      }
+    },
+    {
+      "routename": "CIT nagar",
+      "stops": {
+        "stop1": "CIT Nagar Bus Stop",
+        "stop2": "Vasanth & Co",
+        "stop3": "Aranganathan Sub Way",
+        "stop4": "Srinivasa Theatre",
+        "stop5": "Metupalayam",
+        "stop6": "Blue Tank"
+      }
+    },
+    {
+      "routename": "Ashok Pillar",
+      "stops": {
+        "stop1": "Kasi Theatre",
+        "stop2": "Ekkatuthangal",
+        "stop3": "Ramapuram",
+        "stop4": "Porur Sivan kovil"
+      }
+    },
+    {
+      "routename": "KK.Nagar (Sivan Park)",
+      "stops": {
+        "stop1": "Sivan Park",
+        "stop2": "K.K.Nagar Pillaiyar koil",
+        "stop3": "Hotel Saravana Bhavan",
+        "stop4": "MGR Nagar Market",
+        "stop5": "Ajantha",
+        "stop6": "vVirugambakkam Vembuliyamman Koil"
+      }
+    },
+    {
+      "routename": "Nesapakkam",
+      "stops": {
+        "stop1": "Nesapakkam Bus Stand",
+        "stop2": "Pondichery Guest House"
+      }
+    },
+    {
+      "routename": "Porur Ramachandra",
+      "stops": {
+        "stop1": "Ramachandra",
+        "stop2": "Ambedkar Statue",
+        "stop3": "Kattupakkam Honda Show Room",
+        "stop4": "Maran garden",
+        "stop5": "Munisvaran Koil (Kattupakkam)"
+      }
+    },
+    {
+      "routename": "Porur Bridge",
+      "stops": {
+        "stop1": "Porur Bus stand",
+        "stop2": "Kattupakkam (Hyundai showroom)",
+        "stop3": "Kattupakkam Bus stand",
+        "stop4": "Kattupakkam Muneeswaran Kovil",
+        "stop5": "Kumanachavdi (EVP Mahal)"
+      }
+    },
+    {
+      "routename": "Iyyappanthangal",
+      "stops": {
+        "stop1": "Iyyappanthangal",
+        "stop2": "Nazharathpettai bunk"
+      }
+    },
+    {
+      "routename": "Pammal (Therasa School)",
+      "stops": {
+        "stop1": "Therasa School",
+        "stop2": "Puthur Koil",
+        "stop3": "Krishna Nagar",
+        "stop4": "Pozhichalur Church"
+      }
+    },
+    {
+      "routename": "Arunmathi Theatre (Pammal)",
+      "stops": {
+        "stop1": "Arunmathi Theatre",
+        "stop2": "Indian Bank",
+        "stop3": "Anakaputhur Amman  Kovil",
+        "stop4": "Manikandan Nagar",
+        "stop5": "Metha Nagar",
+        "stop6": "Kundrathur Theradi"
+      }
+    },
+    {
+      "routename": "Kundrathur",
+      "stops": {
+        "stop1": "Mananchery",
+        "stop2": "Andarkuppam",
+        "stop3": "Sivanthangal",
+        "stop4": "Muthukumaran Bus Stop",
+        "stop5": "Pattu Koot Road",
+        "stop6": "Mangadu"
+      }
+    },
+    {
+      "routename": "Kovur",
+      "stops": {
+        "stop1": "Moondram Kattalai",
+        "stop2": "Kovur RTO Office",
+        "stop3": "Kovur High School",
+        "stop4": "Panicherry",
+        "stop5": "Girugampakkam Bus Stop",
+        "stop6": "Girugampakkam Lakshmi Kalyanamandapam",
+        "stop7": "Kolapakkam Bus Stop",
+        "stop8": "Bai Kadai"
+      }
+    },
+    {
+      "routename": "Madhanandapuram",
+      "stops": {
+        "stop1": "Madhanandapuram Bus Stop",
+        "stop2": "Madhanandapuram Petrol Bunk",
+        "stop3": "Porur EB",
+        "stop4": "Porur  Bridge Down",
+        "stop5": "Iyappanthangal"
+      }
+    },
+    {
+      "routename": "DLF",
+      "stops": {
+        "stop1": "DLF",
+        "stop2": "Mugaliwakkam",
+        "stop3": "Mugaliwakkam Bus Stop",
+        "stop4": "Saravana Stores",
+        "stop5": "Police Station"
+      }
+    },
+    {
+      "routename": "Iyyappanthangal (Reliance Mart)",
+      "stops": {
+        "stop1": "Iyyappanthangal (Reliance Mart)",
+        "stop2": "Kattupakkam Petrol Bunk",
+        "stop3": "E.V.P. Mahal"
+      }
+    },
+    {
+      "routename": "NIVH Poonamallee",
+      "stops": {
+        "stop1": "National Institute for the Visually Handicapped",
+        "stop2": "Govt.Higher Secoundary School",
+        "stop3": "Karayanchavadi Bus Stop",
+        "stop4": "Indian Bank",
+        "stop5": "E.B.Office",
+        "stop6": "Perumal Koil",
+        "stop7": "Golden Apartment (Poonamallee Byepass)",
+        "stop8": "Paraivakkam Signal"
+      }
+    },
+    {
+      "routename": "Poonamallee Bus stand",
+      "stops": {
+        "stop1": "Poonamallee ambedkar statue"
+      }
+    },
+    {
+      "routename": "Poonamallee Ambedkar statue",
+      "stops": {
+        "stop1": "Poonamallee ambedkar statue",
+        "stop2": "Nazarathpettai",
+        "stop3": "Chembarambakkam",
+        "stop4": "RIT Bus stop",
+        "stop5": "Pappanchatram"
+      }
+    },
+    {
+      "routename": "Cheyyar",
+      "stops": {
+        "stop1": "State Bank",
+        "stop2": "Soundari Theatre",
+        "stop3": "Pandiyampakkam",
+        "stop4": "Mangal Koot Road",
+        "stop5": "Mamandur",
+        "stop6": "Dusi",
+        "stop7": "Iyyangarkulam X road",
+        "stop8": "Punchaiarasanthangal"
+      }
+    },
+    {
+      "routename": "Vandavasi",
+      "stops": {
+        "stop1": "Vandavasi New Bus stand",
+        "stop2": "Vandavasi Old Bus stand",
+        "stop3": "Thennangur Bus stand",
+        "stop4": "Manamathi X Road",
+        "stop5": "Peru Nagar",
+        "stop6": "Mangal X Road",
+        "stop7": "Sevelimedu",
+        "stop8": "Housing Board",
+        "stop9": "Kanchipuram collectorate"
+      }
+    },
+    {
+      "routename": "Uthiramerur",
+      "stops": {
+        "stop1": "Uthirumerur",
+        "stop2": "Karuvappampoondi",
+        "stop3": "Manalmedu",
+        "stop4": "Vengacherry",
+        "stop5": "Magaral",
+        "stop6": "Arpakkam",
+        "stop7": "Kalakatur",
+        "stop8": "Kuruvimalai",
+        "stop9": "Orikkai",
+        "stop10": "Miltary Road",
+        "stop11": "KK Nagar",
+        "stop12": "Keel Gate",
+        "stop13": "Keeramandapam"
+      }
+    },
+    {
+      "routename": "Kancheepuram",
+      "stops": {
+        "stop1": "Kancheepuram Bus Stand",
+        "stop2": "Ekambaranathar temple",
+        "stop3": "Ponnerikarai",
+        "stop4": "Kancheepuram RTO Office",
+        "stop5": "Sunguvarchatram"
+      }
+    },
+    {
+      "routename": "Walajabad",
+      "stops": {
+        "stop1": "New Police Station",
+        "stop2": "Chetty Street",
+        "stop3": "Perumal Koil",
+        "stop4": "Tollgate",
+        "stop5": "Periyar Nagar",
+        "stop6": "Pachaiyappa's College"
+      }
+    },
+    {
+      "routename": "Rangasamy Kulam",
+      "stops": {
+        "stop1": "Rengasamy Kulam",
+        "stop2": "Mungelmandapam",
+        "stop3": "Thaluk Office",
+        "stop4": "Kachepeswarar Koil",
+        "stop5": "Gujarathi Chithiram",
+        "stop6": "Oli Mohamed Pettai (Kori)",
+        "stop7": "Rajalakshmi Cars"
+      }
+    },
+    {
+      "routename": "Kanchipuram Bus Stand",
+      "stops": {
+        "stop1": "Ramas Cafe"
+      }
+    },
+    {
+      "routename": "Ranipet",
+      "stops": {
+        "stop1": "Ranipet Old Bus Stand",
+        "stop2": "Muthukadai",
+        "stop3": "VC Moottur",
+        "stop4": "Walajapet GH",
+        "stop5": "Walajapet Bus Stand",
+        "stop6": "Housing Board",
+        "stop7": "AAA College"
+      }
+    },
+    {
+      "routename": "Vellore",
+      "stops": {
+        "stop1": "Vellore Rountana",
+        "stop2": "Sathuvachari",
+        "stop3": "Vallar",
+        "stop4": "Puttuthakku"
+      }
+    },
+    {
+      "routename": "Arakkonam",
+      "stops": {
+        "stop1": "Vimal School",
+        "stop2": "Indira Gandhi Statue",
+        "stop3": "Suvalapet",
+        "stop4": "Old Bus Stand",
+        "stop5": "New Bus Stand",
+        "stop6": "Thakkolam Koot Road",
+        "stop7": "Kadambanallur",
+        "stop8": "Naidu Mess",
+        "stop9": "Thakkolam E.B",
+        "stop10": "Thakkolam Bazzer(Meal)",
+        "stop11": "Thakkolam Bazzer(Keel)",
+        "stop12": "Thakkolam Petrol Bunk",
+        "stop13": "Perampakkam",
+        "stop14": "Kattu koot Road"
+      }
+    },
+    {
+      "routename": "Senthamangalam",
+      "stops": {
+        "stop1": "Senthamangalam",
+        "stop2": "Attupakkam Koot Road",
+        "stop3": "Illuppaithandalam",
+        "stop4": "Parameswaramangalam",
+        "stop5": "Thakkolam koot Road",
+        "stop6": "Kadambanallur",
+        "stop7": "Naidu Mess",
+        "stop8": "Thakkolam E.B",
+        "stop9": "Thakkolam Bazzar(Up)",
+        "stop10": "Thakkolam Bazzar(Down)",
+        "stop11": "Thakkolam Petrol Bunk",
+        "stop12": "Perampakkam",
+        "stop13": "Kattu koot Road"
+      }
+    },
+    {
+      "routename": "Sholingur",
+      "stops": {
+        "stop1": "Sholingur Bus Stand",
+        "stop2": "Karumaiamman Koil",
+        "stop3": "Anjaneyar Kovil",
+        "stop4": "Sholigur Textile Mill",
+        "stop5": "Paranchi",
+        "stop6": "Salai",
+        "stop7": "Chitteri",
+        "stop8": "Kummunipet",
+        "stop9": "Kainoor",
+        "stop10": "Nethaji Nagar",
+        "stop11": "Windru pet",
+        "stop12": "S R Gate",
+        "stop13": "Venkatespuram",
+        "stop14": "Perumuchi",
+        "stop15": "Pudhukesavaram",
+        "stop16": "Mettukuppam",
+        "stop17": "Marimangalam",
+        "stop18": "Narasingapuram",
+        "stop19": "Koovam",
+        "stop20": "Mappedu",
+        "stop21": "Vooluthai"
+      }
+    },
+    {
+      "routename": "Thiruthani",
+      "stops": {
+        "stop1": "Thirupathi Bypass",
+        "stop2": "Arcot Kuppam",
+        "stop3": "Kanakammachathram",
+        "stop4": "Ramanjeri",
+        "stop5": "Narayanapuram Koot Road",
+        "stop6": "Pandur",
+        "stop7": "Thirupachur Bypass",
+        "stop8": "Manavala Nagar Bus Stop",
+        "stop9": "Pattarai (Indian Oil Petrol Bunk)",
+        "stop10": "Chatram",
+        "stop11": "Mevalurkuppam"
+      }
+    },
+    {
+      "routename": "Nemili-Panappakkam",
+      "stops": {
+        "stop1": "Nemili Bus Stand",
+        "stop2": "Vetangulam",
+        "stop3": "Reddyvalam",
+        "stop4": "Panapakkam",
+        "stop5": "Damal",
+        "stop6": "Baluchetti",
+        "stop7": "Ambi Bypass",
+        "stop8": "Ariyaperumbakkam",
+        "stop9": "Vellagate (Sakthiganapthy Hotel)",
+        "stop10": "Meenachi College (KPM)",
+        "stop11": "Enathur Petrol Bunk",
+        "stop12": "Rajakulam",
+        "stop13": "Sathankulam",
+        "stop14": "Chinnachatram",
+        "stop15": "Pillaichatram",
+        "stop16": "Senthamangalam",
+        "stop17": "Santhavellore",
+        "stop18": "Thirumangalam",
+        "stop19": "Mambakkam",
+        "stop20": "Vadamangalam",
+        "stop21": "Nokia Gate",
+        "stop22": "Sriperumbudur Police Station",
+        "stop23": "Sriperumbudur Toll gate"
+      }
+    },
+    {
+      "routename": "Padappai",
+      "stops": {
+        "stop1": "Padappai",
+        "stop2": "Keel Padappai (High School)",
+        "stop3": "Karasangal",
+        "stop4": "Manimangalam",
+        "stop5": "Naduverpattu",
+        "stop6": "Melnallathur High School",
+        "stop7": "Pudupet Koot Road",
+        "stop8": "nallur Check post",
+        "stop9": "Sriperumbudur RTO Office",
+        "stop10": "Sriperumbudur High School Stoping"
+      }
+    }
+  ]
+}

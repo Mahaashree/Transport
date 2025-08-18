@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Existing Bus Routes - College Transport System</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            height: 80vh;
+        }
+        
+        .control-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .filter-select, .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .search-input {
+            margin-bottom: 10px;
+        }
+        
+        .map-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .map-container h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #map {
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .status.success {
+            background: #f0fff4;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        
+        .status.error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+        
+        .status.info {
+            background: #ebf8ff;
+            color: #2c5282;
+            border: 1px solid #90cdf4;
+        }
+        
+        .loading {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #4299e1;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats-summary {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            color: #4a5568;
+        }
+        
+        .stat-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .route-legend {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            max-width: 200px;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .legend-symbol {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .stop-marker {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .stop-marker:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-route"></i> Existing Bus Routes</h1>
+            <p>Visualizing extracted stop coordinates from existing route data</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="section">
+                    <h3><i class="fas fa-database"></i> Data Controls</h3>
+                    <button class="btn" onclick="loadStopCoordinates()">
+                        <i class="fas fa-download"></i> Load Actual Stop Data
+                    </button>
+                    <button class="btn btn-secondary" onclick="centerMapOnCollege()">
+                        <i class="fas fa-university"></i> Center on College
+                    </button>
+                    <button class="btn btn-secondary" onclick="fitAllStops()">
+                        <i class="fas fa-expand-arrows-alt"></i> Fit All Stops
+                    </button>
+                    <button class="btn btn-secondary" onclick="showCoordinateBounds()">
+                        <i class="fas fa-info-circle"></i> Show Data Bounds
+                    </button>
+                </div>
+                
+                <div class="section">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    <div class="filter-group">
+                        <label for="routeSearch">Search Routes:</label>
+                        <input type="text" id="routeSearch" class="search-input" placeholder="Type route name...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="routeFilter">Filter by Route:</label>
+                        <select id="routeFilter" class="filter-select">
+                            <option value="">All Routes</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Clear Filters
+                    </button>
+                </div>
+                
+                <div class="section">
+                    <h3><i class="fas fa-chart-bar"></i> Statistics</h3>
+                    <div class="stats-summary" id="statsContainer">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Routes:</span>
+                            <span class="stat-value" id="totalRoutes">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Stops:</span>
+                            <span class="stat-value" id="totalStops">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Visible Stops:</span>
+                            <span class="stat-value" id="visibleStops">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Success Rate:</span>
+                            <span class="stat-value" id="successRate">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3><i class="fas fa-cog"></i> View Options</h3>
+                    <button class="btn btn-secondary" onclick="toggleRouteLines()">
+                        <i class="fas fa-bezier-curve"></i> Toggle Route Lines
+                    </button>
+                    <button class="btn btn-secondary" onclick="toggleStopLabels()">
+                        <i class="fas fa-tags"></i> Toggle Stop Labels
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportVisibleData()">
+                        <i class="fas fa-file-export"></i> Export Data
+                    </button>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <h3><i class="fas fa-map-marked-alt"></i> Route Visualization</h3>
+                <div id="map">
+                    <div class="route-legend">
+                        <div class="legend-title">Legend</div>
+                        <div class="legend-item">
+                            <div class="legend-symbol" style="background: #2d3748;"><i class="fas fa-university" style="color: white; font-size: 8px;"></i></div>
+                            <span>College</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-symbol" style="background: #4299e1;"></div>
+                            <span>Bus Stops</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-symbol" style="background: #48bb78;"></div>
+                            <span>Selected Route</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-symbol" style="background: #ed8936;"></div>
+                            <span>Search Result</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/existing-routes/existing-routes-manager.js"></script>
+    <script src="js/existing-routes/existing-routes-visualizer.js"></script>
+    <script src="js/existing-routes/existing-routes-filters.js"></script>
+    
+    <script>
+        // Add function to show coordinate bounds for verification
+        function showCoordinateBounds() {
+            if (!stopCoordinatesData || stopCoordinatesData.length === 0) {
+                showStatus('No data loaded', 'error');
+                return;
+            }
+            
+            const lats = stopCoordinatesData.map(s => s.lat);
+            const lngs = stopCoordinatesData.map(s => s.lng);
+            const bounds = {
+                minLat: Math.min(...lats),
+                maxLat: Math.max(...lats),
+                minLng: Math.min(...lngs),
+                maxLng: Math.max(...lngs)
+            };
+            
+            const boundingBox = L.rectangle([
+                [bounds.minLat, bounds.minLng],
+                [bounds.maxLat, bounds.maxLng]
+            ], {
+                color: '#ff7800',
+                weight: 3,
+                fillOpacity: 0.1
+            }).addTo(map);
+            
+            boundingBox.bindPopup(`
+                <b>Data Bounds</b><br>
+                Latitude: ${bounds.minLat.toFixed(6)} to ${bounds.maxLat.toFixed(6)}<br>
+                Longitude: ${bounds.minLng.toFixed(6)} to ${bounds.maxLng.toFixed(6)}<br>
+                Total area: ${stopCoordinatesData.length} stops
+            `);
+            
+            map.fitBounds(boundingBox.getBounds().pad(0.1));
+            showStatus(`Showing bounds: ${bounds.minLat.toFixed(3)},${bounds.minLng.toFixed(3)} to ${bounds.maxLat.toFixed(3)},${bounds.maxLng.toFixed(3)}`, 'info');
+        }
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Initializing Existing Routes Viewer');
+            console.log('📄 Will load actual coordinates from extracted_stop_coordinates.csv');
+            initializeExistingRoutes();
+        });
+    </script>
+</body>
+</html>
