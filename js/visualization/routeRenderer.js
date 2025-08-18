@@ -360,14 +360,14 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
         const studentLon = parseFloat(student.student_lon);
         
         if (!isNaN(studentLat) && !isNaN(studentLon)) {
-            // Create a very small circle marker for each student
+            // Create a larger circle marker for each student
             const studentDot = L.circleMarker([studentLat, studentLon], {
-                radius: 2,
+                radius: 4, // Increased from 2 to 4
                 fillColor: '#ff6b6b',
                 color: '#ff4757',
-                weight: 1,
-                opacity: 0.8,
-                fillOpacity: 0.6,
+                weight: 2, // Increased from 1 to 2
+                opacity: 0.9, // Increased from 0.8 to 0.9
+                fillOpacity: 0.8, // Increased from 0.6 to 0.8
                 className: 'student-assignment-dot'
             });
             
@@ -384,15 +384,15 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
                 totalAssignmentDistance += distanceToStop;
                 assignedStudents++;
                 
-                // Create assignment line
+                // Create thicker assignment line
                 const assignmentLine = L.polyline([
                     [studentLat, studentLon],
                     [stopLat, stopLon]
                 ], {
                     color: distanceToStop > 2 ? '#ff4757' : distanceToStop > 1 ? '#ffa502' : '#26de81',
-                    weight: 1,
-                    opacity: 0.6,
-                    dashArray: '2, 4',
+                    weight: 2, // Increased from 1 to 2
+                    opacity: 0.8, // Increased from 0.6 to 0.8
+                    dashArray: '4, 6', // Increased dash size from '2, 4' to '4, 6'
                     className: 'assignment-line'
                 });
                 
@@ -406,10 +406,12 @@ function addStudentAssignmentDots(mapInstance, studentDataSource) {
                 
                 assignmentLinesLayer.addLayer(assignmentLine);
                 
-                // Update student dot color based on distance
+                // Update student dot color and size based on distance
                 studentDot.setStyle({
+                    radius: distanceToStop > 2 ? 5 : 4, // Bigger dots for poor assignments
                     fillColor: distanceToStop > 2 ? '#ff4757' : distanceToStop > 1 ? '#ffa502' : '#26de81',
-                    color: distanceToStop > 2 ? '#ff3742' : distanceToStop > 1 ? '#ff9000' : '#20bf6b'
+                    color: distanceToStop > 2 ? '#ff3742' : distanceToStop > 1 ? '#ff9000' : '#20bf6b',
+                    weight: distanceToStop > 2 ? 3 : 2 // Thicker border for poor assignments
                 });
             }
             

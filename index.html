@@ -189,9 +189,10 @@
         }
         
         .student-assignment-dot:hover {
-            stroke-width: 2;
+            stroke-width: 3; /* Increased from 2 to 3 */
             stroke: #ff4757;
-            fill-opacity: 0.9;
+            fill-opacity: 1; /* Increased from 0.9 to 1 */
+            transform: scale(1.2); /* Add slight scale on hover */
         }
         
         /* Toggle button styling */
@@ -244,10 +245,10 @@
         }
         
         .legend-dot {
-            width: 4px;
-            height: 4px;
+            width: 6px; /* Increased from 4px to 6px */
+            height: 6px; /* Increased from 4px to 6px */
             background: #ff6b6b;
-            border: 1px solid #ff4757;
+            border: 2px solid #ff4757; /* Increased border from 1px to 2px */
             border-radius: 50%;
         }
         
@@ -376,8 +377,8 @@
         }
         
         .line-sample {
-            width: 20px;
-            height: 2px;
+            width: 24px; /* Increased from 20px to 24px */
+            height: 3px; /* Increased from 2px to 3px */
             display: inline-block;
         }
         
@@ -393,7 +394,7 @@
         
         .assignment-line:hover {
             opacity: 1 !important;
-            weight: 2;
+            weight: 4; /* Increased from 2 to 4 on hover */
         }
         
         /* Update legend to include assignment lines */
@@ -405,6 +406,12 @@
             border-top: 1px solid #e2e8f0;
             padding-top: 8px;
             margin-top: 8px;
+        }
+        
+        .legend-item.assignment .legend-symbol div {
+            width: 20px; /* Increased from 16px to 20px */
+            height: 3px; /* Increased from 2px to 3px */
+            background: #26de81;
         }
     </style>
 </head>
@@ -580,7 +587,7 @@
                         </div>
                         <div class="legend-item assignment">
                             <div class="legend-symbol">
-                                <div style="width: 16px; height: 2px; background: #26de81;"></div>
+                                <div style="width: 20px; height: 3px; background: #26de81;"></div>
                             </div>
                             <span>Assignments</span>
                         </div>
